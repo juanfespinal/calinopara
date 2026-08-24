@@ -2,7 +2,7 @@
 
 Directorio mobile-first de emprendimientos caleños afectados por el terremoto del 10 de agosto de 2026.
 
-Datos curados a mano desde publicaciones de [@lacasonavegetariana](https://www.instagram.com/p/DcMMvPYIDsU/), [@ostinatorest](https://www.instagram.com/p/DcO9fDLM-i7/), [@fabricaemilitaspostres](https://www.instagram.com/p/DcCNXcuB7gU/), [@mangoscol](https://www.instagram.com/p/DcCJ2tEJxnE/), [@arepasdelaabuela.cali](https://www.instagram.com/p/DcZMGe1vtVX/), [@cocinamiacali](https://www.instagram.com/p/DcRCw02tgwn/), [@lafondatradicional](https://www.instagram.com/lafondatradicional/), [@rringlete](https://www.instagram.com/p/DcY_4tqR-eu/), [@cheesecakecali](https://www.instagram.com/p/DcT7QBgR0iR/), [@alimentosyen](https://www.instagram.com/p/DcTqf3ARleZ/), comentarios y notas de prensa. No es un censo oficial.
+Datos curados a mano desde publicaciones de [@lacasonavegetariana](https://www.instagram.com/p/DcMMvPYIDsU/), [@ostinatorest](https://www.instagram.com/p/DcO9fDLM-i7/), [@fabricaemilitaspostres](https://www.instagram.com/p/DcCNXcuB7gU/), [@mangoscol](https://www.instagram.com/p/DcCJ2tEJxnE/), [@arepasdelaabuela.cali](https://www.instagram.com/p/DcZMGe1vtVX/), [@cocinamiacali](https://www.instagram.com/p/DcRCw02tgwn/), [@lafondatradicional](https://www.instagram.com/lafondatradicional/), [@rringlete](https://www.instagram.com/p/DcY_4tqR-eu/), [@cheesecakecali](https://www.instagram.com/p/DcT7QBgR0iR/), [@tejaditospasteleria](https://www.instagram.com/p/DcWYttcCG0K/), [@alimentosyen](https://www.instagram.com/p/DcTqf3ARleZ/), comentarios y notas de prensa. No es un censo oficial.
 
 ## Stack
 
