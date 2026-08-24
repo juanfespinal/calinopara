@@ -23,7 +23,7 @@ const sent = Astro.url.searchParams.get("ok") === "1";
         Recibimos tu caso. Te escribimos si hace falta algún dato.
       </p>
     ) : (
-      <form class="case-form" action="https://formsubmit.co/juanfespinal@gmail.com" method="POST">
+      <form class="case-form" action="https://formsubmit.co/juanfespinal@gmail.com" method="POST" data-analytics-event="submit_business_case">
         <input type="hidden" name="_subject" value="Cali No Para — nuevo caso" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_next" id="form-next" value="/sumate?ok=1" />

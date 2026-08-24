@@ -1,0 +1,57 @@
+---
+import Base from "../layouts/Base.astro";
+import { categories, places } from "../data/emprendimientos";
+---
+
+<Base title="Mapa · Cali No Para" bodyClass="map-page">
+  <section class="map-view" data-directory data-map-page="true" data-view="mapa">
+    <div class="map-view-controls">
+      <label class="visually-hidden" for="buscar-mapa">Buscar negocio en el mapa</label>
+      <input
+        id="buscar-mapa"
+        class="search"
+        type="search"
+        placeholder="Busca por nombre o barrio"
+        data-search
+        autocomplete="off"
+      />
+      <div class="category-filters" role="group" aria-label="Filtrar mapa por categoría">
+        <button type="button" data-category-filter="todos" aria-pressed="true">Todos</button>
+        {categories.map((category) => (
+          <button type="button" data-category-filter={category.id} aria-pressed="false">{category.label}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="map-pane map-pane-full" data-map-pane>
+      <div class="map-frame map-solo" data-map aria-label="Mapa de Cali con los negocios"></div>
+      <aside class="map-sheet" data-map-sheet hidden aria-label="Negocio seleccionado">
+        <img data-sheet-photo src="" alt="" width="96" height="96" />
+        <div class="map-sheet-copy">
+          <h2 data-sheet-name></h2>
+          <p data-sheet-meta></p>
+          <p class="map-sheet-status" data-sheet-status aria-live="polite"></p>
+        </div>
+        <a class="btn btn-primary" data-sheet-link href="/">Ver detalle</a>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+</style>
+
+<script>
+  import { initDirectory } from "../scripts/directory";
+  import { places } from "../data/emprendimientos";
+
+  const root = document.querySelector<HTMLElement>("[data-directory]");
+  if (root) initDirectory(root, places);
+</script>

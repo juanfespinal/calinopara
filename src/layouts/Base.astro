@@ -5,11 +5,13 @@ import { initiative } from "../data/initiative.mjs";
 interface Props {
   title: string;
   description?: string;
+  bodyClass?: string;
 }
 
 const {
   title,
   description = "Cali No Para: iniciativa comunitaria para visibilizar negocios caleños afectados por el terremoto y fomentar la compra local.",
+  bodyClass,
 } = Astro.props;
 ---
 
@@ -20,6 +22,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch.png" />
@@ -32,7 +35,7 @@ const {
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <title>{title}</title>
   </head>
-  <body>
+  <body class={bodyClass}>
     <a class="skip" href="#contenido">Saltar al contenido</a>
     <header class="site-header">
       <div class="wrap">
@@ -50,6 +53,34 @@ const {
     <main id="contenido">
       <slot />
     </main>
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <a class="bottom-nav-item" href="/" data-nav-view="lista" data-analytics-event="open_directory">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+        </svg>
+        <span>Directorio</span>
+      </a>
+      <a class="bottom-nav-item" href="/mapa/" data-nav-view="mapa" data-analytics-event="open_map">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="m4 6 5-2 6 2 5-2v14l-5 2-6-2-5 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          <path d="M9 4v14M15 6v14" fill="none" stroke="currentColor" stroke-width="1.8" />
+        </svg>
+        <span>Mapa</span>
+      </a>
+      <a class="bottom-nav-item" href="/sumate" data-analytics-event="open_sumate">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+        <span>Súmate</span>
+      </a>
+    </nav>
+    <aside class="analytics-consent" data-analytics-consent hidden aria-label="Preferencias de medición">
+      <p><strong>Ayúdanos a medir el impacto.</strong> Usamos analítica de uso para saber qué historias y acciones ayudan más a los negocios.</p>
+      <div class="analytics-consent-actions">
+        <button type="button" class="btn btn-primary" data-analytics-consent-action="granted">Aceptar medición</button>
+        <button type="button" class="btn btn-ghost" data-analytics-consent-action="denied">Ahora no</button>
+      </div>
+    </aside>
     <footer class="site-footer">
       <div class="wrap">
         <a class="footer-brand" href="/">
@@ -80,5 +111,51 @@ const {
         </p>
       </div>
     </footer>
-  </body>
+</body>
 </html>
+
+<script is:inline>
+  (() => {
+    const consentKey = "cali-no-para-analytics-consent";
+    const banner = document.querySelector("[data-analytics-consent]");
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() { window.dataLayer.push(arguments); };
+    window.gtag("consent", "default", {
+      ad_personalization: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      analytics_storage: "denied",
+    });
+
+    const loadAnalytics = () => {
+      window.__analyticsConsent = true;
+      window.gtag("consent", "update", { analytics_storage: "granted" });
+      window.gtag("js", new Date());
+      window.gtag("config", "G-R9MNJYHSLQ");
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-R9MNJYHSLQ";
+      document.head.appendChild(script);
+    };
+
+    const storedConsent = window.localStorage.getItem(consentKey);
+    if (storedConsent === "granted") {
+      loadAnalytics();
+    } else if (storedConsent !== "denied" && banner) {
+      banner.hidden = false;
+    }
+
+    banner?.addEventListener("click", (event) => {
+      const action = event.target.closest("[data-analytics-consent-action]")?.dataset.analyticsConsentAction;
+      if (!action) return;
+      window.localStorage.setItem(consentKey, action);
+      banner.hidden = true;
+      if (action === "granted") loadAnalytics();
+    });
+  })();
+</script>
+
+<script>
+  import { initAnalytics } from "../scripts/analytics";
+  initAnalytics();
+</script>

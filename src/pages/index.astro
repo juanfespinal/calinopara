@@ -3,14 +3,14 @@ import Base from "../layouts/Base.astro";
 import InitiativeDialog from "../components/InitiativeDialog.astro";
 import ReelTile from "../components/ReelTile.astro";
 import { initiative } from "../data/initiative.mjs";
-import { places } from "../data/emprendimientos";
+import { categories, places } from "../data/emprendimientos";
 import { prioritizeVideoPlaces } from "../data/place-order.mjs";
 
 const orderedPlaces = prioritizeVideoPlaces(places);
 ---
 
 <Base title="Cali No Para · carta local">
-  <section class="wrap hero">
+  <section class="wrap hero directory-hero">
     <p class="hero-kicker">{initiative.heroKicker}</p>
     <h1>{initiative.heroTitle}</h1>
     <p class="hero-lead">{initiative.heroText}</p>
@@ -32,20 +32,18 @@ const orderedPlaces = prioritizeVideoPlaces(places);
           data-search
           autocomplete="off"
         />
-        <div class="view-toggle" role="group" aria-label="Tipo de vista">
-          <button type="button" data-view="lista" aria-pressed="true">Lista</button>
-          <button type="button" data-view="mapa" aria-pressed="false">Mapa</button>
-        </div>
+      </div>
+      <div class="category-filters" role="group" aria-label="Filtrar por categoría">
+        <button type="button" data-category-filter="todos" aria-pressed="true">Todos</button>
+        {categories.map((category) => (
+          <button type="button" data-category-filter={category.id} aria-pressed="false">{category.label}</button>
+        ))}
       </div>
     </div>
 
     <p class="meta-row">
       <span data-count>{places.length} negocios</span>
     </p>
-
-    <div class="map-pane" data-map-pane hidden>
-      <div class="map-frame map-solo" data-map aria-label="Mapa de Cali con los negocios"></div>
-    </div>
 
     <div data-list-pane>
       <div class="list" data-list>

@@ -4,12 +4,13 @@ import { instagramPostUrl } from "../data/emprendimientos";
 interface Props {
   src: string;
   poster: string;
+  slug: string;
   name: string;
   handle?: string;
   post?: string;
 }
 
-const { src, poster, name, handle, post } = Astro.props;
+const { src, poster, slug, name, handle, post } = Astro.props;
 const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.com/${handle}/` : null;
 ---
 
@@ -26,6 +27,17 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
     >
       <source src={src} type="video/mp4" />
     </video>
+    <button
+      type="button"
+      class="reel-hero-play"
+      data-video-toggle
+      data-analytics-business-slug={slug}
+      aria-label={`Reproducir video de ${name}`}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m9 6 9 6-9 6z" fill="currentColor" />
+      </svg>
+    </button>
   </div>
   {postUrl && (
     <figcaption class="reel-credit">
@@ -36,3 +48,49 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
     </figcaption>
   )}
 </figure>
+
+<script>
+  import { trackEvent } from "../scripts/analytics";
+
+  const toggles = document.querySelectorAll("[data-video-toggle]");
+
+  toggles.forEach((toggle) => {
+    const video = toggle.closest(".reel-hero")?.querySelector("video");
+    if (!video) return;
+    const businessSlug = toggle.dataset.analyticsBusinessSlug ?? "negocio-local";
+    let hasTrackedStart = false;
+
+    const syncToggle = () => {
+      toggle.hidden = !video.paused;
+      toggle.setAttribute(
+        "aria-label",
+        video.paused ? "Reproducir video" : "Pausar video",
+      );
+    };
+
+    toggle.addEventListener("click", async () => {
+      try {
+        if (video.paused) {
+          await video.play();
+        } else {
+          video.pause();
+        }
+      } catch {
+        syncToggle();
+      }
+    });
+
+    video.addEventListener("play", syncToggle);
+    video.addEventListener("pause", syncToggle);
+    video.addEventListener("ended", () => {
+      syncToggle();
+      trackEvent("video_complete", { business_slug: businessSlug, content_type: "business_story" });
+    });
+    video.addEventListener("play", () => {
+      if (hasTrackedStart) return;
+      hasTrackedStart = true;
+      trackEvent("video_start", { business_slug: businessSlug, content_type: "business_story" });
+    });
+    syncToggle();
+  });
+</script>
