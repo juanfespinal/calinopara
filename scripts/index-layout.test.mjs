@@ -81,7 +81,7 @@ test("detail videos expose a working central play control", () => {
 test("map lives on a dedicated full-height route", () => {
   assert.equal(mapPageExists, true);
   assert.match(baseSource, /href="\/mapa\/"/);
-  assert.match(indexSource, /href="\/mapa\/"/);
+  assert.doesNotMatch(indexSource, /Ver mapa|map-link/);
   assert.doesNotMatch(indexSource, /data-map-pane/);
   assert.match(mapPageSource, /data-map-page/);
   assert.match(mapPageSource, /data-map/);

@@ -385,26 +385,6 @@ h2 {
   padding-bottom: 4px;
 }
 
-.map-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid color-mix(in srgb, var(--accent-blue) 30%, var(--line));
-  border-radius: 999px;
-  color: var(--accent-blue);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.map-link:hover {
-  border-color: var(--accent-blue);
-  color: var(--accent-blue);
-}
-
 .map-view {
   position: relative;
   min-height: 100dvh;
