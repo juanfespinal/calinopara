@@ -5,11 +5,13 @@ import { initiative } from "../data/initiative.mjs";
 interface Props {
   title: string;
   description?: string;
+  bodyClass?: string;
 }
 
 const {
   title,
   description = "Cali No Para: iniciativa comunitaria para visibilizar negocios caleños afectados por el terremoto y fomentar la compra local.",
+  bodyClass,
 } = Astro.props;
 ---
 
@@ -32,7 +34,7 @@ const {
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <title>{title}</title>
   </head>
-  <body>
+  <body class={bodyClass}>
     <a class="skip" href="#contenido">Saltar al contenido</a>
     <header class="site-header">
       <div class="wrap">
@@ -57,7 +59,7 @@ const {
         </svg>
         <span>Directorio</span>
       </a>
-      <a class="bottom-nav-item" href="/#mapa" data-nav-view="mapa">
+      <a class="bottom-nav-item" href="/mapa/" data-nav-view="mapa">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <path d="m4 6 5-2 6 2 5-2v14l-5 2-6-2-5 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
           <path d="M9 4v14M15 6v14" fill="none" stroke="currentColor" stroke-width="1.8" />

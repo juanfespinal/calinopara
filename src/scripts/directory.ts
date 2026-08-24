@@ -21,8 +21,9 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
   const sheetStatus = root.querySelector<HTMLElement>("[data-sheet-status]");
   const sheetLink = root.querySelector<HTMLAnchorElement>("[data-sheet-link]");
   const listPane = root.querySelector<HTMLElement>("[data-list-pane]");
+  const isMapPage = root.dataset.mapPage === "true";
 
-  let view: View = window.location.hash === "#mapa" ? "mapa" : "lista";
+  let view: View = isMapPage || window.location.hash === "#mapa" ? "mapa" : "lista";
   let category = "todos";
   let map: ReturnType<typeof mountMap> | null = null;
   let activeVideo: HTMLVideoElement | null = null;
@@ -66,7 +67,7 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
   function setView(next: View, updateUrl = true) {
     view = next;
     root.dataset.view = view;
-    if (updateUrl) {
+    if (updateUrl && !isMapPage) {
       const url = new URL(window.location.href);
       url.hash = view === "mapa" ? "mapa" : "";
       window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);

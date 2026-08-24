@@ -29,10 +29,13 @@ import { categories, places } from "../data/emprendimientos";
           data-search
           autocomplete="off"
         />
-        <div class="view-toggle" role="group" aria-label="Tipo de vista">
-          <button type="button" data-view="lista" aria-pressed="true">Lista</button>
-          <button type="button" data-view="mapa" aria-pressed="false">Mapa</button>
-        </div>
+        <a class="map-link" href="/mapa/">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="m4 6 5-2 6 2 5-2v14l-5 2-6-2-5 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M9 4v14M15 6v14" fill="none" stroke="currentColor" stroke-width="1.8" />
+          </svg>
+          <span>Ver mapa</span>
+        </a>
       </div>
       <div class="category-filters" role="group" aria-label="Filtrar por categoría">
         <button type="button" data-category-filter="todos" aria-pressed="true">Todos</button>
@@ -45,19 +48,6 @@ import { categories, places } from "../data/emprendimientos";
     <p class="meta-row">
       <span data-count>{places.length} negocios</span>
     </p>
-
-    <div class="map-pane" id="mapa" data-map-pane hidden>
-      <div class="map-frame map-solo" data-map aria-label="Mapa de Cali con los negocios"></div>
-      <aside class="map-sheet" data-map-sheet hidden aria-label="Negocio seleccionado">
-        <img data-sheet-photo src="" alt="" width="96" height="96" />
-        <div class="map-sheet-copy">
-          <h2 data-sheet-name></h2>
-          <p data-sheet-meta></p>
-          <p class="map-sheet-status" data-sheet-status aria-live="polite"></p>
-        </div>
-        <a class="btn btn-primary" data-sheet-link href="/">Ver detalle</a>
-      </aside>
-    </div>
 
     <div data-list-pane>
       <div class="list" data-list>
