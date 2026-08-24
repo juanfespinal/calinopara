@@ -646,6 +646,8 @@ body.map-page .map-view-controls {
 body.map-page .map-pane-full {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  isolation: isolate;
 }
 
 body.map-page .map-pane-full .map-frame {

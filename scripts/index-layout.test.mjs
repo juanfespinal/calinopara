@@ -80,5 +80,6 @@ test("map lives on a dedicated full-height route", () => {
   assert.match(stylesSource, /body\.map-page/);
   assert.match(stylesSource, /body\.map-page \.bottom-nav[\s\S]*?z-index:\s*30/);
   assert.match(stylesSource, /body\.map-page \.bottom-nav[\s\S]*?background:\s*#fff/);
+  assert.match(stylesSource, /body\.map-page \.map-pane-full[\s\S]*?isolation:\s*isolate/);
   assert.match(stylesSource, /height:\s*100dvh/);
 });
