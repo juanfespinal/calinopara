@@ -13,6 +13,8 @@ const {
   description = "Cali No Para: iniciativa comunitaria para visibilizar negocios caleños afectados por el terremoto y fomentar la compra local.",
   bodyClass,
 } = Astro.props;
+
+const pathname = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -54,20 +56,27 @@ const {
       <slot />
     </main>
     <nav class="bottom-nav" aria-label="Navegación principal">
-      <a class="bottom-nav-item" href="/" data-nav-view="lista" data-analytics-event="open_directory">
+      <a class="bottom-nav-item" href="/" aria-current={pathname === "/" ? "page" : undefined} data-nav-view="lista" data-analytics-event="open_directory">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
         </svg>
         <span>Directorio</span>
       </a>
-      <a class="bottom-nav-item" href="/mapa/" data-nav-view="mapa" data-analytics-event="open_map">
+      <a class="bottom-nav-item" href="/mapa/" aria-current={pathname.startsWith("/mapa") ? "page" : undefined} data-nav-view="mapa" data-analytics-event="open_map">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <path d="m4 6 5-2 6 2 5-2v14l-5 2-6-2-5 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
           <path d="M9 4v14M15 6v14" fill="none" stroke="currentColor" stroke-width="1.8" />
         </svg>
         <span>Mapa</span>
       </a>
-      <a class="bottom-nav-item" href="/sumate" data-analytics-event="open_sumate">
+      <a class="bottom-nav-item" href="/ayudas/" aria-current={pathname.startsWith("/ayudas") ? "page" : undefined} data-analytics-event="open_aids">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M12 21s-7-4.3-7-10a4 4 0 0 1 7-2.8A4 4 0 0 1 19 11c0 5.7-7 10-7 10Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          <path d="M12 9v6M9 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+        <span>Ayudas</span>
+      </a>
+      <a class="bottom-nav-item" href="/sumate" aria-current={pathname.startsWith("/sumate") ? "page" : undefined} data-analytics-event="open_sumate">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
         </svg>
@@ -75,7 +84,7 @@ const {
       </a>
     </nav>
     <aside class="analytics-consent" data-analytics-consent hidden aria-label="Preferencias de medición">
-      <p><strong>Ayúdanos a medir el impacto.</strong> Usamos analítica de uso para saber qué historias y acciones ayudan más a los negocios.</p>
+      <p><strong>Ayúdanos a medir el impacto.</strong> Usamos analítica opcional para saber qué acciones ayudan más.</p>
       <div class="analytics-consent-actions">
         <button type="button" class="btn btn-primary" data-analytics-consent-action="granted">Aceptar medición</button>
         <button type="button" class="btn btn-ghost" data-analytics-consent-action="denied">Ahora no</button>
@@ -107,7 +116,8 @@ const {
         <p>
           <span class="footer-lead">¿Tu negocio se vio afectado? </span>
           Cali No Para es este directorio. Si el tuyo no está,{" "}
-          <a href="/sumate">presenta tu caso</a>.
+          <a href="/sumate">presenta tu caso</a> o consulta las{" "}
+          <a href="/ayudas/">ayudas verificadas</a>.
         </p>
       </div>
     </footer>

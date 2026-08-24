@@ -1,0 +1,159 @@
+---
+import Base from "../layouts/Base.astro";
+import { aidOpportunities, aidStatus } from "../data/ayudas.mjs";
+
+const primaryAid = aidOpportunities.find(({ id }) => id === "registro-afectacion-economica");
+const providerAids = aidOpportunities.filter(({ status }) => status === "byProvider");
+const upcomingAids = aidOpportunities.filter(({ status }) => ["announced", "regulation"].includes(status));
+const supportEmail =
+  "mailto:juanfespinal@gmail.com?subject=Cali%20No%20Para%20%E2%80%94%20ofrezco%20apoyo%20a%20negocios";
+
+const verifiedDateFormatter = new Intl.DateTimeFormat("es-CO", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+const formatVerified = (value) => verifiedDateFormatter.format(new Date(`${value}T00:00:00Z`));
+const latestVerified = [...aidOpportunities].map(({ lastVerified }) => lastVerified).sort().at(-1);
+---
+
+<Base
+  title="Ayudas para negocios afectados · Cali No Para"
+  description="Ayudas verificadas, alivios y rutas de recuperación para negocios afectados por el terremoto en Cali."
+  bodyClass="aids-page"
+>
+  <article class="wrap aids-shell">
+    <a class="back" href="/">← Volver al directorio</a>
+
+    <header class="aids-hero">
+      <p class="hero-kicker">Ruta de recuperación</p>
+      <h1>Ayudas para negocios afectados</h1>
+      <p>
+        Reunimos canales oficiales y oportunidades publicadas para que sepas qué puedes hacer hoy y qué todavía está pendiente.
+      </p>
+      {latestVerified && <p class="aids-updated">Actualizado el {formatVerified(latestVerified)}</p>}
+    </header>
+
+    <aside class="aid-boundary" aria-label="Alcance de Cali No Para">
+      <strong>Información, no intermediación.</strong>
+      No administramos ni entregamos recursos. Verificamos el estado de cada oportunidad y te enviamos al canal responsable.
+    </aside>
+
+    {primaryAid && (
+      <section class="aid-priority" aria-labelledby="first-step-title">
+        <p class="aid-section-kicker">Haz esto primero</p>
+        <article class="aid-card aid-card-priority" data-aid-status={primaryAid.status}>
+          <div class="aid-card-heading">
+            <span class={`aid-status aid-status-${primaryAid.status}`}>{aidStatus[primaryAid.status]}</span>
+            <p>{primaryAid.provider}</p>
+          </div>
+          <h2 id="first-step-title">{primaryAid.title}</h2>
+          <p class="aid-summary">{primaryAid.summary}</p>
+          <p class="aid-eligibility"><strong>Para quién:</strong> {primaryAid.eligibility}</p>
+          {primaryAid.institutionRole && (
+            <p class="aid-guidance"><strong>Papel de la Cámara:</strong> {primaryAid.institutionRole}</p>
+          )}
+          <ul class="aid-details">
+            {primaryAid.details.map((detail) => <li>{detail}</li>)}
+          </ul>
+          <div class="aid-actions">
+            {primaryAid.actions.map((action, index) => (
+              <a
+                class:list={["btn", index === 0 ? "btn-primary" : "btn-ghost"]}
+                href={action.href}
+                data-analytics-event="aid_action"
+                data-analytics-aid-id={primaryAid.id}
+                data-analytics-channel={action.type}
+              >
+                {action.label}
+              </a>
+            ))}
+          </div>
+          <footer class="aid-card-footer">
+            <span>Última verificación: {formatVerified(primaryAid.lastVerified)}</span>
+            <a href={primaryAid.sourceUrl} target="_blank" rel="noopener noreferrer">{primaryAid.sourceLabel}<span class="sr-only"> (abre en una pestaña nueva)</span></a>
+          </footer>
+        </article>
+      </section>
+    )}
+
+    <section class="aid-group" aria-labelledby="available-title">
+      <div class="aid-group-heading">
+        <p class="aid-section-kicker">Según tu entidad</p>
+        <h2 id="available-title">Ayudas que puedes consultar ahora</h2>
+      </div>
+      <div class="aid-grid">
+        {providerAids.map((aid) => (
+          <article class="aid-card" id={aid.id} data-aid-status={aid.status}>
+            <div class="aid-card-heading">
+              <span class={`aid-status aid-status-${aid.status}`}>{aidStatus[aid.status]}</span>
+              <p>{aid.provider}</p>
+            </div>
+            <h3>{aid.title}</h3>
+            <p class="aid-summary">{aid.summary}</p>
+            <p class="aid-eligibility"><strong>Para quién:</strong> {aid.eligibility}</p>
+            <ul class="aid-details">
+              {aid.details.map((detail) => <li>{detail}</li>)}
+            </ul>
+            {aid.guidance && <p class="aid-guidance"><strong>Qué hacer:</strong> {aid.guidance}</p>}
+            <footer class="aid-card-footer">
+              <span>Última verificación: {formatVerified(aid.lastVerified)}</span>
+              <a href={aid.sourceUrl} target="_blank" rel="noopener noreferrer">{aid.sourceLabel}<span class="sr-only"> (abre en una pestaña nueva)</span></a>
+            </footer>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="aid-group" aria-labelledby="upcoming-title">
+      <div class="aid-group-heading">
+        <p class="aid-section-kicker">Próximamente</p>
+        <h2 id="upcoming-title">Medidas anunciadas que aún no están abiertas</h2>
+        <p>No envíes documentos ni dinero a intermediarios. Publicaremos el canal únicamente cuando exista una convocatoria verificable.</p>
+      </div>
+      <div class="aid-grid aid-grid-upcoming">
+        {upcomingAids.map((aid) => (
+          <article class="aid-card" id={aid.id} data-aid-status={aid.status}>
+            <div class="aid-card-heading">
+              <span class={`aid-status aid-status-${aid.status}`}>{aidStatus[aid.status]}</span>
+              <p>{aid.provider}</p>
+            </div>
+            <h3>{aid.title}</h3>
+            <p class="aid-summary">{aid.summary}</p>
+            <p class="aid-eligibility"><strong>Para quién:</strong> {aid.eligibility}</p>
+            <ul class="aid-details">
+              {aid.details.map((detail) => <li>{detail}</li>)}
+            </ul>
+            <footer class="aid-card-footer">
+              <span>Última verificación: {formatVerified(aid.lastVerified)}</span>
+              <a href={aid.sourceUrl} target="_blank" rel="noopener noreferrer">{aid.sourceLabel}<span class="sr-only"> (abre en una pestaña nueva)</span></a>
+            </footer>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="offer-support" aria-labelledby="offer-support-title">
+      <div>
+        <p class="aid-section-kicker">La recuperación también es comunitaria</p>
+        <h2 id="offer-support-title">¿Puedes ofrecer apoyo?</h2>
+        <p>Cuéntanos si puedes facilitar espacio temporal, equipos, una feria comercial o servicios profesionales.</p>
+      </div>
+      <ul class="support-types" aria-label="Tipos de apoyo">
+        <li>Espacio temporal</li>
+        <li>Equipos e insumos</li>
+        <li>Feria o campaña</li>
+        <li>Servicios profesionales</li>
+      </ul>
+      <a
+        class="btn btn-primary"
+        href={supportEmail}
+        data-analytics-event="offer_support"
+        data-analytics-channel="email"
+      >
+        Ofrecer apoyo
+      </a>
+    </section>
+  </article>
+</Base>
