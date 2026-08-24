@@ -1,0 +1,74 @@
+---
+import Base from "../layouts/Base.astro";
+import ShopCard from "../components/ShopCard.astro";
+import { categories, places } from "../data/emprendimientos";
+---
+
+<Base title="La Vitrina · carta de Cali">
+  <section class="wrap hero">
+    <p class="brand-kicker">Cali</p>
+    <h1>Carta local</h1>
+    <p>Negocios de la ciudad, con lo que venden y cómo pedir.</p>
+  </section>
+
+  <section class="wrap" id="directorio" data-directory data-view="lista">
+    <div class="toolbar">
+      <div class="toolbar-row">
+        <label class="visually-hidden" for="buscar">Buscar negocio</label>
+        <input
+          id="buscar"
+          class="search"
+          type="search"
+          placeholder="Busca por nombre o barrio"
+          data-search
+          autocomplete="off"
+        />
+        <div class="view-toggle" role="group" aria-label="Tipo de vista">
+          <button type="button" data-view="lista" aria-pressed="true">Lista</button>
+          <button type="button" data-view="mapa" aria-pressed="false">Mapa</button>
+        </div>
+      </div>
+      <div class="chips" role="toolbar" aria-label="Categorías">
+        <button class="chip" type="button" data-chip="todos" aria-pressed="true">Todos</button>
+        {categories.map((cat) => (
+          <button class="chip" type="button" data-chip={cat.id} aria-pressed="false">
+            {cat.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <p class="meta-row">
+      <span data-count>{places.length} negocios</span>
+    </p>
+
+    <div class="map-pane" data-map-pane hidden>
+      <div class="map-frame map-solo" data-map aria-label="Mapa de Cali con los negocios"></div>
+    </div>
+
+    <div data-list-pane>
+      <div class="list" data-list>
+        {places.map((place) => <ShopCard place={place} />)}
+      </div>
+      <p class="empty" data-empty hidden>No hay negocios con ese filtro. Prueba otra categoría.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+</style>
+
+<script>
+  import { initDirectory } from "../scripts/directory";
+  import { places } from "../data/emprendimientos";
+
+  const root = document.querySelector<HTMLElement>("[data-directory]");
+  if (root) initDirectory(root, places);
+</script>

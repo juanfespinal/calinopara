@@ -1,0 +1,85 @@
+---
+import Base from "../../layouts/Base.astro";
+import InstagramFeed from "../../components/InstagramFeed.astro";
+import { categories, formatCop, getPlace, places, statusLabel } from "../../data/emprendimientos";
+
+export function getStaticPaths() {
+  return places.map((place) => ({ params: { slug: place.slug } }));
+}
+
+const { slug } = Astro.params;
+const place = getPlace(slug!);
+if (!place) throw new Error("Negocio no encontrado");
+
+const category = categories.find((c) => c.id === place.category);
+const mapsQuery = encodeURIComponent(
+  place.lat != null && place.lng != null ? `${place.lat},${place.lng}` : `${place.address}, Cali`,
+);
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+const ig = place.instagram ? `https://www.instagram.com/${place.instagram}/` : null;
+const wa = place.whatsapp ? `https://wa.me/${place.whatsapp}` : null;
+const tel = place.phone ? `tel:${place.phone}` : null;
+const orderHref = wa ?? tel ?? ig ?? mapsUrl;
+---
+
+<Base title={`${place.name} · La Vitrina`} description={`${place.tagline} en ${place.barrio}.`}>
+  <article class="wrap">
+    <a class="back" href="/">← Todas las vitrinas</a>
+
+    <figure class="hero-photo">
+      <img src={place.photo} alt={place.photoAlt} width="1200" height="900" />
+    </figure>
+
+    <header class="detail-hero">
+      <p class="brand-kicker">{category?.label} · {place.barrio}</p>
+      <h1>{place.name}</h1>
+      <p>{place.tagline}</p>
+      <p class="detail-meta">
+        <span class:list={["badge", place.status]}>{statusLabel[place.status]}</span>
+        {ig && (
+          <a class="ig-inline" href={ig} target="_blank" rel="noopener noreferrer">
+            @{place.instagram}
+          </a>
+        )}
+      </p>
+    </header>
+
+    <section class="menu-block" aria-labelledby="carta">
+      <h2 id="carta">La carta</h2>
+      <ul class="menu">
+        {place.menu.map((item) => (
+          <li>
+            <div>
+              <strong>{item.name}</strong>
+              <p>{item.desc}</p>
+            </div>
+            <span class="menu-price">{formatCop(item.price) ?? "Consulta"}</span>
+          </li>
+        ))}
+      </ul>
+      {place.menuNote && <p class="menu-note">{place.menuNote}</p>}
+    </section>
+
+    <section class="panel">
+      <h2>Dónde</h2>
+      <address>
+        {place.address}
+        {place.coordsApproximate && <p>Ubicación de barrio o centro comercial.</p>}
+      </address>
+    </section>
+
+    {place.instagram && <InstagramFeed handle={place.instagram} name={place.name} />}
+
+    {place.status !== "cerrado" && (
+      <div class="order-bar">
+        <a class="btn btn-primary" href={orderHref}>Pedir ahora</a>
+        <a class="btn btn-ghost" href={mapsUrl}>Cómo llegar</a>
+        {ig && (
+          <a class="btn btn-ghost" href={ig} target="_blank" rel="noopener noreferrer">
+            Instagram
+          </a>
+        )}
+      </div>
+    )}
+  </article>
+</Base>

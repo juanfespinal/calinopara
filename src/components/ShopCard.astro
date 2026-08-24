@@ -1,0 +1,28 @@
+---
+import { formatCop, startingPrice, statusLabel, type Place } from "../data/emprendimientos";
+
+interface Props {
+  place: Place;
+}
+
+const { place } = Astro.props;
+const from = formatCop(startingPrice(place) ?? undefined);
+const ig = place.instagram ? `https://www.instagram.com/${place.instagram}/` : null;
+---
+
+<article class="card" data-slug={place.slug} data-category={place.category}>
+  <a class="card-main" href={`/emprendimiento/${place.slug}`}>
+    <img class="card-photo" src={place.photo} alt={place.photoAlt} width="224" height="224" loading="lazy" />
+    <div class="card-body">
+      <span class:list={["badge", place.status]}>{statusLabel[place.status]}</span>
+      <h2>{place.name}</h2>
+      <p>{place.tagline} · {place.barrio}</p>
+      {from && <p class="card-price">Desde {from}</p>}
+    </div>
+  </a>
+  {ig && (
+    <a class="card-ig" href={ig} target="_blank" rel="noopener noreferrer">
+      @{place.instagram}
+    </a>
+  )}
+</article>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  handle: string;
+  name: string;
+}
+
+const { handle, name } = Astro.props;
+const profile = `https://www.instagram.com/${handle}/`;
+const embed = `https://www.instagram.com/${handle}/embed/`;
+---
+
+<section class="ig-block" aria-labelledby="ig-title">
+  <div class="ig-head">
+    <h2 id="ig-title">Últimas en Instagram</h2>
+    <a class="ig-profile" href={profile} target="_blank" rel="noopener noreferrer">
+      @{handle}
+    </a>
+  </div>
+  <iframe
+    class="ig-frame"
+    src={embed}
+    loading="lazy"
+    allow="encrypted-media; clipboard-write"
+    referrerpolicy="no-referrer-when-downgrade"
+    title={`Publicaciones recientes de ${name} en Instagram`}
+  ></iframe>
+  <a class="ig-open" href={profile} target="_blank" rel="noopener noreferrer">
+    Abrir perfil en Instagram
+  </a>
+</section>
