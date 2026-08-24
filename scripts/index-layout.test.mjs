@@ -53,6 +53,13 @@ test("poster links remain clickable while the local video is hidden", () => {
   assert.match(stylesSource, /\.reel-tile-link[\s\S]*?z-index:\s*1/);
 });
 
+test("video reel tiles reserve portrait media space in the document flow", () => {
+  assert.match(
+    stylesSource,
+    /\.reel-tile\[data-has-video="true"\] \.reel-tile-link::before\s*\{[^}]*content:\s*"";[^}]*display:\s*block;[^}]*aspect-ratio:\s*3\s*\/\s*4;/s,
+  );
+});
+
 test("directory script supports category filtering, card playback, and map selection", () => {
   assert.match(directorySource, /data-category-filter/);
   assert.match(directorySource, /data-reel-video/);

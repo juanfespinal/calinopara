@@ -1105,6 +1105,12 @@ body.map-page .map-sheet {
   color: var(--on-dark);
 }
 
+.reel-tile[data-has-video="true"] .reel-tile-link::before {
+  content: "";
+  display: block;
+  aspect-ratio: 3 / 4;
+}
+
 .reel-tile-photo {
   width: 100%;
   aspect-ratio: 3 / 4;
