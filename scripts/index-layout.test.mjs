@@ -7,6 +7,7 @@ const stylesSource = await readFile(new URL("../src/styles/global.css", import.m
 const tileSource = await readFile(new URL("../src/components/ReelTile.astro", import.meta.url), "utf8");
 const baseSource = await readFile(new URL("../src/layouts/Base.astro", import.meta.url), "utf8");
 const directorySource = await readFile(new URL("../src/scripts/directory.ts", import.meta.url), "utf8");
+const mapSource = await readFile(new URL("../src/scripts/map.ts", import.meta.url), "utf8");
 
 test("the directory homepage does not render story chips", () => {
   assert.doesNotMatch(indexSource, /story-rail|story-ring|story-name/);
@@ -38,6 +39,11 @@ test("directory script supports category filtering, card playback, and map selec
   assert.match(directorySource, /pause\(\)/);
   assert.match(directorySource, /data-map-sheet/);
   assert.match(directorySource, /location\.hash/);
+});
+
+test("map markers expose business selection to the directory sheet", () => {
+  assert.match(mapSource, /onSelect\?: \(place: Place\) => void/);
+  assert.match(mapSource, /marker\.on\("click"/);
 });
 
 test("the directory uses the approved white canvas and restrained motion tokens", () => {

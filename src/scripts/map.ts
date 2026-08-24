@@ -17,7 +17,7 @@ function pinIcon(color: string) {
 export function mountMap(
   el: HTMLElement,
   places: Place[],
-  options: { zoom?: number; interactive?: boolean } = {},
+  options: { zoom?: number; interactive?: boolean; onSelect?: (place: Place) => void } = {},
 ) {
   const withCoords = places.filter((p) => p.lat != null && p.lng != null);
   const map = L.map(el, {
@@ -41,6 +41,7 @@ export function mountMap(
     marker.bindPopup(
       `<strong>${place.name}</strong><br>${place.barrio}<br><a href="/emprendimiento/${place.slug}">Ver ficha</a>`,
     );
+    marker.on("click", () => options.onSelect?.(place));
     markers.set(place.slug, marker);
   }
 

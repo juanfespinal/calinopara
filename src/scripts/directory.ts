@@ -1,5 +1,5 @@
 import { mountMap } from "./map";
-import { type Place } from "../data/emprendimientos";
+import { categories, statusLabel, type Place } from "../data/emprendimientos";
 
 type View = "lista" | "mapa";
 
@@ -15,6 +15,11 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
   const mapEl = root.querySelector<HTMLElement>("[data-map]");
   const mapPane = root.querySelector<HTMLElement>("[data-map-pane]");
   const mapSheet = root.querySelector<HTMLElement>("[data-map-sheet]");
+  const sheetPhoto = root.querySelector<HTMLImageElement>("[data-sheet-photo]");
+  const sheetName = root.querySelector<HTMLElement>("[data-sheet-name]");
+  const sheetMeta = root.querySelector<HTMLElement>("[data-sheet-meta]");
+  const sheetStatus = root.querySelector<HTMLElement>("[data-sheet-status]");
+  const sheetLink = root.querySelector<HTMLAnchorElement>("[data-sheet-link]");
   const listPane = root.querySelector<HTMLElement>("[data-list-pane]");
 
   let view: View = window.location.hash === "#mapa" ? "mapa" : "lista";
@@ -44,6 +49,20 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
     if (activeVideo === video) activeVideo = null;
   }
 
+  function showMapSheet(place: Place) {
+    if (!mapSheet) return;
+    const categoryLabel = categories.find((item) => item.id === place.category)?.label ?? "Negocio";
+    if (sheetPhoto) {
+      sheetPhoto.src = place.photo;
+      sheetPhoto.alt = place.photoAlt;
+    }
+    if (sheetName) sheetName.textContent = place.name;
+    if (sheetMeta) sheetMeta.textContent = `${categoryLabel} · ${place.barrio}`;
+    if (sheetStatus) sheetStatus.textContent = statusLabel[place.status];
+    if (sheetLink) sheetLink.href = `/emprendimiento/${place.slug}`;
+    mapSheet.hidden = false;
+  }
+
   function setView(next: View, updateUrl = true) {
     view = next;
     root.dataset.view = view;
@@ -59,7 +78,7 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
       btn.setAttribute("aria-pressed", String(btn.dataset.view === view));
     });
     if (view === "mapa" && mapEl && !map) {
-      map = mountMap(mapEl, places);
+      map = mountMap(mapEl, places, { onSelect: showMapSheet });
       map.filter(visiblePlaces().map((p) => p.slug));
     } else if (view === "mapa") {
       requestAnimationFrame(() => map?.map.invalidateSize());
