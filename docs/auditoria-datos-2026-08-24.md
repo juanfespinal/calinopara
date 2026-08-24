@@ -56,7 +56,7 @@ Esta revisión contrasta las 21 fichas recibidas desde `origin/main` con fuentes
 ### La Fonda Tradicional — verificada
 
 - Perfil, dirección, domicilios y proceso de reconstrucción confirmados: <https://www.instagram.com/lafondatradicional/>.
-- Publicaciones recientes confirman pedidos al 312 246 6202: <https://www.instagram.com/p/DcbZEHAHN17/> y <https://www.instagram.com/p/DcXCwp-CEYU/>.
+- Publicaciones recientes confirman pedidos al 312 246 6202: <https://www.instagram.com/p/DcbZEHAHN17/> y <https://www.instagram.com/p/DcXCwp-CEYU/>. Esta última publicación quedó incorporada como video local optimizado en la ficha, reemplazando el reel colectivo.
 - La ficha ya estaba alineada.
 
 ### Mangos — corregida

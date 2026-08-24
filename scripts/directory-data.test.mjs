@@ -54,3 +54,15 @@ test("Cocinamia publishes its complete priced menu and source", async () => {
   assert.match(detailSource, /place\.menuUrl/);
   assert.match(detailSource, />Ver carta completa</);
 });
+
+test("La Fonda Tradicional uses its own verified Instagram video", async () => {
+  const laFonda = dataSource.match(
+    /slug:\s*"la-fonda-tradicional"([\s\S]*?)slug:\s*"mangos"/,
+  )?.[1];
+
+  assert.ok(laFonda, "La Fonda Tradicional listing must exist");
+  assert.match(laFonda, /instagramPost:\s*"DcXCwp-CEYU"/);
+  assert.match(laFonda, /video:\s*"\/videos\/la-fonda-tradicional\.mp4"/);
+  assert.doesNotMatch(laFonda, /reactivacion-cali\.mp4/);
+  await access(new URL("../public/videos/la-fonda-tradicional.mp4", import.meta.url));
+});
