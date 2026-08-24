@@ -366,65 +366,6 @@ h2 {
   color: var(--mute);
 }
 
-.story-rail {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 4px 0 12px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.story-rail::-webkit-scrollbar {
-  display: none;
-}
-
-.story {
-  flex: 0 0 auto;
-  width: 68px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  color: inherit;
-  text-align: center;
-}
-
-.story-ring {
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  padding: 2px;
-  background: conic-gradient(from 210deg, var(--accent), var(--accent-blue), var(--accent));
-  display: grid;
-  place-items: center;
-}
-
-.story-ring img {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  border: 2px solid var(--bg);
-  background: #e8ece9;
-}
-
-.story:hover {
-  color: inherit;
-}
-
-.story-name {
-  font-size: 11px;
-  line-height: 1.2;
-  color: var(--ink);
-  max-width: 68px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .map-frame {
   height: min(42vh, 340px);
   min-height: 220px;
