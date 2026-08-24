@@ -1057,6 +1057,9 @@ body.map-page .map-sheet {
   backdrop-filter: blur(8px);
   border: 1px solid color-mix(in srgb, #fff 40%, transparent);
   text-decoration: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .reel-hero-play svg {

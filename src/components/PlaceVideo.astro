@@ -26,6 +26,16 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
     >
       <source src={src} type="video/mp4" />
     </video>
+    <button
+      type="button"
+      class="reel-hero-play"
+      data-video-toggle
+      aria-label={`Reproducir video de ${name}`}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m9 6 9 6-9 6z" fill="currentColor" />
+      </svg>
+    </button>
   </div>
   {postUrl && (
     <figcaption class="reel-credit">
@@ -36,3 +46,37 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
     </figcaption>
   )}
 </figure>
+
+<script>
+  const toggles = document.querySelectorAll("[data-video-toggle]");
+
+  toggles.forEach((toggle) => {
+    const video = toggle.closest(".reel-hero")?.querySelector("video");
+    if (!video) return;
+
+    const syncToggle = () => {
+      toggle.hidden = !video.paused;
+      toggle.setAttribute(
+        "aria-label",
+        video.paused ? "Reproducir video" : "Pausar video",
+      );
+    };
+
+    toggle.addEventListener("click", async () => {
+      try {
+        if (video.paused) {
+          await video.play();
+        } else {
+          video.pause();
+        }
+      } catch {
+        syncToggle();
+      }
+    });
+
+    video.addEventListener("play", syncToggle);
+    video.addEventListener("pause", syncToggle);
+    video.addEventListener("ended", syncToggle);
+    syncToggle();
+  });
+</script>

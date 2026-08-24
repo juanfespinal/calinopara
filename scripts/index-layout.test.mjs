@@ -12,6 +12,7 @@ const mapPageUrl = new URL("../src/pages/mapa.astro", import.meta.url);
 const mapPageExists = await access(mapPageUrl).then(() => true).catch(() => false);
 const mapPageSource = mapPageExists ? await readFile(mapPageUrl, "utf8") : "";
 const detailSource = await readFile(new URL("../src/pages/emprendimiento/[slug].astro", import.meta.url), "utf8");
+const placeVideoSource = await readFile(new URL("../src/components/PlaceVideo.astro", import.meta.url), "utf8");
 
 test("the directory homepage does not render story chips", () => {
   assert.doesNotMatch(indexSource, /story-rail|story-ring|story-name/);
@@ -68,6 +69,13 @@ test("detail view keeps storytelling before business information", () => {
   assert.ok(detailSource.indexOf("story-block") < detailSource.indexOf("detail-hero"));
   assert.match(detailSource, /Conoce su historia/);
   assert.doesNotMatch(detailSource, /Perfil|Favoritos|Iniciar sesión/);
+});
+
+test("detail videos expose a working central play control", () => {
+  assert.match(placeVideoSource, /data-video-toggle/);
+  assert.match(placeVideoSource, /video\.play\(\)/);
+  assert.match(placeVideoSource, /video\.pause\(\)/);
+  assert.match(stylesSource, /\.reel-hero-play[\s\S]*?cursor:\s*pointer/);
 });
 
 test("map lives on a dedicated full-height route", () => {
