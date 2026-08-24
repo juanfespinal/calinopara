@@ -23,11 +23,13 @@ Esta revisión contrasta las 21 fichas recibidas desde `origin/main` con fuentes
 - Se agregó la tienda como URL de pedidos.
 - Se retiraron las coordenadas porque [el punto guardado](https://www.openstreetmap.org/?mlat=3.3505&mlon=-76.5316#map=18/3.3505/-76.5316) no correspondía a la dirección textual de La Leyenda Mall. La dirección se conserva y Google Maps puede resolverla por texto.
 
-### Fábrica Emilitas — verificada
+### Fábrica Emilitas — verificada y carta incorporada
 
 - Perfil oficial existente: <https://www.instagram.com/fabricaemilitaspostres/>.
 - La publicación de apoyo confirma el punto de venta en carrera 50 con calle 9: <https://www.instagram.com/p/DcCNXcuB7gU/>.
-- No se encontraron contradicciones suficientes para modificar la ficha.
+- La página oficial de Atom Bio publica la carta en tres láminas, el WhatsApp 305 815 0947 y los enlaces oficiales: <https://www.atom.bio/fabricaemilitaspostres>.
+- Se transcribieron los 17 productos y precios visibles de la carta, se extrajeron nueve fotografías auténticas y se conservó Atom Bio como enlace informativo “Ver carta completa”. Los pedidos directos quedan separados por WhatsApp.
+- La antigua portada sintética fue eliminada y reemplazada por la fotografía oficial del Merengón Especial.
 
 ### Asados al Carbón — verificada parcialmente
 

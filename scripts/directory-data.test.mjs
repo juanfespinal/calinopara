@@ -54,3 +54,34 @@ test("Cocinamia publishes its complete priced menu and source", async () => {
   assert.match(detailSource, /place\.menuUrl/);
   assert.match(detailSource, />Ver carta completa</);
 });
+
+test("Fábrica Emilitas publishes the complete official Atom Bio menu", async () => {
+  const fabrica = dataSource.match(
+    /slug:\s*"fabrica-emilitas"([\s\S]*?)slug:\s*"asados-al-carbon"/,
+  )?.[1];
+
+  assert.ok(fabrica, "Fábrica Emilitas listing must exist");
+  assert.match(fabrica, /menuUrl:\s*"https:\/\/www\.atom\.bio\/fabricaemilitaspostres"/);
+  assert.match(fabrica, /whatsapp:\s*"573058150947"/);
+  assert.match(fabrica, /photo:\s*"\/places\/fabrica-emilitas\/menu\/merengon-especial\.webp"/);
+  assert.doesNotMatch(fabrica, /photo:\s*"\/places\/fabrica-emilitas\.jpg"/);
+
+  const itemNames = [
+    "Merengón Especial", "Merengón Personal", "Merengón Junior",
+    "Oblea con Todo", "Oblea Especial", "Oblea Tradicional",
+    "Milo", "Carlota de arequipe", "Maracuyá", "Genovesa",
+    "Cheesecake horneado", "Flan de tres leches", "Arroz de leche",
+    "Torta de chocolate", "Torta artesanal pequeña", "Torta artesanal mediana",
+    "Botella de agua",
+  ];
+  for (const name of itemNames) {
+    assert.match(fabrica, new RegExp(`name:\\s*"${name}"`), `${name} must be published`);
+  }
+
+  const prices = [...fabrica.matchAll(/price:\s*(\d+)/g)].map((match) => Number(match[1]));
+  assert.deepEqual(prices, [18000, 15000, 12000, 7500, 6500, 6000, 9500, 9500, 9500, 9500, 9500, 9500, 5000, 6500, 1800, 2400, 3000]);
+
+  const photos = [...fabrica.matchAll(/photo:\s*"([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(new Set(photos).size, 9, "the official menu must contribute nine distinct local photos");
+  await Promise.all([...new Set(photos)].map((photo) => access(new URL(`../public${photo}`, import.meta.url))));
+});
