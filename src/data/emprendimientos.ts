@@ -8,7 +8,7 @@ export const categories = [
 ] as const;
 
 export type CategoryId = (typeof categories)[number]["id"];
-export type Status = "abierto" | "limitado" | "cerrado";
+export type Status = "abierto" | "limitado" | "cerrado" | "por-confirmar";
 
 export interface MenuItem {
   name: string;
@@ -89,7 +89,7 @@ export const places: Place[] = [
     instagramPost: "DcEuJGzi0Sx",
     video: "/videos/restaurantemontserrat.mp4",
     videoPoster: "/places/restaurantemontserrat.jpg",
-    status: "limitado",
+    status: "por-confirmar",
     photo: "/places/restaurantemontserrat.jpg",
     photoAlt: "Persona entrevistada en el video de Restaurante Montserrat",
     menuNote: "Carta, disponibilidad y modalidad de atención por confirmar en Instagram.",
@@ -1069,6 +1069,7 @@ export const statusLabel: Record<Status, string> = {
   abierto: "Abierto",
   limitado: "Atención limitada",
   cerrado: "No está atendiendo",
+  "por-confirmar": "Por confirmar",
 };
 
 export const categoryColor: Record<CategoryId, string> = {

@@ -24,6 +24,7 @@ test("reservation-only businesses can replace the generic order label", () => {
 test("directory status labels avoid unsupported operational claims", () => {
   assert.match(dataSource, /limitado:\s*"Atención limitada"/);
   assert.match(dataSource, /cerrado:\s*"No está atendiendo"/);
+  assert.match(dataSource, /["']por-confirmar["']:\s*"Por confirmar"/);
 });
 
 test("every Perreiranos menu item includes an existing product photo", async () => {
@@ -93,6 +94,9 @@ test("Restaurant Montserrat publishes its Instagram story and local media", asyn
   assert.match(montserrat, /instagram:\s*"restaurantemontserrat"/);
   assert.match(montserrat, /instagramPost:\s*"DcEuJGzi0Sx"/);
   assert.match(montserrat, /video:\s*"\/videos\/restaurantemontserrat\.mp4"/);
+  assert.match(montserrat, /status:\s*"por-confirmar"/);
+  assert.match(montserrat, /hasPhysicalLocation:\s*false/);
+  assert.doesNotMatch(montserrat, /price:\s*\d+/);
   await Promise.all([
     access(new URL("../public/videos/restaurantemontserrat.mp4", import.meta.url)),
     access(new URL("../public/places/restaurantemontserrat.jpg", import.meta.url)),
