@@ -410,28 +410,6 @@ h2 {
   min-height: 100dvh;
 }
 
-.map-view-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 20px 16px 12px;
-}
-
-.map-view-header h1 {
-  margin: 2px 0 0;
-  font-size: clamp(1.45rem, 5vw, 2.1rem);
-}
-
-.map-view-header .hero-kicker {
-  margin: 0;
-}
-
-.map-view-header .btn {
-  min-height: 40px;
-  flex: 0 0 auto;
-}
-
 .map-view-controls {
   display: grid;
   gap: 8px;
@@ -624,7 +602,6 @@ body.map-page .map-view {
   min-height: 100dvh;
 }
 
-body.map-page .map-view-header,
 body.map-page .map-view-controls {
   position: absolute;
   right: 16px;
@@ -634,13 +611,8 @@ body.map-page .map-view-controls {
   padding-left: 0;
 }
 
-body.map-page .map-view-header {
-  top: 68px;
-  padding-top: 12px;
-}
-
 body.map-page .map-view-controls {
-  top: 132px;
+  top: 68px;
 }
 
 body.map-page .map-pane-full {
