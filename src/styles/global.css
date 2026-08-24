@@ -61,6 +61,18 @@ a:hover {
   outline-offset: 3px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .skip {
   position: absolute;
   left: 12px;
@@ -129,7 +141,7 @@ a:hover {
   bottom: 0;
   left: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 4px;
   padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--line);
@@ -206,8 +218,10 @@ a:hover {
   position: fixed;
   right: 12px;
   bottom: calc(84px + env(safe-area-inset-bottom));
-  left: 12px;
+  left: auto;
   z-index: 25;
+  width: calc(100% - 24px);
+  max-width: 30rem;
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -253,6 +267,314 @@ a:hover {
 
 .invite .btn {
   width: max-content;
+}
+
+.aid-callout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  margin: 4px auto 28px;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent-blue) 24%, var(--line));
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--accent-blue) 7%, var(--paper));
+}
+
+.aid-callout-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.aid-callout-status,
+.aid-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  width: max-content;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.aid-callout h2 {
+  margin: 4px 0 2px;
+  font-size: clamp(1.12rem, 3vw, 1.32rem);
+  letter-spacing: -0.025em;
+}
+
+.aid-callout p {
+  margin: 0;
+  color: var(--mute);
+  font-size: 0.9rem;
+}
+
+.aid-callout .btn {
+  grid-column: 1 / -1;
+  justify-content: center;
+}
+
+.aids-shell {
+  padding-bottom: 28px;
+}
+
+.aids-hero {
+  max-width: 44rem;
+  padding: 28px 0 20px;
+}
+
+.aids-hero h1 {
+  margin: 4px 0 10px;
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.aids-hero > p:not(.hero-kicker, .aids-updated) {
+  max-width: 40rem;
+  margin: 0;
+  color: var(--mute);
+  font-size: 1.03rem;
+}
+
+.aids-updated {
+  margin: 14px 0 0;
+  color: var(--mute);
+  font-size: 0.82rem;
+}
+
+.aid-boundary {
+  padding: 14px 16px;
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 0 10px 10px 0;
+  background: color-mix(in srgb, var(--accent-blue) 6%, var(--paper));
+  color: var(--mute);
+  font-size: 0.9rem;
+}
+
+.aid-boundary strong {
+  color: var(--ink);
+}
+
+.aid-priority,
+.aid-group,
+.offer-support {
+  margin-top: 36px;
+}
+
+.aid-section-kicker {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aid-group-heading {
+  max-width: 42rem;
+  margin-bottom: 16px;
+}
+
+.aid-group-heading h2,
+.offer-support h2 {
+  margin: 0 0 6px;
+  font-size: clamp(1.45rem, 5vw, 2rem);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.aid-group-heading > p:last-child,
+.offer-support > div > p:last-child {
+  margin: 0;
+  color: var(--mute);
+}
+
+.aid-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.aid-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: 0 5px 18px rgba(19, 35, 58, 0.06);
+}
+
+.aid-card-priority {
+  padding: 22px;
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  background: linear-gradient(145deg, var(--paper), color-mix(in srgb, var(--accent) 7%, var(--paper)));
+}
+
+.aid-card-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.aid-card-heading p {
+  margin: 0;
+  color: var(--mute);
+  font-size: 0.78rem;
+}
+
+.aid-status-byProvider {
+  background: color-mix(in srgb, var(--accent-blue) 12%, var(--paper));
+  color: var(--accent-blue);
+}
+
+.aid-status-announced,
+.aid-status-regulation {
+  background: color-mix(in srgb, var(--accent-yellow) 18%, var(--paper));
+  color: #785300;
+}
+
+.aid-card h2,
+.aid-card h3 {
+  margin: 14px 0 8px;
+  color: var(--ink);
+  font-size: clamp(1.22rem, 4vw, 1.55rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.aid-summary,
+.aid-eligibility,
+.aid-guidance {
+  margin: 0 0 12px;
+  color: var(--mute);
+}
+
+.aid-eligibility strong,
+.aid-guidance strong {
+  color: var(--ink);
+}
+
+.aid-details {
+  display: grid;
+  gap: 7px;
+  margin: 2px 0 18px;
+  padding-left: 20px;
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.aid-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.aid-actions .btn {
+  flex: 1 1 180px;
+  justify-content: center;
+}
+
+.aid-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--mute);
+  font-size: 0.75rem;
+}
+
+.aid-card-footer a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.offer-support {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border-radius: var(--radius);
+  background: #001a72;
+  color: #fff;
+}
+
+.offer-support h2,
+.offer-support .aid-section-kicker {
+  color: #fff;
+}
+
+.offer-support > div > p:last-child {
+  color: #d6dced;
+}
+
+.support-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-types li {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 999px;
+  color: #f4f6ff;
+  font-size: 0.82rem;
+}
+
+.offer-support .btn {
+  width: max-content;
+}
+
+.official-registration-note {
+  display: grid;
+  gap: 16px;
+  max-width: 42rem;
+  margin: 0 0 24px;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent-blue) 24%, var(--line));
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--accent-blue) 6%, var(--paper));
+}
+
+.official-registration-note h2 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  letter-spacing: -0.025em;
+}
+
+.official-registration-note p:not(.aid-section-kicker) {
+  margin: 0;
+  color: var(--mute);
+  font-size: 0.9rem;
+}
+
+.official-registration-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.official-registration-actions .btn {
+  flex: 1 1 180px;
+  justify-content: center;
 }
 
 .form-page {
@@ -1664,6 +1986,38 @@ body.map-page .map-sheet {
 @media (min-width: 700px) {
   .brand-logo {
     height: 64px;
+  }
+
+  .aid-callout {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 20px 22px;
+  }
+
+  .aid-callout .btn {
+    grid-column: auto;
+  }
+
+  .aid-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aid-grid:not(.aid-grid-upcoming) .aid-card {
+    grid-column: 1 / -1;
+  }
+
+  .offer-support {
+    grid-template-columns: minmax(0, 1.4fr) minmax(240px, 1fr);
+    align-items: center;
+    padding: 28px;
+  }
+
+  .offer-support .btn {
+    grid-column: 1 / -1;
+  }
+
+  .official-registration-note {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.7fr);
+    align-items: center;
   }
 
   .toolbar-row {

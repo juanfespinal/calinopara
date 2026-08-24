@@ -18,10 +18,34 @@ const sent = Astro.url.searchParams.get("ok") === "1";
       </p>
     </header>
 
+    <aside class="official-registration-note" aria-labelledby="official-registration-title">
+      <div>
+        <p class="aid-section-kicker">Registro de afectaciones</p>
+        <h2 id="official-registration-title">Este formulario no reemplaza el registro oficial</h2>
+        <p>
+          La Alcaldía de Cali y la Cámara de Comercio reciben casos de negocios formales e informales afectados directa o indirectamente.
+        </p>
+      </div>
+      <div class="official-registration-actions">
+        <a
+          class="btn btn-primary"
+          href="https://wa.me/573009131811"
+          data-analytics-event="aid_action"
+          data-analytics-aid-id="registro-afectacion-economica"
+          data-analytics-channel="whatsapp"
+        >
+          Reportar oficialmente
+        </a>
+        <a class="btn btn-ghost" href="/ayudas/">Ver todas las ayudas</a>
+      </div>
+    </aside>
+
     {sent ? (
-      <p class="form-ok" role="status">
-        Recibimos tu caso. Te escribimos si hace falta algún dato.
-      </p>
+      <div class="form-ok" role="status">
+        <strong>Recibimos tu caso.</strong>
+        <p>Te escribimos si hace falta algún dato. Mientras lo revisamos, puedes consultar las ayudas disponibles.</p>
+        <a href="/ayudas/">Consultar ayudas verificadas →</a>
+      </div>
     ) : (
       <form class="case-form" action="https://formsubmit.co/juanfespinal@gmail.com" method="POST" data-analytics-event="submit_business_case">
         <input type="hidden" name="_subject" value="Cali No Para — nuevo caso" />

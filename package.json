@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "test": "node --test scripts/video-policy.test.mjs scripts/initiative-copy.test.mjs scripts/index-layout.test.mjs scripts/analytics-runtime.test.mjs scripts/directory-data.test.mjs scripts/place-order.test.mjs",
+    "test": "node --test scripts/video-policy.test.mjs scripts/initiative-copy.test.mjs scripts/index-layout.test.mjs scripts/analytics-runtime.test.mjs scripts/directory-data.test.mjs scripts/place-order.test.mjs scripts/aids-ux.test.mjs",
     "check:videos": "node scripts/check-videos.mjs",
     "prebuild": "npm run check:videos",
     "build": "astro build",
