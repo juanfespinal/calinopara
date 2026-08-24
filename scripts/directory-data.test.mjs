@@ -86,6 +86,19 @@ test("Fábrica Emilitas publishes the complete official Atom Bio menu", async ()
   await Promise.all([...new Set(photos)].map((photo) => access(new URL(`../public${photo}`, import.meta.url))));
 });
 
+test("Restaurant Montserrat publishes its Instagram story and local media", async () => {
+  const montserrat = dataSource.match(/slug:\s*"restaurante-montserrat"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(montserrat, "Restaurant Montserrat listing must exist");
+  assert.match(montserrat, /instagram:\s*"restaurantemontserrat"/);
+  assert.match(montserrat, /instagramPost:\s*"DcEuJGzi0Sx"/);
+  assert.match(montserrat, /video:\s*"\/videos\/restaurantemontserrat\.mp4"/);
+  await Promise.all([
+    access(new URL("../public/videos/restaurantemontserrat.mp4", import.meta.url)),
+    access(new URL("../public/places/restaurantemontserrat.jpg", import.meta.url)),
+  ]);
+});
+
 test("every local video card has an existing poster", async () => {
   const videoPosters = {
     "arepas-de-la-abuela": "/video-posters/reactivacion-cali.jpg",
