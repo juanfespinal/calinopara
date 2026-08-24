@@ -15,7 +15,13 @@ const hasLocalVideo = Boolean(place.video);
   data-category={place.category}
   data-has-video={hasLocalVideo ? "true" : undefined}
 >
-  <a class="reel-tile-link" href={`/emprendimiento/${place.slug}`}>
+  <a
+    class="reel-tile-link"
+    href={`/emprendimiento/${place.slug}`}
+    data-analytics-event="select_business"
+    data-analytics-business-slug={place.slug}
+    data-analytics-business-name={place.name}
+  >
     {!hasLocalVideo && (
       <img
         class="reel-tile-photo"

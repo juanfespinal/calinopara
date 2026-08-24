@@ -1,4 +1,5 @@
 import { mountMap } from "./map";
+import { trackEvent } from "./analytics";
 import { categories, statusLabel, type Place } from "../data/emprendimientos";
 
 type View = "lista" | "mapa";
@@ -52,6 +53,7 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
 
   function showMapSheet(place: Place) {
     if (!mapSheet) return;
+    trackEvent("map_marker_select", { business_slug: place.slug, business_name: place.name });
     const categoryLabel = categories.find((item) => item.id === place.category)?.label ?? "Negocio";
     if (sheetPhoto) {
       sheetPhoto.src = place.photo;
@@ -107,7 +109,11 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
   }
 
   reelVideos.forEach((video) => {
-    video.addEventListener("ended", () => resetVideo(video));
+    video.addEventListener("ended", () => {
+      const card = video.closest<HTMLElement>("[data-slug]");
+      trackEvent("video_complete", { business_slug: card?.dataset.slug, content_type: "directory_story" });
+      resetVideo(video);
+    });
   });
 
   reelButtons.forEach((button) => {
@@ -127,6 +133,7 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
       card.dataset.playing = "true";
       button.hidden = true;
       video.tabIndex = 0;
+      trackEvent("video_start", { business_slug: card.dataset.slug, content_type: "directory_story" });
 
       try {
         await video.play();
@@ -146,11 +153,20 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
   categoryBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       category = btn.dataset.categoryFilter || "todos";
+      trackEvent("directory_filter", { category });
       render();
     });
   });
 
-  search?.addEventListener("input", render);
+  let searchTimer: ReturnType<typeof setTimeout> | undefined;
+  search?.addEventListener("input", () => {
+    render();
+    if (searchTimer) window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(() => {
+      const query = search.value.trim();
+      if (query) trackEvent("directory_search", { query });
+    }, 500);
+  });
 
   setView(view, false);
   render();

@@ -30,6 +30,7 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
       type="button"
       class="reel-hero-play"
       data-video-toggle
+      data-analytics-business-name={name}
       aria-label={`Reproducir video de ${name}`}
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -48,11 +49,15 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
 </figure>
 
 <script>
+  import { trackEvent } from "../scripts/analytics";
+
   const toggles = document.querySelectorAll("[data-video-toggle]");
 
   toggles.forEach((toggle) => {
     const video = toggle.closest(".reel-hero")?.querySelector("video");
     if (!video) return;
+    const businessName = toggle.dataset.analyticsBusinessName ?? "Negocio local";
+    let hasTrackedStart = false;
 
     const syncToggle = () => {
       toggle.hidden = !video.paused;
@@ -76,7 +81,15 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
 
     video.addEventListener("play", syncToggle);
     video.addEventListener("pause", syncToggle);
-    video.addEventListener("ended", syncToggle);
+    video.addEventListener("play", () => {
+      if (hasTrackedStart) return;
+      hasTrackedStart = true;
+      trackEvent("video_start", { business_name: businessName, content_type: "business_story" });
+    });
+    video.addEventListener("ended", () => {
+      syncToggle();
+      trackEvent("video_complete", { business_name: businessName, content_type: "business_story" });
+    });
     syncToggle();
   });
 </script>

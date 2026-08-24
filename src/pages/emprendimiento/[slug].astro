@@ -74,7 +74,7 @@ const menuHasPhotos = place.menu.some((item) => Boolean(item.photo));
       <p class="detail-meta">
         <span class:list={["badge", place.status]}>{statusLabel[place.status]}</span>
         {ig && (
-          <a class="ig-inline" href={ig} target="_blank" rel="noopener noreferrer">
+          <a class="ig-inline" href={ig} target="_blank" rel="noopener noreferrer" data-analytics-event="view_instagram" data-analytics-business-slug={place.slug}>
             @{place.instagram}
           </a>
         )}
@@ -86,7 +86,7 @@ const menuHasPhotos = place.menu.some((item) => Boolean(item.photo));
       <ul class:list={["menu", menuHasPhotos && "menu-grid"]}>
         {place.menu.map((item, index) => (
           <li>
-            <button type="button" class="menu-card" data-dish aria-haspopup="dialog">
+            <button type="button" class="menu-card" data-dish data-analytics-event="view_menu_item" data-analytics-business-slug={place.slug} data-analytics-item-name={item.name} aria-haspopup="dialog">
               {item.photo ? (
                 <img
                   class="menu-thumb"
@@ -128,6 +128,9 @@ const menuHasPhotos = place.menu.some((item) => Boolean(item.photo));
           <a
             class="btn btn-primary"
             href={orderHref}
+            data-analytics-event="support_click"
+            data-analytics-business-slug={place.slug}
+            data-analytics-channel={orderHref.startsWith("https://wa.me/") ? "whatsapp" : orderHref.startsWith("tel:") ? "phone" : "order_url"}
             target={orderNewTab ? "_blank" : undefined}
             rel={orderNewTab ? "noopener noreferrer" : undefined}
           >
@@ -139,7 +142,7 @@ const menuHasPhotos = place.menu.some((item) => Boolean(item.photo));
           </a>
         )}
         {hasPhysicalLocation && (
-          <a class="btn btn-ghost" href={mapsUrl}>
+          <a class="btn btn-ghost" href={mapsUrl} data-analytics-event="get_directions" data-analytics-business-slug={place.slug}>
             <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 21s6-5.4 6-11a6 6 0 1 0-12 0c0 5.6 6 11 6 11Z" fill="none" stroke="currentColor" stroke-width="1.8" />
               <circle cx="12" cy="10" r="2" fill="none" stroke="currentColor" stroke-width="1.8" />

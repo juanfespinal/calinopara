@@ -33,6 +33,13 @@ const {
     />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <title>{title}</title>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag() { window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", "G-R9MNJYHSLQ");
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R9MNJYHSLQ"></script>
   </head>
   <body class={bodyClass}>
     <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -53,20 +60,20 @@ const {
       <slot />
     </main>
     <nav class="bottom-nav" aria-label="Navegación principal">
-      <a class="bottom-nav-item" href="/" data-nav-view="lista">
+      <a class="bottom-nav-item" href="/" data-nav-view="lista" data-analytics-event="open_directory">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
         </svg>
         <span>Directorio</span>
       </a>
-      <a class="bottom-nav-item" href="/mapa/" data-nav-view="mapa">
+      <a class="bottom-nav-item" href="/mapa/" data-nav-view="mapa" data-analytics-event="open_map">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <path d="m4 6 5-2 6 2 5-2v14l-5 2-6-2-5 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
           <path d="M9 4v14M15 6v14" fill="none" stroke="currentColor" stroke-width="1.8" />
         </svg>
         <span>Mapa</span>
       </a>
-      <a class="bottom-nav-item" href="/sumate">
+      <a class="bottom-nav-item" href="/sumate" data-analytics-event="open_sumate">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
         </svg>
@@ -105,3 +112,8 @@ const {
     </footer>
   </body>
 </html>
+
+<script>
+  import { initAnalytics } from "../scripts/analytics";
+  initAnalytics();
+</script>

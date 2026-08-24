@@ -13,6 +13,9 @@ const mapPageExists = await access(mapPageUrl).then(() => true).catch(() => fals
 const mapPageSource = mapPageExists ? await readFile(mapPageUrl, "utf8") : "";
 const detailSource = await readFile(new URL("../src/pages/emprendimiento/[slug].astro", import.meta.url), "utf8");
 const placeVideoSource = await readFile(new URL("../src/components/PlaceVideo.astro", import.meta.url), "utf8");
+const analyticsUrl = new URL("../src/scripts/analytics.ts", import.meta.url);
+const analyticsExists = await access(analyticsUrl).then(() => true).catch(() => false);
+const analyticsSource = analyticsExists ? await readFile(analyticsUrl, "utf8") : "";
 
 test("the directory homepage does not render story chips", () => {
   assert.doesNotMatch(indexSource, /story-rail|story-ring|story-name/);
@@ -95,4 +98,21 @@ test("map lives on a dedicated full-height route", () => {
   assert.match(stylesSource, /body\.map-page \.bottom-nav[\s\S]*?background:\s*#fff/);
   assert.match(stylesSource, /body\.map-page \.map-pane-full[\s\S]*?isolation:\s*isolate/);
   assert.match(stylesSource, /height:\s*100dvh/);
+});
+
+test("analytics measures the support journey", () => {
+  assert.equal(analyticsExists, true);
+  assert.match(analyticsSource, /G-R9MNJYHSLQ/);
+  assert.match(analyticsSource, /trackEvent/);
+  assert.match(baseSource, /G-R9MNJYHSLQ/);
+  assert.match(baseSource, /googletagmanager\.com\/gtag\/js/);
+  assert.match(baseSource, /data-analytics-event="open_directory"/);
+  assert.match(directorySource, /video_start/);
+  assert.match(directorySource, /directory_search/);
+  assert.match(directorySource, /directory_filter/);
+  assert.match(detailSource, /data-analytics-event="support_click"/);
+  assert.match(detailSource, /data-analytics-event="get_directions"/);
+  assert.match(detailSource, /data-analytics-event="view_instagram"/);
+  assert.match(directorySource, /map_marker_select/);
+  assert.match(detailSource, /data-analytics-event="view_menu_item"/);
 });
