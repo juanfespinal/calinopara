@@ -114,6 +114,7 @@ test("supplied logos and La Fugitiva menu source are published", async () => {
   assert.match(fugitiva, /menuUrl:\s*"https:\/\/menupp\.co\/lafugitiva\/venue\/jhfJgnsgRrj3ovActhCE\/menu\/a5204527-32eb-412d-b231-dd7bb5b0c987"/);
   assert.match(fugitiva, /"?name"?:\s*"Pepperoni Chips/);
   assert.match(fugitiva, /"?name"?:\s*"Pizza de Nutella/);
+  assert.match(fugitiva, /"?photo"?:\s*"\/places\/la-fugitiva-pizzeria-dapa\/menu\/001-pepperoni-chips\.webp"/);
   await Promise.all([
     access(new URL("../public/logos/restaurantemontserrat.png", import.meta.url)),
     access(new URL("../public/logos/la-fugitiva-pizzeria-dapa.png", import.meta.url)),
