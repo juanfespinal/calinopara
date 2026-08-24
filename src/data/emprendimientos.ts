@@ -687,6 +687,7 @@ export const places: Place[] = [
     instagram: "lacasonavegetariana",
     instagramPost: "DcMMvPYIDsU",
     video: "/videos/lacasona-vegetariana.mp4",
+    videoPoster: "/video-posters/lacasona-vegetariana.jpg",
     whatsapp: "573164955537",
     phone: "3164955537",
     status: "limitado",
