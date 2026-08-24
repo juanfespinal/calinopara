@@ -1,12 +1,12 @@
 ---
-import { formatCop, startingPrice, statusLabel, type Place } from "../data/emprendimientos";
+import { statusLabel, type Place } from "../data/emprendimientos";
 
 interface Props {
   place: Place;
 }
 
 const { place } = Astro.props;
-const from = formatCop(startingPrice(place) ?? undefined);
+const hasLocalVideo = Boolean(place.video);
 ---
 
 <article class="reel-tile" data-slug={place.slug} data-category={place.category}>
@@ -19,7 +19,7 @@ const from = formatCop(startingPrice(place) ?? undefined);
       height="800"
       loading="lazy"
     />
-    {(place.video || place.instagramPost) && (
+    {place.instagramPost && !hasLocalVideo && (
       <span class="reel-tile-play" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true">
           <polygon points="8,5 19,12 8,19" fill="currentColor" />
@@ -30,7 +30,33 @@ const from = formatCop(startingPrice(place) ?? undefined);
     <div class="reel-tile-scrim">
       <h2>{place.name}</h2>
       <p>{place.barrio}</p>
-      {from && <p class="reel-tile-price">Desde {from}</p>}
     </div>
   </a>
+  {hasLocalVideo && (
+    <>
+      <video
+        class="reel-tile-video"
+        data-reel-video
+        poster={place.photo}
+        preload="none"
+        muted
+        playsinline
+        controls
+        tabindex="-1"
+        aria-label={`Video de ${place.name}`}
+      >
+        <source src={place.video} type="video/mp4" />
+      </video>
+      <button
+        class="reel-tile-play"
+        type="button"
+        data-reel-play
+        aria-label={`Reproducir historia de ${place.name}`}
+      >
+        <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true">
+          <polygon points="8,5 19,12 8,19" fill="currentColor" />
+        </svg>
+      </button>
+    </>
+  )}
 </article>

@@ -32,6 +32,14 @@ test("directory cards expose poster-first tap-to-play video controls", () => {
   assert.match(directorySource, /data-reel-play/);
 });
 
+test("directory script supports category filtering, card playback, and map selection", () => {
+  assert.match(directorySource, /data-category-filter/);
+  assert.match(directorySource, /data-reel-video/);
+  assert.match(directorySource, /pause\(\)/);
+  assert.match(directorySource, /data-map-sheet/);
+  assert.match(directorySource, /location\.hash/);
+});
+
 test("the directory uses the approved white canvas and restrained motion tokens", () => {
   assert.match(stylesSource, /--bg:\s*#ffffff/i);
   assert.match(stylesSource, /--accent-red:\s*#e43e3e/i);

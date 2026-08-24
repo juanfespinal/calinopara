@@ -1,38 +1,60 @@
 import { mountMap } from "./map";
-import type { Place } from "../data/emprendimientos";
+import { type Place } from "../data/emprendimientos";
 
 type View = "lista" | "mapa";
 
 export function initDirectory(root: HTMLElement, places: Place[]) {
   const search = root.querySelector<HTMLInputElement>("[data-search]");
   const viewBtns = [...root.querySelectorAll<HTMLButtonElement>("[data-view]")];
+  const categoryBtns = [...root.querySelectorAll<HTMLButtonElement>("[data-category-filter]")];
   const cards = [...root.querySelectorAll<HTMLElement>("[data-slug]")];
+  const reelButtons = [...root.querySelectorAll<HTMLButtonElement>("[data-reel-play]")];
+  const reelVideos = [...root.querySelectorAll<HTMLVideoElement>("[data-reel-video]")];
   const count = root.querySelector<HTMLElement>("[data-count]");
   const empty = root.querySelector<HTMLElement>("[data-empty]");
   const mapEl = root.querySelector<HTMLElement>("[data-map]");
   const mapPane = root.querySelector<HTMLElement>("[data-map-pane]");
+  const mapSheet = root.querySelector<HTMLElement>("[data-map-sheet]");
   const listPane = root.querySelector<HTMLElement>("[data-list-pane]");
 
-  let view: View = (sessionStorage.getItem("calinopara-view") as View) || "lista";
+  let view: View = window.location.hash === "#mapa" ? "mapa" : "lista";
+  let category = "todos";
   let map: ReturnType<typeof mountMap> | null = null;
+  let activeVideo: HTMLVideoElement | null = null;
 
   function visiblePlaces() {
     const q = (search?.value ?? "").trim().toLowerCase();
     return places.filter((place) => {
+      const categoryOk = category === "todos" || place.category === category;
       const qOk =
         !q ||
         place.name.toLowerCase().includes(q) ||
         place.barrio.toLowerCase().includes(q) ||
         place.tagline.toLowerCase().includes(q);
-      return qOk;
+      return categoryOk && qOk;
     });
   }
 
-  function applyView() {
+  function resetVideo(video: HTMLVideoElement) {
+    const card = video.closest<HTMLElement>("[data-slug]");
+    card?.removeAttribute("data-playing");
+    const button = card?.querySelector<HTMLButtonElement>("[data-reel-play]");
+    if (button) button.hidden = false;
+    video.tabIndex = -1;
+    if (activeVideo === video) activeVideo = null;
+  }
+
+  function setView(next: View, updateUrl = true) {
+    view = next;
     root.dataset.view = view;
-    sessionStorage.setItem("calinopara-view", view);
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      url.hash = view === "mapa" ? "mapa" : "";
+      window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    }
     if (listPane) listPane.hidden = view !== "lista";
     if (mapPane) mapPane.hidden = view !== "mapa";
+    if (mapSheet && view !== "mapa") mapSheet.hidden = true;
     viewBtns.forEach((btn) => {
       btn.setAttribute("aria-pressed", String(btn.dataset.view === view));
     });
@@ -53,6 +75,10 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
       card.hidden = !slugs.has(slug);
     }
 
+    categoryBtns.forEach((btn) => {
+      btn.setAttribute("aria-pressed", String((btn.dataset.categoryFilter ?? "todos") === category));
+    });
+
     if (count) {
       count.textContent = shown.length === 1 ? "1 negocio" : `${shown.length} negocios`;
     }
@@ -60,16 +86,52 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
     map?.filter([...slugs]);
   }
 
+  reelVideos.forEach((video) => {
+    video.addEventListener("ended", () => resetVideo(video));
+  });
+
+  reelButtons.forEach((button) => {
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const card = button.closest<HTMLElement>("[data-slug]");
+      const video = card?.querySelector<HTMLVideoElement>("[data-reel-video]");
+      if (!card || !video) return;
+
+      if (activeVideo && activeVideo !== video) {
+        activeVideo.pause();
+        resetVideo(activeVideo);
+      }
+
+      activeVideo = video;
+      card.dataset.playing = "true";
+      button.hidden = true;
+      video.tabIndex = 0;
+
+      try {
+        await video.play();
+      } catch {
+        resetVideo(video);
+      }
+    });
+  });
+
   viewBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      view = (btn.dataset.view as View) || "lista";
-      applyView();
+      setView((btn.dataset.view as View) || "lista");
+      render();
+    });
+  });
+
+  categoryBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      category = btn.dataset.categoryFilter || "todos";
       render();
     });
   });
 
   search?.addEventListener("input", render);
 
-  applyView();
+  setView(view, false);
   render();
 }
