@@ -107,6 +107,7 @@ test("every local video card has an existing poster", async () => {
   const videoPosters = {
     "arepas-de-la-abuela": "/video-posters/reactivacion-cali.jpg",
     "la-fonda-tradicional": "/video-posters/reactivacion-cali.jpg",
+    "la-casona-vegetariana": "/video-posters/lacasona-vegetariana.jpg",
   };
 
   for (const [slug, poster] of Object.entries(videoPosters)) {
