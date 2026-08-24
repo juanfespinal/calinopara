@@ -1215,7 +1215,7 @@ export const places: Place[] = [
     address: "Avenida 6, Cali. Punto de venta y fábrica",
     hasPhysicalLocation: true,
     instagram: "tejaditospasteleria",
-    instagramPost: "DcWYttcCG0K",
+    instagramPost: "DcTf_YgiimN",
     video: "/videos/tjaditos.mp4",
     whatsapp: "573148890391",
     phone: "3148890391",
@@ -1223,7 +1223,7 @@ export const places: Place[] = [
     status: "limitado",
     photo: "/places/tjaditos.jpg",
     logo: "/logos/tjaditos.jpg",
-    photoAlt: "Punto de venta de Tjaditos con su aviso de domicilios",
+    photoAlt: "Equipo de Tjaditos en su punto de venta y fábrica",
     menuNote: "Tres de sus cuatro puntos fueron afectados. Siguen atendiendo desde la Avenida 6 y con domicilios; confirma disponibilidad al 3148890391.",
     menu: [
       {
