@@ -4,8 +4,6 @@ import InitiativeDialog from "../components/InitiativeDialog.astro";
 import ReelTile from "../components/ReelTile.astro";
 import { initiative } from "../data/initiative.mjs";
 import { places } from "../data/emprendimientos";
-
-const stories = places.filter((p) => p.instagram);
 ---
 
 <Base title="Cali No Para · carta local">
@@ -20,19 +18,6 @@ const stories = places.filter((p) => p.instagram);
   </section>
 
   <section class="wrap" id="directorio" data-directory data-view="lista">
-    {stories.length > 0 && (
-      <nav class="story-rail" aria-label="Historias">
-        {stories.map((place) => (
-          <a class="story" href={`/emprendimiento/${place.slug}`}>
-            <span class="story-ring">
-              <img src={place.photo} alt="" width="54" height="54" />
-            </span>
-            <span class="story-name">{place.name.split(/\s+/)[0]}</span>
-          </a>
-        ))}
-      </nav>
-    )}
-
     <div class="toolbar">
       <div class="toolbar-row">
         <label class="visually-hidden" for="buscar">Buscar negocio</label>
