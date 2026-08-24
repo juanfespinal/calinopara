@@ -85,3 +85,16 @@ test("Fábrica Emilitas publishes the complete official Atom Bio menu", async ()
   assert.equal(new Set(photos).size, 9, "the official menu must contribute nine distinct local photos");
   await Promise.all([...new Set(photos)].map((photo) => access(new URL(`../public${photo}`, import.meta.url))));
 });
+
+test("every local video card has an existing poster", async () => {
+  const videoPosters = {
+    "arepas-de-la-abuela": "/video-posters/reactivacion-cali.jpg",
+    "la-fonda-tradicional": "/video-posters/reactivacion-cali.jpg",
+  };
+
+  for (const [slug, poster] of Object.entries(videoPosters)) {
+    assert.match(dataSource, new RegExp(`slug:\\s*"${slug}"[\\s\\S]*?video:\\s*"`));
+    assert.match(dataSource, new RegExp(`slug:\\s*"${slug}"[\\s\\S]*?videoPoster:\\s*"${poster}"`));
+    await access(new URL(`../public${poster}`, import.meta.url));
+  }
+});

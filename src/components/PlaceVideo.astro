@@ -19,6 +19,7 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
     <video
       class="reel-hero-photo"
       poster={poster}
+      data-analytics-business-slug={slug}
       controls
       playsinline
       preload="none"
@@ -27,17 +28,6 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
     >
       <source src={src} type="video/mp4" />
     </video>
-    <button
-      type="button"
-      class="reel-hero-play"
-      data-video-toggle
-      data-analytics-business-slug={slug}
-      aria-label={`Reproducir video de ${name}`}
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="m9 6 9 6-9 6z" fill="currentColor" />
-      </svg>
-    </button>
   </div>
   {postUrl && (
     <figcaption class="reel-credit">
@@ -52,38 +42,13 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
 <script>
   import { trackEvent } from "../scripts/analytics";
 
-  const toggles = document.querySelectorAll("[data-video-toggle]");
+  const videos = document.querySelectorAll(".reel-hero video[data-analytics-business-slug]");
 
-  toggles.forEach((toggle) => {
-    const video = toggle.closest(".reel-hero")?.querySelector("video");
-    if (!video) return;
-    const businessSlug = toggle.dataset.analyticsBusinessSlug ?? "negocio-local";
+  videos.forEach((video) => {
+    const businessSlug = video.dataset.analyticsBusinessSlug ?? "negocio-local";
     let hasTrackedStart = false;
 
-    const syncToggle = () => {
-      toggle.hidden = !video.paused;
-      toggle.setAttribute(
-        "aria-label",
-        video.paused ? "Reproducir video" : "Pausar video",
-      );
-    };
-
-    toggle.addEventListener("click", async () => {
-      try {
-        if (video.paused) {
-          await video.play();
-        } else {
-          video.pause();
-        }
-      } catch {
-        syncToggle();
-      }
-    });
-
-    video.addEventListener("play", syncToggle);
-    video.addEventListener("pause", syncToggle);
     video.addEventListener("ended", () => {
-      syncToggle();
       trackEvent("video_complete", { business_slug: businessSlug, content_type: "business_story" });
     });
     video.addEventListener("play", () => {
@@ -91,6 +56,5 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
       hasTrackedStart = true;
       trackEvent("video_start", { business_slug: businessSlug, content_type: "business_story" });
     });
-    syncToggle();
   });
 </script>
