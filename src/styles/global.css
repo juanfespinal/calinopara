@@ -1054,36 +1054,6 @@ body.map-page .map-sheet {
   border: 1px solid color-mix(in srgb, #fff 28%, transparent);
 }
 
-.reel-hero-play {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  background: color-mix(in srgb, var(--accent-blue) 55%, transparent);
-  backdrop-filter: blur(8px);
-  border: 1px solid color-mix(in srgb, #fff 40%, transparent);
-  text-decoration: none;
-  padding: 0;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.reel-hero-play svg {
-  width: 22px;
-  height: 22px;
-}
-
-.reel-hero-play:hover {
-  filter: brightness(1.08);
-  color: #fff;
-}
-
 .reel-hero-caption {
   position: absolute;
   left: 0;

@@ -42,6 +42,7 @@ test("directory cards expose poster-first tap-to-play video controls", () => {
   assert.match(tileSource, /preload="none"/);
   assert.doesNotMatch(tileSource, /autoplay/);
   assert.match(directorySource, /data-reel-play/);
+  assert.match(tileSource, /place\.videoPoster/);
 });
 
 test("poster links remain clickable while the local video is hidden", () => {
@@ -80,12 +81,11 @@ test("detail view keeps storytelling before business information", () => {
 });
 
 test("detail videos expose a working central play control", () => {
-  assert.match(placeVideoSource, /data-video-toggle/);
+  assert.match(placeVideoSource, /controls/);
   assert.match(placeVideoSource, /data-analytics-business-slug/);
   assert.match(placeVideoSource, /business_slug/);
-  assert.match(placeVideoSource, /video\.play\(\)/);
-  assert.match(placeVideoSource, /video\.pause\(\)/);
-  assert.match(stylesSource, /\.reel-hero-play[\s\S]*?cursor:\s*pointer/);
+  assert.doesNotMatch(placeVideoSource, /data-video-toggle/);
+  assert.doesNotMatch(stylesSource, /\.reel-hero-play/);
 });
 
 test("map lives on a dedicated full-height route", () => {

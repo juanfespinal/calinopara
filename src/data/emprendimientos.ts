@@ -34,6 +34,8 @@ export interface Place {
   instagramPost?: string;
   /** Local file under /videos, e.g. `/videos/nanitos-burger.mp4`. Preferred over the Instagram embed. */
   video?: string;
+  /** Optional poster override when several businesses share a local video source. */
+  videoPoster?: string;
   whatsapp?: string;
   phone?: string;
   website?: string;
@@ -226,6 +228,7 @@ export const places: Place[] = [
     instagram: "arepasdelaabuela.cali",
     instagramPost: "DcZMGe1vtVX",
     video: "/videos/reactivacion-cali.mp4",
+    videoPoster: "/video-posters/reactivacion-cali.jpg",
     whatsapp: "573147711600",
     phone: "3147711600",
     status: "limitado",
@@ -339,6 +342,7 @@ export const places: Place[] = [
     instagram: "lafondatradicional",
     instagramPost: "DcZMGe1vtVX",
     video: "/videos/reactivacion-cali.mp4",
+    videoPoster: "/video-posters/reactivacion-cali.jpg",
     phone: "3122466202",
     status: "limitado",
     photo: "/places/fonda-tradicional.jpg",

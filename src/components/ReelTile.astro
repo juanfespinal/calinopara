@@ -50,7 +50,7 @@ const hasLocalVideo = Boolean(place.video);
       <video
         class="reel-tile-video"
         data-reel-video
-        poster={`/video-posters/${place.slug}.jpg`}
+        poster={place.videoPoster ?? `/video-posters/${place.slug}.jpg`}
         preload="none"
         muted
         playsinline
