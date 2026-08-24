@@ -51,7 +51,8 @@ Cuando el usuario entregue una URL de perfil, post o reel, ejecuta este flujo si
 1. Abre la URL y confirma el usuario, nombre visible, caption, teléfono, WhatsApp, dirección, horarios, tipo de atención y si el lugar recibe público. La URL entregada es la fuente primaria.
    Ignora datos bancarios, NIT, llaves de pago o llamados a donaciones del caption salvo que el usuario pida explícitamente documentarlos; no son datos de la ficha.
 2. Si el enlace es un reel, usa su shortcode como `instagramPost` y conserva el perfil como `instagram`. Si la publicación pertenece a otra cuenta, usa como negocio la cuenta que el caption identifique explícitamente.
-3. Convierte el nombre en un `slug` ASCII, minúsculo y estable: espacios y signos pasan a guiones; conserva una sola entrada por negocio.
+   Si el reel es una pieza colectiva y menciona varias cuentas, crea o actualiza una ficha por cada negocio identificado. Reutiliza el mismo MP4 local cuando corresponda; no dupliques el archivo ni la ficha.
+3. Convierte el nombre en un `slug` ASCII, minúsculo y estable: espacios y signos pasan a guiones; conserva una sola entrada por negocio y enriquece la existente si ya está en `places`.
 4. Elige la categoría más cercana de `categories`. No crees categorías nuevas para una sola alta.
 5. Decide el estado únicamente con evidencia:
    - `abierto`: anuncia atención normal.

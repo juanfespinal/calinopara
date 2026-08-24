@@ -2,7 +2,7 @@
 
 Directorio mobile-first de emprendimientos caleños afectados por el terremoto del 10 de agosto de 2026.
 
-Datos curados a mano desde publicaciones de [@dilettopasticceria](https://www.instagram.com/p/DcMetBJlMza/), [@lacasonavegetariana](https://www.instagram.com/p/DcMMvPYIDsU/), [@ostinatorest](https://www.instagram.com/p/DcO9fDLM-i7/), [@fabricaemilitaspostres](https://www.instagram.com/p/DcCNXcuB7gU/), [@alimentosyen](https://www.instagram.com/p/DcTqf3ARleZ/), comentarios y notas de prensa. No es un censo oficial.
+Datos curados a mano desde publicaciones de [@lacasonavegetariana](https://www.instagram.com/p/DcMMvPYIDsU/), [@ostinatorest](https://www.instagram.com/p/DcO9fDLM-i7/), [@fabricaemilitaspostres](https://www.instagram.com/p/DcCNXcuB7gU/), [@mangoscol](https://www.instagram.com/p/DcRH01VOaFJ/), [@arepasdelaabuela.cali](https://www.instagram.com/p/DcZMGe1vtVX/), [@cocinamiacali](https://www.instagram.com/p/DcRCw02tgwn/), [@lafondatradicional](https://www.instagram.com/lafondatradicional/), [@alimentosyen](https://www.instagram.com/p/DcTqf3ARleZ/), comentarios y notas de prensa. No es un censo oficial.
 
 ## Stack
 

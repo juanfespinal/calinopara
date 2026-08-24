@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { initiative } from "../data/initiative.mjs";
 
 interface Props {
   title: string;
@@ -8,7 +9,7 @@ interface Props {
 
 const {
   title,
-  description = "Cali No Para: negocios de la ciudad, con lo que venden y cómo pedir.",
+  description = "Cali No Para: iniciativa comunitaria para visibilizar negocios caleños afectados por el terremoto y fomentar la compra local.",
 } = Astro.props;
 ---
 
@@ -60,6 +61,10 @@ const {
             height="420"
           />
         </a>
+        <p>
+          <span class="footer-lead">{initiative.footerLead}</span>
+          {initiative.footerText}
+        </p>
         <p>
           <span class="footer-lead">Código abierto. </span>
           Si eres desarrollador y quieres aportar, el GitHub está abierto.
