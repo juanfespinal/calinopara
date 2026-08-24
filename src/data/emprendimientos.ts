@@ -8,7 +8,7 @@ export const categories = [
 ] as const;
 
 export type CategoryId = (typeof categories)[number]["id"];
-export type Status = "abierto" | "limitado" | "cerrado";
+export type Status = "abierto" | "limitado" | "cerrado" | "por-confirmar";
 
 export interface MenuItem {
   name: string;
@@ -75,6 +75,26 @@ export const places: Place[] = [
       { name: "Americano", desc: "Espresso alargado." },
       { name: "Filtrado", desc: "Método del día, grano de origen." },
       { name: "Torta de la casa", desc: "Porción para acompañar el café." },
+    ],
+  },
+  {
+    slug: "restaurante-montserrat",
+    name: "Restaurante Montserrat",
+    tagline: "Restaurante afectado que busca reconstruir su sueño",
+    category: "comida",
+    barrio: "Domicilios",
+    address: "Ubicación no publicada",
+    hasPhysicalLocation: false,
+    instagram: "restaurantemontserrat",
+    instagramPost: "DcEuJGzi0Sx",
+    video: "/videos/restaurantemontserrat.mp4",
+    videoPoster: "/places/restaurantemontserrat.jpg",
+    status: "por-confirmar",
+    photo: "/places/restaurantemontserrat.jpg",
+    photoAlt: "Persona entrevistada en el video de Restaurante Montserrat",
+    menuNote: "Carta, disponibilidad y modalidad de atención por confirmar en Instagram.",
+    menu: [
+      { name: "Menú del día", desc: "Consulta disponibilidad y atención por Instagram." },
     ],
   },
   {
@@ -1049,6 +1069,7 @@ export const statusLabel: Record<Status, string> = {
   abierto: "Abierto",
   limitado: "Atención limitada",
   cerrado: "No está atendiendo",
+  "por-confirmar": "Por confirmar",
 };
 
 export const categoryColor: Record<CategoryId, string> = {

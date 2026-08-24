@@ -910,6 +910,11 @@ body.map-page .map-sheet {
   color: var(--danger);
 }
 
+.badge.por-confirmar {
+  background: #fff7da;
+  color: #805b00;
+}
+
 .back {
   display: inline-flex;
   align-items: center;

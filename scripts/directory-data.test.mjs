@@ -24,6 +24,7 @@ test("reservation-only businesses can replace the generic order label", () => {
 test("directory status labels avoid unsupported operational claims", () => {
   assert.match(dataSource, /limitado:\s*"Atención limitada"/);
   assert.match(dataSource, /cerrado:\s*"No está atendiendo"/);
+  assert.match(dataSource, /["']por-confirmar["']:\s*"Por confirmar"/);
 });
 
 test("every Perreiranos menu item includes an existing product photo", async () => {
@@ -84,6 +85,22 @@ test("Fábrica Emilitas publishes the complete official Atom Bio menu", async ()
   const photos = [...fabrica.matchAll(/photo:\s*"([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(photos).size, 9, "the official menu must contribute nine distinct local photos");
   await Promise.all([...new Set(photos)].map((photo) => access(new URL(`../public${photo}`, import.meta.url))));
+});
+
+test("Restaurant Montserrat publishes its Instagram story and local media", async () => {
+  const montserrat = dataSource.match(/slug:\s*"restaurante-montserrat"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(montserrat, "Restaurant Montserrat listing must exist");
+  assert.match(montserrat, /instagram:\s*"restaurantemontserrat"/);
+  assert.match(montserrat, /instagramPost:\s*"DcEuJGzi0Sx"/);
+  assert.match(montserrat, /video:\s*"\/videos\/restaurantemontserrat\.mp4"/);
+  assert.match(montserrat, /status:\s*"por-confirmar"/);
+  assert.match(montserrat, /hasPhysicalLocation:\s*false/);
+  assert.doesNotMatch(montserrat, /price:\s*\d+/);
+  await Promise.all([
+    access(new URL("../public/videos/restaurantemontserrat.mp4", import.meta.url)),
+    access(new URL("../public/places/restaurantemontserrat.jpg", import.meta.url)),
+  ]);
 });
 
 test("every local video card has an existing poster", async () => {
