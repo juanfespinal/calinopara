@@ -3,11 +3,11 @@ import Base from "../layouts/Base.astro";
 import InitiativeDialog from "../components/InitiativeDialog.astro";
 import ReelTile from "../components/ReelTile.astro";
 import { initiative } from "../data/initiative.mjs";
-import { places } from "../data/emprendimientos";
+import { categories, places } from "../data/emprendimientos";
 ---
 
 <Base title="Cali No Para · carta local">
-  <section class="wrap hero">
+  <section class="wrap hero directory-hero">
     <p class="hero-kicker">{initiative.heroKicker}</p>
     <h1>{initiative.heroTitle}</h1>
     <p class="hero-lead">{initiative.heroText}</p>
@@ -34,14 +34,29 @@ import { places } from "../data/emprendimientos";
           <button type="button" data-view="mapa" aria-pressed="false">Mapa</button>
         </div>
       </div>
+      <div class="category-filters" role="group" aria-label="Filtrar por categoría">
+        <button type="button" data-category-filter="todos" aria-pressed="true">Todos</button>
+        {categories.map((category) => (
+          <button type="button" data-category-filter={category.id} aria-pressed="false">{category.label}</button>
+        ))}
+      </div>
     </div>
 
     <p class="meta-row">
       <span data-count>{places.length} negocios</span>
     </p>
 
-    <div class="map-pane" data-map-pane hidden>
+    <div class="map-pane" id="mapa" data-map-pane hidden>
       <div class="map-frame map-solo" data-map aria-label="Mapa de Cali con los negocios"></div>
+      <aside class="map-sheet" data-map-sheet hidden aria-label="Negocio seleccionado">
+        <img data-sheet-photo src="" alt="" width="96" height="96" />
+        <div class="map-sheet-copy">
+          <h2 data-sheet-name></h2>
+          <p data-sheet-meta></p>
+          <p class="map-sheet-status" data-sheet-status aria-live="polite"></p>
+        </div>
+        <a class="btn btn-primary" data-sheet-link href="/">Ver detalle</a>
+      </aside>
     </div>
 
     <div data-list-pane>
