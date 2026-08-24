@@ -7,11 +7,12 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    __analyticsConsent?: boolean;
   }
 }
 
 function toSnakeCase(value: string) {
-  return value.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
+  return value.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`).replace(/^_/, "");
 }
 
 function paramsFromElement(element: HTMLElement) {
@@ -26,7 +27,7 @@ function paramsFromElement(element: HTMLElement) {
 }
 
 export function trackEvent(name: string, params: AnalyticsParams = {}) {
-  if (typeof window === "undefined" || typeof window.gtag !== "function") return false;
+  if (typeof window === "undefined" || window.__analyticsConsent !== true || typeof window.gtag !== "function") return false;
   window.gtag("event", name, params);
   return true;
 }

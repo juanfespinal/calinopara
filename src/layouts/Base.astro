@@ -22,6 +22,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch.png" />
@@ -33,13 +34,6 @@ const {
     />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <title>{title}</title>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function gtag() { window.dataLayer.push(arguments); };
-      window.gtag("js", new Date());
-      window.gtag("config", "G-R9MNJYHSLQ");
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R9MNJYHSLQ"></script>
   </head>
   <body class={bodyClass}>
     <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -80,6 +74,13 @@ const {
         <span>Súmate</span>
       </a>
     </nav>
+    <aside class="analytics-consent" data-analytics-consent hidden aria-label="Preferencias de medición">
+      <p><strong>Ayúdanos a medir el impacto.</strong> Usamos analítica de uso para saber qué historias y acciones ayudan más a los negocios.</p>
+      <div class="analytics-consent-actions">
+        <button type="button" class="btn btn-primary" data-analytics-consent-action="granted">Aceptar medición</button>
+        <button type="button" class="btn btn-ghost" data-analytics-consent-action="denied">Ahora no</button>
+      </div>
+    </aside>
     <footer class="site-footer">
       <div class="wrap">
         <a class="footer-brand" href="/">
@@ -110,8 +111,49 @@ const {
         </p>
       </div>
     </footer>
-  </body>
+</body>
 </html>
+
+<script is:inline>
+  (() => {
+    const consentKey = "cali-no-para-analytics-consent";
+    const banner = document.querySelector("[data-analytics-consent]");
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() { window.dataLayer.push(arguments); };
+    window.gtag("consent", "default", {
+      ad_personalization: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      analytics_storage: "denied",
+    });
+
+    const loadAnalytics = () => {
+      window.__analyticsConsent = true;
+      window.gtag("consent", "update", { analytics_storage: "granted" });
+      window.gtag("js", new Date());
+      window.gtag("config", "G-R9MNJYHSLQ");
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-R9MNJYHSLQ";
+      document.head.appendChild(script);
+    };
+
+    const storedConsent = window.localStorage.getItem(consentKey);
+    if (storedConsent === "granted") {
+      loadAnalytics();
+    } else if (storedConsent !== "denied" && banner) {
+      banner.hidden = false;
+    }
+
+    banner?.addEventListener("click", (event) => {
+      const action = event.target.closest("[data-analytics-consent-action]")?.dataset.analyticsConsentAction;
+      if (!action) return;
+      window.localStorage.setItem(consentKey, action);
+      banner.hidden = true;
+      if (action === "granted") loadAnalytics();
+    });
+  })();
+</script>
 
 <script>
   import { initAnalytics } from "../scripts/analytics";

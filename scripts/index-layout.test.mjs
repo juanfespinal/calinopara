@@ -102,13 +102,18 @@ test("map lives on a dedicated full-height route", () => {
 
 test("analytics measures the support journey", () => {
   assert.equal(analyticsExists, true);
-  assert.match(analyticsSource, /G-R9MNJYHSLQ/);
-  assert.match(analyticsSource, /trackEvent/);
-  assert.match(baseSource, /G-R9MNJYHSLQ/);
-  assert.match(baseSource, /googletagmanager\.com\/gtag\/js/);
+       assert.match(analyticsSource, /G-R9MNJYHSLQ/);
+       assert.match(analyticsSource, /trackEvent/);
+       assert.match(analyticsSource, /replace\(\/\^_\//);
+       assert.match(baseSource, /G-R9MNJYHSLQ/);
+       assert.match(baseSource, /googletagmanager\.com\/gtag\/js/);
+       assert.match(baseSource, /analytics_storage: "denied"/);
+       assert.match(baseSource, /Aceptar medición/);
   assert.match(baseSource, /data-analytics-event="open_directory"/);
   assert.match(directorySource, /video_start/);
-  assert.match(directorySource, /directory_search/);
+       assert.match(directorySource, /directory_search/);
+       assert.match(directorySource, /query_length/);
+       assert.doesNotMatch(directorySource, /\{ query \}/);
   assert.match(directorySource, /directory_filter/);
   assert.match(detailSource, /data-analytics-event="support_click"/);
   assert.match(detailSource, /data-analytics-event="get_directions"/);

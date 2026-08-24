@@ -164,7 +164,7 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
     if (searchTimer) window.clearTimeout(searchTimer);
     searchTimer = window.setTimeout(() => {
       const query = search.value.trim();
-      if (query) trackEvent("directory_search", { query });
+      if (query) trackEvent("directory_search", { query_length: query.length });
     }, 500);
   });
 
