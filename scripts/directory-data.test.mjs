@@ -7,6 +7,17 @@ const detailSource = await readFile(
   new URL("../src/pages/emprendimiento/[slug].astro", import.meta.url),
   "utf8",
 );
+const { categories, places } = await import("../src/data/emprendimientos.ts");
+
+test("directory categories stay condensed and every filter has businesses", () => {
+  assert.deepEqual(
+    categories.map((category) => category.label),
+    ["Comidas", "Postres y panadería", "Café y bebidas"],
+  );
+  for (const category of categories) {
+    assert.ok(places.some((place) => place.category === category.id), `${category.label} must not be empty`);
+  }
+});
 
 
 test("unverified businesses are not published as active listings", () => {

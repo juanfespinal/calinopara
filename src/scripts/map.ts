@@ -73,6 +73,8 @@ export function mountMap(
         map.fitBounds(L.latLngBounds(visible), { padding: [28, 28], maxZoom: 14 });
       } else if (visible.length === 1) {
         map.setView(visible[0], 15);
+      } else {
+        map.setView(CALI, 12);
       }
     },
     open(slug: string) {
