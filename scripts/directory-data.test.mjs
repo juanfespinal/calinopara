@@ -103,6 +103,23 @@ test("Restaurant Montserrat publishes its Instagram story and local media", asyn
   ]);
 });
 
+test("supplied logos and La Fugitiva menu source are published", async () => {
+  const montserrat = dataSource.match(/slug:\s*"restaurante-montserrat"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+  const fugitiva = dataSource.match(/slug:\s*"la-fugitiva-pizzeria-dapa"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(montserrat, "Restaurant Montserrat listing must exist");
+  assert.ok(fugitiva, "La Fugitiva listing must exist");
+  assert.match(montserrat, /logo:\s*"\/logos\/restaurantemontserrat\.png"/);
+  assert.match(fugitiva, /logo:\s*"\/logos\/la-fugitiva-pizzeria-dapa\.png"/);
+  assert.match(fugitiva, /menuUrl:\s*"https:\/\/menupp\.co\/lafugitiva\/venue\/jhfJgnsgRrj3ovActhCE\/menu\/a5204527-32eb-412d-b231-dd7bb5b0c987"/);
+  assert.match(fugitiva, /"?name"?:\s*"Pepperoni Chips/);
+  assert.match(fugitiva, /"?name"?:\s*"Pizza de Nutella/);
+  await Promise.all([
+    access(new URL("../public/logos/restaurantemontserrat.png", import.meta.url)),
+    access(new URL("../public/logos/la-fugitiva-pizzeria-dapa.png", import.meta.url)),
+  ]);
+});
+
 test("every local video card has an existing poster", async () => {
   const videoPosters = {
     "arepas-de-la-abuela": "/video-posters/reactivacion-cali.jpg",
