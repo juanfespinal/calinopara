@@ -115,6 +115,11 @@ const menuHasPhotos = place.menu.some((item) => Boolean(item.photo));
         ))}
       </ul>
       {place.menuNote && <p class="menu-note">{place.menuNote}</p>}
+      {place.menuUrl && (
+        <p class="menu-source">
+          <a href={place.menuUrl} target="_blank" rel="noopener noreferrer">Ver carta completa</a>
+        </p>
+      )}
     </section>
 
     {place.status !== "cerrado" && (canOrder || hasPhysicalLocation) && (
@@ -130,7 +135,7 @@ const menuHasPhotos = place.menu.some((item) => Boolean(item.photo));
               <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2h7A3.5 3.5 0 0 1 19 5.5v5a3.5 3.5 0 0 1-3.5 3.5h-3l-4.5 4v-4.15A3.5 3.5 0 0 1 5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
               <path d="M9 7.5h6M9 10.5h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
             </svg>
-            Pedir ahora
+            {place.orderLabel ?? "Pedir ahora"}
           </a>
         )}
         {hasPhysicalLocation && (
