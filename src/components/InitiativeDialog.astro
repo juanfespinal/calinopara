@@ -1,0 +1,20 @@
+---
+import { initiative } from "../data/initiative.mjs";
+---
+
+<dialog class="initiative-dialog" data-initiative-dialog aria-labelledby="initiative-dialog-title">
+  <div class="initiative-dialog-panel" data-initiative-panel>
+    <button type="button" class="initiative-dialog-close" data-initiative-close aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <p class="initiative-dialog-kicker">{initiative.heroKicker}</p>
+    <h2 id="initiative-dialog-title">{initiative.dialogTitle}</h2>
+    <p>{initiative.dialogText}</p>
+    <ul class="initiative-dialog-list">
+      {initiative.principles.map((principle) => <li>{principle}</li>)}
+    </ul>
+    <a class="btn btn-primary" href="#directorio" data-initiative-close>Explorar negocios</a>
+  </div>
+</dialog>

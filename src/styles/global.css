@@ -233,18 +233,88 @@ h2 {
 }
 
 .hero {
-  padding: 20px 0 8px;
+  padding: 24px 0 14px;
+}
+
+.hero-kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .hero h1 {
-  font-size: clamp(1.6rem, 5vw, 2.15rem);
-  margin: 6px 0 8px;
+  max-width: 18ch;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  margin: 8px 0 12px;
 }
 
-.hero p {
+.hero-lead {
   margin: 0;
   max-width: 32rem;
   color: var(--mute);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.initiative-intro {
+  display: grid;
+  gap: 18px;
+  margin-top: 12px;
+  padding: 22px 18px;
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+  border-radius: var(--radius);
+}
+
+.initiative-intro h2 {
+  margin: 4px 0 8px;
+  font-size: clamp(1.35rem, 4vw, 1.8rem);
+}
+
+.initiative-intro p {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--mute);
+  line-height: 1.55;
+}
+
+.initiative-principles {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.initiative-principles li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.initiative-principles li::before {
+  content: "↗";
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-dark);
+  font-size: 0.82rem;
 }
 
 .toolbar {
@@ -1159,6 +1229,91 @@ h2 {
   }
 }
 
+.initiative-dialog {
+  width: min(calc(100vw - 24px), 560px);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.initiative-dialog::backdrop {
+  background: rgba(15, 20, 18, 0.58);
+}
+
+.initiative-dialog-panel {
+  position: relative;
+  padding: 26px 22px 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px rgba(15, 20, 18, 0.28);
+}
+
+.initiative-dialog-kicker {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.initiative-dialog h2 {
+  max-width: 18ch;
+  margin: 0 36px 10px 0;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+.initiative-dialog-panel > p:not(.initiative-dialog-kicker) {
+  margin: 0;
+  color: var(--mute);
+  line-height: 1.55;
+}
+
+.initiative-dialog-list {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.initiative-dialog-list li {
+  position: relative;
+  padding-left: 20px;
+  font-weight: 600;
+}
+
+.initiative-dialog-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.initiative-dialog-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--mute);
+  cursor: pointer;
+}
+
+.initiative-dialog-close:hover {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
 .menu-note {
   margin: 12px 0 0;
   color: var(--mute);
@@ -1258,6 +1413,12 @@ h2 {
 
   .hero-photo img {
     height: 160px;
+  }
+
+  .initiative-intro {
+    grid-template-columns: minmax(0, 1.5fr) minmax(220px, 1fr);
+    align-items: center;
+    padding: 26px 24px;
   }
 
   .order-bar {

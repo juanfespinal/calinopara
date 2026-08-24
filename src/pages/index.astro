@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
+import InitiativeDialog from "../components/InitiativeDialog.astro";
 import ReelTile from "../components/ReelTile.astro";
+import { initiative } from "../data/initiative.mjs";
 import { categories, places } from "../data/emprendimientos";
 
 const stories = places.filter((p) => p.instagram);
@@ -8,8 +10,24 @@ const stories = places.filter((p) => p.instagram);
 
 <Base title="Cali No Para · carta local">
   <section class="wrap hero">
-    <h1>Carta local</h1>
-    <p>Negocios de la ciudad, con lo que venden y cómo pedir.</p>
+    <p class="hero-kicker">{initiative.heroKicker}</p>
+    <h1>{initiative.heroTitle}</h1>
+    <p class="hero-lead">{initiative.heroText}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#directorio">Explorar negocios</a>
+      <button class="btn btn-ghost" type="button" data-initiative-open>Conoce la iniciativa</button>
+    </div>
+  </section>
+
+  <section class="wrap initiative-intro" aria-labelledby="initiative-title">
+    <div>
+      <p class="brand-kicker">{initiative.introKicker}</p>
+      <h2 id="initiative-title">{initiative.introTitle}</h2>
+      <p>{initiative.introText}</p>
+    </div>
+    <ul class="initiative-principles">
+      {initiative.principles.map((principle) => <li>{principle}</li>)}
+    </ul>
   </section>
 
   <section class="wrap" id="directorio" data-directory data-view="lista">
@@ -75,6 +93,8 @@ const stories = places.filter((p) => p.instagram);
     </p>
     <a class="btn btn-primary" href="/sumate">Presentar mi negocio</a>
   </section>
+
+  <InitiativeDialog />
 </Base>
 
 <style>
@@ -89,8 +109,10 @@ const stories = places.filter((p) => p.instagram);
 
 <script>
   import { initDirectory } from "../scripts/directory";
+  import { initInitiativeDialog } from "../scripts/initiative-dialog";
   import { places } from "../data/emprendimientos";
 
   const root = document.querySelector<HTMLElement>("[data-directory]");
   if (root) initDirectory(root, places);
+  initInitiativeDialog();
 </script>
