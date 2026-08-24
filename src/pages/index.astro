@@ -4,6 +4,9 @@ import InitiativeDialog from "../components/InitiativeDialog.astro";
 import ReelTile from "../components/ReelTile.astro";
 import { initiative } from "../data/initiative.mjs";
 import { places } from "../data/emprendimientos";
+import { prioritizeVideoPlaces } from "../data/place-order.mjs";
+
+const orderedPlaces = prioritizeVideoPlaces(places);
 ---
 
 <Base title="Cali No Para · carta local">
@@ -46,7 +49,7 @@ import { places } from "../data/emprendimientos";
 
     <div data-list-pane>
       <div class="list" data-list>
-        {places.map((place) => <ReelTile place={place} />)}
+        {orderedPlaces.map((place) => <ReelTile place={place} />)}
       </div>
       <p class="empty" data-empty hidden>No hay negocios con esa búsqueda. Prueba otro término.</p>
     </div>
@@ -88,8 +91,9 @@ import { places } from "../data/emprendimientos";
   import { initDirectory } from "../scripts/directory";
   import { initInitiativeDialog } from "../scripts/initiative-dialog";
   import { places } from "../data/emprendimientos";
+  import { prioritizeVideoPlaces } from "../data/place-order.mjs";
 
   const root = document.querySelector<HTMLElement>("[data-directory]");
-  if (root) initDirectory(root, places);
+  if (root) initDirectory(root, prioritizeVideoPlaces(places));
   initInitiativeDialog();
 </script>
