@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import InitiativeDialog from "../components/InitiativeDialog.astro";
 import ReelTile from "../components/ReelTile.astro";
 import { initiative } from "../data/initiative.mjs";
-import { categories, places } from "../data/emprendimientos";
+import { places } from "../data/emprendimientos";
 
 const stories = places.filter((p) => p.instagram);
 ---
@@ -17,17 +17,6 @@ const stories = places.filter((p) => p.instagram);
       <a class="btn btn-primary" href="#directorio">Explorar negocios</a>
       <button class="btn btn-ghost" type="button" data-initiative-open>Conoce la iniciativa</button>
     </div>
-  </section>
-
-  <section class="wrap initiative-intro" aria-labelledby="initiative-title">
-    <div>
-      <p class="brand-kicker">{initiative.introKicker}</p>
-      <h2 id="initiative-title">{initiative.introTitle}</h2>
-      <p>{initiative.introText}</p>
-    </div>
-    <ul class="initiative-principles">
-      {initiative.principles.map((principle) => <li>{principle}</li>)}
-    </ul>
   </section>
 
   <section class="wrap" id="directorio" data-directory data-view="lista">
@@ -60,14 +49,6 @@ const stories = places.filter((p) => p.instagram);
           <button type="button" data-view="mapa" aria-pressed="false">Mapa</button>
         </div>
       </div>
-      <div class="chips" role="toolbar" aria-label="Categorías">
-        <button class="chip" type="button" data-chip="todos" aria-pressed="true">Todos</button>
-        {categories.map((cat) => (
-          <button class="chip" type="button" data-chip={cat.id} aria-pressed="false">
-            {cat.label}
-          </button>
-        ))}
-      </div>
     </div>
 
     <p class="meta-row">
@@ -82,8 +63,19 @@ const stories = places.filter((p) => p.instagram);
       <div class="list" data-list>
         {places.map((place) => <ReelTile place={place} />)}
       </div>
-      <p class="empty" data-empty hidden>No hay negocios con ese filtro. Prueba otra categoría.</p>
+      <p class="empty" data-empty hidden>No hay negocios con esa búsqueda. Prueba otro término.</p>
     </div>
+  </section>
+
+  <section class="wrap initiative-intro" aria-labelledby="initiative-title">
+    <div>
+      <p class="brand-kicker">{initiative.introKicker}</p>
+      <h2 id="initiative-title">{initiative.introTitle}</h2>
+      <p>{initiative.introText}</p>
+    </div>
+    <ul class="initiative-principles">
+      {initiative.principles.map((principle) => <li>{principle}</li>)}
+    </ul>
   </section>
 
   <section class="wrap invite" aria-labelledby="invite-title">
