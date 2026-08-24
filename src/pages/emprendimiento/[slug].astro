@@ -31,10 +31,10 @@ const menuHasPhotos = place.menu.some((item) => Boolean(item.photo));
 ---
 
 <Base title={`${place.name} · Cali No Para`} description={`${place.tagline} en ${place.barrio}.`}>
-  <article class="wrap">
+  <article class="wrap detail-page">
     <a class="back" href="/">← Todos los negocios</a>
 
-    <section class="story-block" aria-labelledby="historia">
+    <section class="story-block" data-story-first aria-labelledby="historia">
       <h2 id="historia">Conoce su historia</h2>
       {place.video ? (
         <PlaceVideo

@@ -8,6 +8,7 @@ const tileSource = await readFile(new URL("../src/components/ReelTile.astro", im
 const baseSource = await readFile(new URL("../src/layouts/Base.astro", import.meta.url), "utf8");
 const directorySource = await readFile(new URL("../src/scripts/directory.ts", import.meta.url), "utf8");
 const mapSource = await readFile(new URL("../src/scripts/map.ts", import.meta.url), "utf8");
+const detailSource = await readFile(new URL("../src/pages/emprendimiento/[slug].astro", import.meta.url), "utf8");
 
 test("the directory homepage does not render story chips", () => {
   assert.doesNotMatch(indexSource, /story-rail|story-ring|story-name/);
@@ -51,4 +52,12 @@ test("the directory uses the approved white canvas and restrained motion tokens"
   assert.match(stylesSource, /--accent-red:\s*#e43e3e/i);
   assert.match(stylesSource, /prefers-reduced-motion/);
   assert.match(stylesSource, /transition:[^;]*(150ms|180ms|220ms)/);
+});
+
+test("detail view keeps storytelling before business information", () => {
+  assert.match(detailSource, /class="wrap detail-page"/);
+  assert.match(detailSource, /data-story-first/);
+  assert.ok(detailSource.indexOf("story-block") < detailSource.indexOf("detail-hero"));
+  assert.match(detailSource, /Conoce su historia/);
+  assert.doesNotMatch(detailSource, /Perfil|Favoritos|Iniciar sesión/);
 });

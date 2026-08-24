@@ -1056,6 +1056,23 @@ h2 {
   margin: 8px 0 4px;
 }
 
+.detail-page {
+  padding-bottom: 20px;
+}
+
+.detail-page .story-block h2 {
+  color: var(--ink);
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.detail-page .story-block .reel-hero,
+.detail-page .story-block .reel-embed,
+.detail-page .story-block .hero-photo {
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(19, 35, 58, 0.1);
+}
+
 .story-block h2 {
   margin: 0 0 10px;
   font-size: 1.15rem;
@@ -1069,14 +1086,16 @@ h2 {
 }
 
 .detail-hero {
-  margin: 16px 0 18px;
+  margin: 18px 0 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
 }
 
 .place-logo {
   width: 56px;
   height: 56px;
   object-fit: cover;
-  border-radius: var(--radius);
+  border-radius: 14px;
   border: 1px solid var(--line);
   display: block;
   background: #e8ece9;
@@ -1446,6 +1465,38 @@ h2 {
   display: grid;
   gap: 8px;
   margin: 20px 0 8px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .detail-page .story-block {
+    animation: detail-story-in 180ms ease-out both;
+  }
+
+  .detail-page .detail-hero {
+    animation: detail-card-in 180ms 60ms ease-out both;
+  }
+}
+
+@keyframes detail-story-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes detail-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .panel {
