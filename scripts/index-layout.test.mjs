@@ -33,6 +33,9 @@ test("the directory keeps the approved public mobile shell", () => {
 test("directory cards expose poster-first tap-to-play video controls", () => {
   assert.match(tileSource, /data-reel-play/);
   assert.match(tileSource, /data-reel-video/);
+  assert.match(tileSource, /data-has-video/);
+  assert.match(tileSource, /video-posters/);
+  assert.match(tileSource, /!hasLocalVideo/);
   assert.match(tileSource, /preload="none"/);
   assert.doesNotMatch(tileSource, /autoplay/);
   assert.match(directorySource, /data-reel-play/);
@@ -40,7 +43,9 @@ test("directory cards expose poster-first tap-to-play video controls", () => {
 
 test("poster links remain clickable while the local video is hidden", () => {
   assert.match(stylesSource, /\.reel-tile-video[\s\S]*?pointer-events:\s*none/);
+  assert.match(stylesSource, /\.reel-tile\[data-has-video="true"\][\s\S]*?\.reel-tile-video[\s\S]*?opacity:\s*1/);
   assert.match(stylesSource, /\.reel-tile\[data-playing="true"\][\s\S]*?\.reel-tile-video[\s\S]*?pointer-events:\s*auto/);
+  assert.match(stylesSource, /\.reel-tile-link[\s\S]*?z-index:\s*1/);
 });
 
 test("directory script supports category filtering, card playback, and map selection", () => {

@@ -752,6 +752,7 @@ body.map-page .map-sheet {
   color: var(--on-dark);
   text-decoration: none;
   position: relative;
+  z-index: 1;
 }
 
 .reel-tile-link:hover {
@@ -774,7 +775,12 @@ body.map-page .map-sheet {
   object-fit: cover;
   opacity: 0;
   pointer-events: none;
+  z-index: 0;
   transition: opacity 180ms ease;
+}
+
+.reel-tile[data-has-video="true"] .reel-tile-video {
+  opacity: 1;
 }
 
 .reel-tile[data-playing="true"] .reel-tile-photo {
@@ -839,6 +845,7 @@ body.map-page .map-sheet {
   border: 1px solid color-mix(in srgb, #fff 35%, transparent);
   padding: 0;
   cursor: pointer;
+  z-index: 2;
   transition: transform 180ms ease, background-color 180ms ease;
 }
 

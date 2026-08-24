@@ -9,16 +9,23 @@ const { place } = Astro.props;
 const hasLocalVideo = Boolean(place.video);
 ---
 
-<article class="reel-tile" data-slug={place.slug} data-category={place.category}>
+<article
+  class="reel-tile"
+  data-slug={place.slug}
+  data-category={place.category}
+  data-has-video={hasLocalVideo ? "true" : undefined}
+>
   <a class="reel-tile-link" href={`/emprendimiento/${place.slug}`}>
-    <img
-      class="reel-tile-photo"
-      src={place.photo}
-      alt={place.photoAlt}
-      width="600"
-      height="800"
-      loading="lazy"
-    />
+    {!hasLocalVideo && (
+      <img
+        class="reel-tile-photo"
+        src={place.photo}
+        alt={place.photoAlt}
+        width="600"
+        height="800"
+        loading="lazy"
+      />
+    )}
     {place.instagramPost && !hasLocalVideo && (
       <span class="reel-tile-play" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true">
@@ -37,7 +44,7 @@ const hasLocalVideo = Boolean(place.video);
       <video
         class="reel-tile-video"
         data-reel-video
-        poster={place.photo}
+        poster={`/video-posters/${place.slug}.jpg`}
         preload="none"
         muted
         playsinline
