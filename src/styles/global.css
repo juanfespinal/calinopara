@@ -1079,8 +1079,7 @@ body.map-page .map-sheet {
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #1e2623;
-  aspect-ratio: 3 / 4;
+  background: var(--paper);
   box-shadow: 0 4px 14px rgba(19, 35, 58, 0.08);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
@@ -1108,7 +1107,8 @@ body.map-page .map-sheet {
 
 .reel-tile-photo {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 3 / 4;
+  height: auto;
   object-fit: cover;
   display: block;
   transition: opacity 180ms ease, transform 220ms ease;
@@ -1116,9 +1116,12 @@ body.map-page .map-sheet {
 
 .reel-tile-video {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
   opacity: 0;
   pointer-events: none;
@@ -1143,21 +1146,33 @@ body.map-page .map-sheet {
   pointer-events: none;
 }
 
-.reel-tile-scrim {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 36px 10px 10px;
-  background: linear-gradient(180deg, transparent, rgba(15, 20, 18, 0.88));
-  color: inherit;
+.reel-tile-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 9px 10px 10px;
+  color: var(--ink);
 }
 
-.reel-tile-scrim h2 {
+.reel-tile-logo {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #e8ece9;
+}
+
+.reel-tile-copy {
+  min-width: 0;
+}
+
+.reel-tile-name {
   margin: 0;
   font-size: 0.92rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--ink);
   letter-spacing: -0.02em;
   line-height: 1.2;
   display: -webkit-box;
@@ -1166,15 +1181,10 @@ body.map-page .map-sheet {
   overflow: hidden;
 }
 
-.reel-tile-scrim p {
+.reel-tile-category {
   margin: 2px 0 0;
   font-size: 0.75rem;
-  color: rgba(247, 247, 244, 0.88);
-}
-
-.reel-tile-price {
-  color: #fff;
-  font-variant-numeric: tabular-nums;
+  color: var(--mute);
 }
 
 .reel-tile-play {

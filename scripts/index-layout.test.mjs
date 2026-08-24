@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 
 const indexSource = await readFile(new URL("../src/pages/index.astro", import.meta.url), "utf8");
+const reelTileSource = await readFile(new URL("../src/components/ReelTile.astro", import.meta.url), "utf8");
 const stylesSource = await readFile(new URL("../src/styles/global.css", import.meta.url), "utf8");
 const tileSource = await readFile(new URL("../src/components/ReelTile.astro", import.meta.url), "utf8");
 const baseSource = await readFile(new URL("../src/layouts/Base.astro", import.meta.url), "utf8");
@@ -122,4 +123,13 @@ test("analytics measures the support journey", () => {
   assert.match(detailSource, /data-analytics-event="view_instagram"/);
   assert.match(directorySource, /map_marker_select/);
   assert.match(detailSource, /data-analytics-event="view_menu_item"/);
+});
+
+test("reel tiles show business identity below the video", () => {
+  assert.match(reelTileSource, /class="reel-tile-meta"/);
+  assert.match(reelTileSource, /class="reel-tile-logo"/);
+  assert.match(reelTileSource, /class="reel-tile-name"/);
+  assert.match(reelTileSource, /class="reel-tile-category"/);
+  assert.doesNotMatch(reelTileSource, /class="reel-tile-scrim"/);
+  assert.match(stylesSource, /\.reel-tile-meta/);
 });
