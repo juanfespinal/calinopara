@@ -4,12 +4,13 @@ import { instagramPostUrl } from "../data/emprendimientos";
 interface Props {
   src: string;
   poster: string;
+  slug: string;
   name: string;
   handle?: string;
   post?: string;
 }
 
-const { src, poster, name, handle, post } = Astro.props;
+const { src, poster, slug, name, handle, post } = Astro.props;
 const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.com/${handle}/` : null;
 ---
 
@@ -30,7 +31,7 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
       type="button"
       class="reel-hero-play"
       data-video-toggle
-      data-analytics-business-name={name}
+      data-analytics-business-slug={slug}
       aria-label={`Reproducir video de ${name}`}
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -56,7 +57,7 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
   toggles.forEach((toggle) => {
     const video = toggle.closest(".reel-hero")?.querySelector("video");
     if (!video) return;
-    const businessName = toggle.dataset.analyticsBusinessName ?? "Negocio local";
+    const businessSlug = toggle.dataset.analyticsBusinessSlug ?? "negocio-local";
     let hasTrackedStart = false;
 
     const syncToggle = () => {
@@ -81,14 +82,14 @@ const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.
 
     video.addEventListener("play", syncToggle);
     video.addEventListener("pause", syncToggle);
+    video.addEventListener("ended", () => {
+      syncToggle();
+      trackEvent("video_complete", { business_slug: businessSlug, content_type: "business_story" });
+    });
     video.addEventListener("play", () => {
       if (hasTrackedStart) return;
       hasTrackedStart = true;
-      trackEvent("video_start", { business_name: businessName, content_type: "business_story" });
-    });
-    video.addEventListener("ended", () => {
-      syncToggle();
-      trackEvent("video_complete", { business_name: businessName, content_type: "business_story" });
+      trackEvent("video_start", { business_slug: businessSlug, content_type: "business_story" });
     });
     syncToggle();
   });

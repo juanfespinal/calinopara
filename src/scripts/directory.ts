@@ -133,10 +133,10 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
       card.dataset.playing = "true";
       button.hidden = true;
       video.tabIndex = 0;
-      trackEvent("video_start", { business_slug: card.dataset.slug, content_type: "directory_story" });
 
       try {
         await video.play();
+        trackEvent("video_start", { business_slug: card.dataset.slug, content_type: "directory_story" });
       } catch {
         resetVideo(video);
       }

@@ -40,6 +40,7 @@ const menuHasPhotos = place.menu.some((item) => Boolean(item.photo));
         <PlaceVideo
           src={place.video}
           poster={place.photo}
+          slug={place.slug}
           name={place.name}
           handle={place.instagram}
           post={place.instagramPost}

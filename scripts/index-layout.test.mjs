@@ -81,6 +81,8 @@ test("detail view keeps storytelling before business information", () => {
 
 test("detail videos expose a working central play control", () => {
   assert.match(placeVideoSource, /data-video-toggle/);
+  assert.match(placeVideoSource, /data-analytics-business-slug/);
+  assert.match(placeVideoSource, /business_slug/);
   assert.match(placeVideoSource, /video\.play\(\)/);
   assert.match(placeVideoSource, /video\.pause\(\)/);
   assert.match(stylesSource, /\.reel-hero-play[\s\S]*?cursor:\s*pointer/);
