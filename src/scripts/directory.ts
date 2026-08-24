@@ -15,7 +15,7 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
   const listPane = root.querySelector<HTMLElement>("[data-list-pane]");
 
   let category = "todos";
-  let view: View = (sessionStorage.getItem("vitrina-view") as View) || "lista";
+  let view: View = (sessionStorage.getItem("calinopara-view") as View) || "lista";
   let map: ReturnType<typeof mountMap> | null = null;
 
   function visiblePlaces() {
@@ -33,7 +33,7 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
 
   function applyView() {
     root.dataset.view = view;
-    sessionStorage.setItem("vitrina-view", view);
+    sessionStorage.setItem("calinopara-view", view);
     if (listPane) listPane.hidden = view !== "lista";
     if (mapPane) mapPane.hidden = view !== "mapa";
     viewBtns.forEach((btn) => {

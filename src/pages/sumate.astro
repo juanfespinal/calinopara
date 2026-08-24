@@ -1,0 +1,91 @@
+---
+import Base from "../layouts/Base.astro";
+
+const sent = Astro.url.searchParams.get("ok") === "1";
+---
+
+<Base
+  title="Presentar mi negocio · Cali No Para"
+  description="Si tu negocio en Cali se vio afectado, cuenta tu caso para aparecer en Cali No Para."
+>
+  <article class="wrap form-page">
+    <a class="back" href="/">← Todos los negocios</a>
+
+    <header class="hero">
+      <h1>Presenta tu caso</h1>
+      <p>
+        Si tu negocio se vio afectado y quieres estar en Cali No Para, llena este formulario. Lo leemos a mano. No es un censo oficial.
+      </p>
+    </header>
+
+    {sent ? (
+      <p class="form-ok" role="status">
+        Recibimos tu caso. Te escribimos si hace falta algún dato.
+      </p>
+    ) : (
+      <form class="case-form" action="https://formsubmit.co/juanfespinal@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Cali No Para — nuevo caso" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_next" id="form-next" value="/sumate?ok=1" />
+        <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" />
+
+        <label>
+          <span>Nombre del negocio</span>
+          <input class="search" name="negocio" type="text" required maxlength="120" autocomplete="organization" />
+        </label>
+
+        <label>
+          <span>Barrio</span>
+          <input class="search" name="barrio" type="text" required maxlength="80" />
+        </label>
+
+        <label>
+          <span>Dirección <span class="opt">opcional</span></span>
+          <input class="search" name="direccion" type="text" maxlength="200" autocomplete="street-address" />
+        </label>
+
+        <label>
+          <span>Tu caso</span>
+          <textarea name="caso" required maxlength="2000" rows="5" placeholder="Qué pasó, cómo están hoy, qué venden."></textarea>
+        </label>
+
+        <label>
+          <span>Contacto</span>
+          <input
+            class="search"
+            name="contacto"
+            type="text"
+            required
+            maxlength="120"
+            placeholder="WhatsApp, teléfono o correo"
+            autocomplete="tel"
+          />
+        </label>
+
+        <label>
+          <span>Instagram <span class="opt">opcional</span></span>
+          <input class="search" name="instagram" type="text" maxlength="80" placeholder="@tunegocio" />
+        </label>
+
+        <button class="btn btn-primary" type="submit">Enviar caso</button>
+      </form>
+    )}
+  </article>
+</Base>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+</style>
+
+<script>
+  const next = document.getElementById("form-next");
+  if (next instanceof HTMLInputElement) {
+    next.value = `${location.origin}/sumate?ok=1`;
+  }
+</script>

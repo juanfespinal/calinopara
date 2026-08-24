@@ -7,6 +7,9 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "test": "node --test scripts/video-policy.test.mjs",
+    "check:videos": "node scripts/check-videos.mjs",
+    "prebuild": "npm run check:videos",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

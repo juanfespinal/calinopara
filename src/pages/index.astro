@@ -1,17 +1,31 @@
 ---
 import Base from "../layouts/Base.astro";
-import ShopCard from "../components/ShopCard.astro";
+import ReelTile from "../components/ReelTile.astro";
 import { categories, places } from "../data/emprendimientos";
+
+const stories = places.filter((p) => p.instagram);
 ---
 
-<Base title="La Vitrina · carta de Cali">
+<Base title="Cali No Para · carta local">
   <section class="wrap hero">
-    <p class="brand-kicker">Cali</p>
     <h1>Carta local</h1>
     <p>Negocios de la ciudad, con lo que venden y cómo pedir.</p>
   </section>
 
   <section class="wrap" id="directorio" data-directory data-view="lista">
+    {stories.length > 0 && (
+      <nav class="story-rail" aria-label="Historias">
+        {stories.map((place) => (
+          <a class="story" href={`/emprendimiento/${place.slug}`}>
+            <span class="story-ring">
+              <img src={place.photo} alt="" width="54" height="54" />
+            </span>
+            <span class="story-name">{place.name.split(/\s+/)[0]}</span>
+          </a>
+        ))}
+      </nav>
+    )}
+
     <div class="toolbar">
       <div class="toolbar-row">
         <label class="visually-hidden" for="buscar">Buscar negocio</label>
@@ -48,10 +62,18 @@ import { categories, places } from "../data/emprendimientos";
 
     <div data-list-pane>
       <div class="list" data-list>
-        {places.map((place) => <ShopCard place={place} />)}
+        {places.map((place) => <ReelTile place={place} />)}
       </div>
       <p class="empty" data-empty hidden>No hay negocios con ese filtro. Prueba otra categoría.</p>
     </div>
+  </section>
+
+  <section class="wrap invite" aria-labelledby="invite-title">
+    <h2 id="invite-title">¿Tu negocio se vio afectado?</h2>
+    <p>
+      Cali No Para es este directorio. Si el sismo tocó tu local y no estás en la lista, cuenta tu caso. Lo revisamos a mano.
+    </p>
+    <a class="btn btn-primary" href="/sumate">Presentar mi negocio</a>
   </section>
 </Base>
 

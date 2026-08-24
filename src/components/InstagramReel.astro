@@ -1,0 +1,23 @@
+---
+import { instagramEmbedSrc } from "../data/emprendimientos";
+
+interface Props {
+  shortcode: string;
+  name: string;
+}
+
+const { shortcode, name } = Astro.props;
+const src = instagramEmbedSrc(shortcode);
+---
+
+<div class="reel-embed">
+  <iframe
+    class="reel-embed-frame"
+    src={src}
+    allow="autoplay; encrypted-media; clipboard-write; fullscreen"
+    allowfullscreen
+    loading="eager"
+    referrerpolicy="no-referrer-when-downgrade"
+    title={`Video de ${name} en Instagram`}
+  ></iframe>
+</div>
