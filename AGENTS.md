@@ -27,6 +27,10 @@ Añade un objeto a `src/data/emprendimientos.ts` con un `slug` estable y estos c
   instagramPost: "SHORTCODE_DEL_POST_O_REEL",
   video: "/videos/nombre-en-minusculas.mp4",
   whatsapp: "57XXXXXXXXXX",
+  // Opcional: fuente pública de la carta completa.
+  menuUrl: "https://ejemplo.com/carta.pdf",
+  // Opcional: cambia “Pedir ahora” por “Reservar” u otra acción precisa.
+  orderLabel: "Reservar",
   status: "abierto",
   photo: "/places/nombre-en-minusculas.jpg",
   logo: "/logos/nombre-en-minusculas.jpg",
@@ -64,7 +68,7 @@ Cuando el usuario entregue una URL de perfil, post o reel, ejecuta este flujo si
 9. Descarga y optimiza el reel siguiendo la sección multimedia. Genera la portada desde un fotograma que represente al negocio, no automáticamente desde un fotograma vacío o de transición.
 10. Añade la entrada y los archivos, ejecuta las verificaciones y revisa la página generada. Solo detente para pedir ayuda si la cuenta es privada, aparece CAPTCHA, se requiere iniciar sesión o la identidad del negocio no puede determinarse sin inventar datos.
 
-La salida esperada de una alta es: un objeto de datos, un MP4 local si existe reel, una portada, un logo solo si la imagen pública es clara, y un build exitoso. No hace falta añadir botones manualmente por negocio: el detalle los deriva de `hasPhysicalLocation`, `orderUrl`, `whatsapp`, `phone` e `instagram`.
+La salida esperada de una alta es: un objeto de datos, un MP4 local si existe reel, una portada, un logo solo si la imagen pública es clara, y un build exitoso. No hace falta añadir botones manualmente por negocio: el detalle los deriva de `hasPhysicalLocation`, `orderUrl`, `whatsapp`, `phone`, `orderLabel` e `instagram`.
 
 ## Descargar y preparar un reel
 
@@ -128,4 +132,4 @@ Comprueba además que:
 - La página muestra la historia local y conserva el crédito “Ver en Instagram”.
 - El botón principal apunta a WhatsApp cuando no existe un catálogo o sitio de pedidos.
 - El precio inicial no aparece si ningún elemento de `menu` tiene `price`.
-- El texto de estado describe la situación real; para `limitado`, la etiqueta actual es “Solo domicilios”.
+- El texto de estado describe la situación real; para `limitado`, la etiqueta actual es “Atención limitada”.
