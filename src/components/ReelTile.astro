@@ -1,5 +1,5 @@
 ---
-import { statusLabel, type Place } from "../data/emprendimientos";
+import { categories, statusLabel, type Place } from "../data/emprendimientos";
 
 interface Props {
   place: Place;
@@ -7,6 +7,7 @@ interface Props {
 
 const { place } = Astro.props;
 const hasLocalVideo = Boolean(place.video);
+const categoryLabel = categories.find((category) => category.id === place.category)?.label ?? place.category;
 ---
 
 <article
@@ -40,9 +41,12 @@ const hasLocalVideo = Boolean(place.video);
       </span>
     )}
     <span class:list={["badge", place.status]}>{statusLabel[place.status]}</span>
-    <div class="reel-tile-scrim">
-      <h2>{place.name}</h2>
-      <p>{place.barrio}</p>
+    <div class="reel-tile-meta">
+      <img class="reel-tile-logo" src={place.logo ?? place.photo} alt="" width="36" height="36" loading="lazy" />
+      <div class="reel-tile-copy">
+        <h2 class="reel-tile-name">{place.name}</h2>
+        <p class="reel-tile-category">{categoryLabel}</p>
+      </div>
     </div>
   </a>
   {hasLocalVideo && (
