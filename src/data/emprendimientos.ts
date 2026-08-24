@@ -773,6 +773,38 @@ export const places: Place[] = [
       },
     ],
   },
+  {
+    slug: "tjaditos",
+    name: "Tjaditos",
+    tagline: "Pastelería, repostería y panadería",
+    category: "postres",
+    barrio: "Avenida 6",
+    address: "Avenida 6, Cali. Punto de venta y fábrica",
+    hasPhysicalLocation: true,
+    instagram: "tejaditospasteleria",
+    instagramPost: "DcWYttcCG0K",
+    video: "/videos/tjaditos.mp4",
+    phone: "3148890391",
+    status: "limitado",
+    photo: "/places/tjaditos.jpg",
+    logo: "/logos/tjaditos.jpg",
+    photoAlt: "Punto de venta de Tjaditos con su aviso de domicilios",
+    menuNote: "Tres de sus cuatro puntos fueron afectados. Siguen atendiendo desde la Avenida 6 y con domicilios; confirma disponibilidad al 3148890391.",
+    menu: [
+      {
+        name: "Pastelería y repostería",
+        desc: "Consulta tortas, postres y presentaciones disponibles.",
+      },
+      {
+        name: "Panadería",
+        desc: "Pregunta por los productos disponibles en el punto de venta y fábrica.",
+      },
+      {
+        name: "Domicilios",
+        desc: "Pide al 3148890391 y confirma cobertura.",
+      },
+    ],
+  },
 ];
 
 export function getPlace(slug: string) {
