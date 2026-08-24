@@ -1229,6 +1229,17 @@ h2 {
   font-size: 0.85rem;
 }
 
+.menu-source {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.menu-source a {
+  color: var(--accent-strong);
+  text-underline-offset: 3px;
+}
+
 .order-bar {
   display: grid;
   gap: 8px;
