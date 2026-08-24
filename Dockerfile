@@ -1,5 +1,6 @@
 FROM node:22-alpine AS build
 WORKDIR /app
+RUN apk add --no-cache ffmpeg
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .

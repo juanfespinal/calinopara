@@ -1,0 +1,36 @@
+---
+import { formatCop, startingPrice, statusLabel, type Place } from "../data/emprendimientos";
+
+interface Props {
+  place: Place;
+}
+
+const { place } = Astro.props;
+const from = formatCop(startingPrice(place) ?? undefined);
+---
+
+<article class="reel-tile" data-slug={place.slug} data-category={place.category}>
+  <a class="reel-tile-link" href={`/emprendimiento/${place.slug}`}>
+    <img
+      class="reel-tile-photo"
+      src={place.photo}
+      alt={place.photoAlt}
+      width="600"
+      height="800"
+      loading="lazy"
+    />
+    {(place.video || place.instagramPost) && (
+      <span class="reel-tile-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true">
+          <polygon points="8,5 19,12 8,19" fill="currentColor" />
+        </svg>
+      </span>
+    )}
+    <span class:list={["badge", place.status]}>{statusLabel[place.status]}</span>
+    <div class="reel-tile-scrim">
+      <h2>{place.name}</h2>
+      <p>{place.barrio}</p>
+      {from && <p class="reel-tile-price">Desde {from}</p>}
+    </div>
+  </a>
+</article>

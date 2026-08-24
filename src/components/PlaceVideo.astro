@@ -1,0 +1,38 @@
+---
+import { instagramPostUrl } from "../data/emprendimientos";
+
+interface Props {
+  src: string;
+  poster: string;
+  name: string;
+  handle?: string;
+  post?: string;
+}
+
+const { src, poster, name, handle, post } = Astro.props;
+const postUrl = post ? instagramPostUrl(post) : handle ? `https://www.instagram.com/${handle}/` : null;
+---
+
+<figure class="reel-player">
+  <div class="reel-hero">
+    <video
+      class="reel-hero-photo"
+      poster={poster}
+      controls
+      playsinline
+      preload="none"
+      controlslist="nodownload"
+      aria-label={`Video de ${name}`}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  </div>
+  {postUrl && (
+    <figcaption class="reel-credit">
+      Video original de{" "}
+      {handle ? `@${handle}` : name}
+      {" · "}
+      <a href={postUrl} target="_blank" rel="noopener noreferrer">Ver en Instagram</a>
+    </figcaption>
+  )}
+</figure>

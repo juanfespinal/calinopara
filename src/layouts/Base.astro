@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title,
-  description = "Carta de emprendimientos caleños: postres, almuerzos, café y más. Pide local.",
+  description = "Cali No Para: negocios de la ciudad, con lo que venden y cómo pedir.",
 } = Astro.props;
 ---
 
@@ -19,7 +19,9 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -34,8 +36,13 @@ const {
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href="/">
-          <span class="brand-kicker">Cali · la carta</span>
-          <span class="brand-name">La Vitrina</span>
+          <img
+            class="brand-logo"
+            src="/brand/cali-no-para.png"
+            alt="Cali No Para"
+            width="401"
+            height="420"
+          />
         </a>
       </div>
     </header>
@@ -44,12 +51,27 @@ const {
     </main>
     <footer class="site-footer">
       <div class="wrap">
+        <a class="footer-brand" href="/">
+          <img
+            class="footer-logo"
+            src="/brand/cali-no-para-cali-blanco.png"
+            alt="Cali No Para"
+            width="377"
+            height="420"
+          />
+        </a>
         <p>
-          Lista armada a partir del post de <a href="https://www.instagram.com/p/DcMetBJlMza/">@dilettopasticceria</a>, comentarios de vecinos y notas de prensa. No es un censo oficial. Confirma horarios antes de salir.
+          <span class="footer-lead">Código abierto. </span>
+          Si eres desarrollador y quieres aportar, el GitHub está abierto.
+          {" "}
+          <a href="https://github.com/juanfespinal/calinopara" target="_blank" rel="noopener noreferrer">
+            Aporta en GitHub
+          </a>.
         </p>
         <p>
-          Daños de vivienda: <a href="https://atencionsismo.cali.gov.co">atencionsismo.cali.gov.co</a>.
-          Emergencias: 123.
+          <span class="footer-lead">¿Tu negocio se vio afectado? </span>
+          Cali No Para es este directorio. Si el tuyo no está,{" "}
+          <a href="/sumate">presenta tu caso</a>.
         </p>
       </div>
     </footer>
