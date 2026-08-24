@@ -37,6 +37,7 @@ const menuGroups = place.menu.reduce<Array<{ section?: string; items: typeof pla
   }
   return groups;
 }, []);
+const menuItemIndexes = new Map(place.menu.map((item, index) => [item, index] as const));
 ---
 
 <Base title={`${place.name} · Cali No Para`} description={`${place.tagline} en ${place.barrio}.`}>
@@ -97,7 +98,7 @@ const menuGroups = place.menu.reduce<Array<{ section?: string; items: typeof pla
         <div class="menu-group">
           {group.section && <h3>{group.section}</h3>}
           <ul class:list={["menu", menuHasPhotos && "menu-grid"]}>
-            {group.items.map((item, index) => (
+            {group.items.map((item) => (
               <li>
                 <button type="button" class="menu-card" data-dish data-analytics-event="view_menu_item" data-analytics-business-slug={place.slug} data-analytics-item-name={item.name} aria-haspopup="dialog">
                   {item.photo ? (
@@ -107,7 +108,7 @@ const menuGroups = place.menu.reduce<Array<{ section?: string; items: typeof pla
                       alt=""
                       width="600"
                       height="600"
-                      loading={index < 4 ? "eager" : "lazy"}
+                      loading={(menuItemIndexes.get(item) ?? 0) < 4 ? "eager" : "lazy"}
                     />
                   ) : (
                     <span class="menu-swatch" role="img" aria-label="Sin foto disponible">

@@ -88,6 +88,11 @@ test("detail videos expose a working central play control", () => {
   assert.doesNotMatch(stylesSource, /\.reel-hero-play/);
 });
 
+test("detail menu images keep eager loading limited to the first four items", () => {
+  assert.match(detailSource, /menuItemIndexes = new Map\(place\.menu\.map/);
+  assert.match(detailSource, /loading=\{\(menuItemIndexes\.get\(item\) \?\? 0\) < 4 \? "eager" : "lazy"\}/);
+});
+
 test("map lives on a dedicated full-height route", () => {
   assert.equal(mapPageExists, true);
   assert.match(baseSource, /href="\/mapa\/"/);
