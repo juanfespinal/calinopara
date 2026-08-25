@@ -185,7 +185,7 @@ test("Kurtos Kali publishes the verified Libertadores location and official medi
   ]);
 });
 
-test("Casa Bananá publishes its verified Pance operation and official recovery media", async () => {
+test("Casa Bananá publishes its verified Pance operation, priced menu, and official media", async () => {
   const casaBanana = dataSource.match(/slug:\s*"casa-banana"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
 
   assert.ok(casaBanana, "Casa Bananá listing must exist");
@@ -196,13 +196,29 @@ test("Casa Bananá publishes its verified Pance operation and official recovery 
   assert.match(casaBanana, /barrio:\s*"Pance"/);
   assert.match(casaBanana, /address:\s*"Puerto 125, Cl\. 16A #124-285, local 2"/);
   assert.match(casaBanana, /whatsapp:\s*"573186909991"/);
-  assert.match(casaBanana, /menuUrl:\s*"https:\/\/menupp\.co\/casabanana"/);
+  assert.match(
+    casaBanana,
+    /menuUrl:\s*"https:\/\/menupp\.co\/casabanana\/venue\/mekiP3lb8Ou8ytqKgOq1\/menu\/aac0c5ed-d748-4191-b3be-fc0f76dc32b3"/,
+  );
   assert.match(casaBanana, /status:\s*"limitado"/);
-  assert.doesNotMatch(casaBanana, /price:\s*\d+/);
+
+  for (const product of ["Waffle Soleados", "Cheesecake Borojó", "Francesita Bananella"]) {
+    assert.match(casaBanana, new RegExp(`name:\\s*"${product}`), `${product} must be published`);
+  }
+  const itemCount = (casaBanana.match(/\bname:\s*"/g) ?? []).length - 1; // Exclude the place name.
+  const prices = casaBanana.match(/\bprice:\s*\d+/g) ?? [];
+  const photos = [...casaBanana.matchAll(/\bphoto:\s*"(\/places\/casa-banana\/menu\/[^"]+\.webp)"/g)]
+    .map((match) => match[1]);
+
+  assert.equal(itemCount, 59, "all 50 photographed products and their priced variants should be represented");
+  assert.equal(prices.length, 58, "every unambiguous official variant price should be represented");
+  assert.equal(photos.length, itemCount, "every local menu card should have an official product photo");
+  assert.equal(new Set(photos).size, 50, "the official Pance menu should contribute 50 distinct product photos");
   await Promise.all([
     access(new URL("../public/videos/casa-banana.mp4", import.meta.url)),
     access(new URL("../public/places/casa-banana.jpg", import.meta.url)),
     access(new URL("../public/logos/casa-banana.jpg", import.meta.url)),
+    ...[...new Set(photos)].map((photo) => access(new URL(`../public${photo}`, import.meta.url))),
   ]);
 });
 
