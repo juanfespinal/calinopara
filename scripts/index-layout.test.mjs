@@ -71,6 +71,10 @@ test("directory script supports category filtering, card playback, and map selec
 test("map markers expose business selection to the directory sheet", () => {
   assert.match(mapSource, /onSelect\?: \(place: Place\) => void/);
   assert.match(mapSource, /marker\.on\("click"/);
+  assert.match(mapSource, /map\.setView\(CALI, 12\)/);
+  assert.match(mapPageSource, /data-map-directory/);
+  assert.match(mapPageSource, /data-map-coordinate-count/);
+  assert.match(mapPageSource, /Los negocios sin una dirección pública precisa/);
 });
 
 test("the directory uses the approved white canvas and restrained motion tokens", () => {

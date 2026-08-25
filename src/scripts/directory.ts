@@ -13,6 +13,8 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
   const reelVideos = [...root.querySelectorAll<HTMLVideoElement>("[data-reel-video]")];
   const count = root.querySelector<HTMLElement>("[data-count]");
   const empty = root.querySelector<HTMLElement>("[data-empty]");
+  const mapCoordinateCount = root.querySelector<HTMLElement>("[data-map-coordinate-count]");
+  const mapDirectory = root.querySelector<HTMLDetailsElement>("[data-map-directory]");
   const mapEl = root.querySelector<HTMLElement>("[data-map]");
   const mapPane = root.querySelector<HTMLElement>("[data-map-pane]");
   const mapSheet = root.querySelector<HTMLElement>("[data-map-sheet]");
@@ -53,6 +55,7 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
 
   function showMapSheet(place: Place) {
     if (!mapSheet) return;
+    if (mapDirectory) mapDirectory.open = false;
     trackEvent("map_marker_select", { business_slug: place.slug, business_name: place.name });
     const categoryLabel = categories.find((item) => item.id === place.category)?.label ?? "Negocio";
     if (sheetPhoto) {
@@ -104,7 +107,11 @@ export function initDirectory(root: HTMLElement, places: Place[]) {
     if (count) {
       count.textContent = shown.length === 1 ? "1 negocio" : `${shown.length} negocios`;
     }
-    if (empty) empty.hidden = shown.length > 0 || view === "mapa";
+    if (mapCoordinateCount) {
+      const mapped = shown.filter((place) => place.lat != null && place.lng != null).length;
+      mapCoordinateCount.textContent = `${mapped} en el mapa`;
+    }
+    if (empty) empty.hidden = shown.length > 0;
     map?.filter([...slugs]);
   }
 

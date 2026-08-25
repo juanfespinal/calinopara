@@ -1,6 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
 import { categories, places } from "../data/emprendimientos";
+
+const categoryLabel = new Map(categories.map((category) => [category.id, category.label]));
+const placesWithCoordinates = places.filter((place) => place.lat != null && place.lng != null);
 ---
 
 <Base title="Mapa · Cali No Para" bodyClass="map-page">
@@ -22,6 +25,46 @@ import { categories, places } from "../data/emprendimientos";
         ))}
       </div>
     </div>
+
+    <details class="map-directory" data-map-directory>
+      <summary>
+        <span data-count>{places.length} negocios</span>
+        <span aria-hidden="true">·</span>
+        <span data-map-coordinate-count>{placesWithCoordinates.length} en el mapa</span>
+      </summary>
+      <div class="map-directory-panel">
+        <p class="map-directory-note">
+          Los negocios sin una dirección pública precisa siguen disponibles aquí, pero no reciben un pin aproximado.
+        </p>
+        <nav class="map-directory-list" aria-label="Resultados del mapa">
+          {places.map((place) => {
+            const hasCoordinates = place.lat != null && place.lng != null;
+            const locationLabel = hasCoordinates
+              ? "Ubicación en el mapa"
+              : place.hasPhysicalLocation === false
+                ? "Domicilios o ubicación no publicada"
+                : "Consulta la dirección en su ficha";
+
+            return (
+              <a
+                href={`/emprendimiento/${place.slug}`}
+                data-slug={place.slug}
+                data-category={place.category}
+                data-has-coordinates={String(hasCoordinates)}
+              >
+                <img src={place.logo ?? place.photo} alt="" width="44" height="44" loading="lazy" />
+                <span>
+                  <strong>{place.name}</strong>
+                  <small>{categoryLabel.get(place.category)} · {place.barrio}</small>
+                  <small class:list={["map-location-label", { "is-mapped": hasCoordinates }]}>{locationLabel}</small>
+                </span>
+              </a>
+            );
+          })}
+        </nav>
+        <p class="empty map-directory-empty" data-empty hidden>No hay negocios con esa búsqueda.</p>
+      </div>
+    </details>
 
     <div class="map-pane map-pane-full" data-map-pane>
       <div class="map-frame map-solo" data-map aria-label="Mapa de Cali con los negocios"></div>

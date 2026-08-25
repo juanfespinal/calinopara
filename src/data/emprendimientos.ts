@@ -1,10 +1,7 @@
 export const categories = [
-  { id: "postres", label: "Postres" },
-  { id: "cafe", label: "Café" },
-  { id: "panaderia", label: "Panadería" },
-  { id: "comida", label: "Comida" },
-  { id: "bebidas", label: "Bebidas" },
-  { id: "juegos", label: "Juegos" },
+  { id: "comida", label: "Comidas" },
+  { id: "postres", label: "Postres y panadería" },
+  { id: "bebidas", label: "Café y bebidas" },
 ] as const;
 
 export type CategoryId = (typeof categories)[number]["id"];
@@ -61,9 +58,12 @@ export const places: Place[] = [
     slug: "cafe-obraje",
     name: "Café Obraje",
     tagline: "Café de Nariño en Ciudad Jardín",
-    category: "cafe",
+    category: "bebidas",
     barrio: "Ciudad Jardín",
     address: "La Leyenda Mall, Cl. 14 #104-30, local 20B",
+    lat: 3.365072,
+    lng: -76.535754,
+    coordsApproximate: true,
     instagram: "cafeobrajecali",
     website: "https://www.cafeobrajecali.com",
     orderUrl: "https://cafeobrajecali.mitiendanube.com/",
@@ -503,6 +503,8 @@ export const places: Place[] = [
     category: "comida",
     barrio: "San Vicente",
     address: "Av. 6 Norte #26-40, San Vicente",
+    lat: 3.472921,
+    lng: -76.526315,
     instagram: "nanitos.burger",
     instagramPost: "DcNUv9XOo-M",
     video: "/videos/nanitos-burger.mp4",
@@ -832,6 +834,8 @@ export const places: Place[] = [
     barrio: "Dapa",
     address: "Vía a Dapa #7, Dapa, Yumbo",
     hasPhysicalLocation: true,
+    lat: 3.555136,
+    lng: -76.552437,
     instagram: "lafugitiva.co",
     instagramPost: "DcY3KyMukJl",
     video: "/videos/la-fugitiva-pizzeria-dapa.mp4",
@@ -1155,6 +1159,9 @@ export const places: Place[] = [
     barrio: "Capri",
     address: "Cra. 71A #10 Bis 160, Cali",
     hasPhysicalLocation: true,
+    lat: 3.392998,
+    lng: -76.543328,
+    coordsApproximate: true,
     instagram: "perreiranos.cali",
     instagramPost: "DcY6Ls_TndS",
     video: "/videos/perreiranos.mp4",
@@ -1315,6 +1322,8 @@ export const places: Place[] = [
     barrio: "San Fernando",
     address: "Cl. 5D #38A-35, Edificio Colores, San Fernando, Cali",
     hasPhysicalLocation: true,
+    lat: 3.423014,
+    lng: -76.542563,
     instagram: "freshw0k",
     instagramPost: "DcWa0ykxomj",
     video: "/videos/fresh-wok.mp4",
@@ -1361,12 +1370,9 @@ export const statusLabel: Record<Status, string> = {
 };
 
 export const categoryColor: Record<CategoryId, string> = {
-  postres: "#c41e3a",
-  cafe: "#1f6b6e",
-  panaderia: "#b45309",
   comida: "#0f3d2e",
+  postres: "#c41e3a",
   bebidas: "#d4a017",
-  juegos: "#4338ca",
 };
 
 export function formatCop(price?: number) {
