@@ -1,13 +1,15 @@
 # Auditoría de datos — 24 de agosto de 2026
 
-Esta revisión contrasta las 21 fichas recibidas originalmente y dos incorporaciones posteriores con fuentes públicas vigentes. Se priorizaron perfiles y publicaciones oficiales de cada negocio, publicaciones de reactivación enlazadas por el propio directorio y tiendas o menús oficiales. Después de la auditoría quedan 22 fichas publicables; El Porteño fue retirado hasta contar con una fuente primaria y Kurtos Kali fue incorporado con datos de su cuenta oficial.
+Actualizada el 25 de agosto de 2026 con Casa Bananá y KingPapa.
+
+Esta revisión contrasta las 21 fichas recibidas originalmente y cuatro incorporaciones posteriores con fuentes públicas vigentes. Se priorizaron perfiles y publicaciones oficiales de cada negocio, publicaciones de reactivación enlazadas por el propio directorio y tiendas o menús oficiales. Después de la auditoría quedan 24 fichas publicables; El Porteño fue retirado hasta contar con una fuente primaria, y Restaurante Montserrat, Kurtos Kali, Casa Bananá y KingPapa fueron incorporados con fuentes verificables.
 
 ## Resultado ejecutivo
 
-- 23 fichas revisadas, incluidas las incorporaciones posteriores de Restaurante Montserrat y Kurtos Kali.
-- 22 fichas publicadas tras retirar una entrada no verificable e incorporar dos fichas nuevas verificadas.
-- 22 perfiles de Instagram comprobados como existentes y correspondientes al negocio.
-- 17 publicaciones únicas enlazadas por el directorio responden correctamente.
+- 25 fichas revisadas, incluidas las incorporaciones posteriores de Restaurante Montserrat, Kurtos Kali, Casa Bananá y KingPapa.
+- 24 fichas publicadas tras retirar una entrada no verificable e incorporar cuatro fichas nuevas verificadas.
+- 24 perfiles de Instagram comprobados como existentes y correspondientes al negocio.
+- 19 publicaciones únicas enlazadas por el directorio responden correctamente.
 - Los sitios de Café Obraje, Sobremesa y Yen responden correctamente.
 - Se corrigieron datos de contacto, operación y ubicación cuando hubo evidencia directa.
 - El Porteño queda pendiente de verificación y fue retirado temporalmente del directorio para no publicar como confirmados un estado, una dirección y un menú sustentados solo por agregadores.
@@ -33,6 +35,23 @@ Esta revisión contrasta las 21 fichas recibidas originalmente y dos incorporaci
 - La cuenta oficial publica los productos Kurto Lulada, Maracululo, Banano Nutella, Smash, Frutos Rojos, Fresas con Nutella, Chocolate Blanco y Kurto salado. Se incorporaron ocho fotografías auténticas tomadas de esas publicaciones.
 - El catálogo oficial de WhatsApp existe en <https://wa.me/c/573233706743>, pero su página pública exige abrir la aplicación o iniciar WhatsApp Web y no expone precios verificables. Por eso la ficha enlaza el catálogo sin inventar precios y pide confirmarlos antes de ordenar.
 - No se encontró un archivo de logotipo independiente. Se incorporó como identidad visual el avatar oficial de la cuenta —una ilustración de marca— sin presentarlo como un wordmark independiente.
+
+### Casa Bananá — incorporada y verificada
+
+- El perfil oficial es `@casabananaa`: <https://www.instagram.com/casabananaa/>.
+- La publicación oficial de recuperación confirma que la sede de Granada quedó sin operación tras el terremoto y dirige a clientes hacia la sede de Pance: <https://www.instagram.com/p/Db_PXvahGFN/>.
+- Una publicación oficial anterior ubica la sede operativa en Puerto 125, calle 16A #124-285, local 2, y publica el WhatsApp 318 690 9991: <https://www.instagram.com/p/DY22XDdxwGk/>.
+- La ficha conserva el estado `limitado` porque el negocio sigue atendiendo desde Pance, pero perdió la operación de Granada. No se afirma que Granada haya reabierto.
+- Se incorporaron el reel oficial normalizado, una portada auténtica de producto y el avatar oficial como identidad visual. La carta pública se enlaza en <https://menupp.co/casabanana> sin publicar precios no verificables.
+
+### KingPapa — incorporada y verificada
+
+- El perfil oficial es `@kingpapaco`: <https://www.instagram.com/kingpapaco/>.
+- La cobertura periodística documenta que el punto de Limonar fue pérdida total y que Mallplaza Cali quedó sin operación: <https://www.elpais.com.co/amp/economia/asi-se-levantan-los-emprendedores-calenos-tras-el-sismo-hay-que-comenzar-de-nuevo-2253.html>.
+- La publicación oficial de recuperación anuncia un nuevo punto en Marbella Plaza con inauguración prevista para el 4 de septiembre: <https://www.instagram.com/p/DccLjFFsVgy/>.
+- El sitio oficial publica el punto operativo de La Flora, su ubicación, el WhatsApp 317 245 5336 y la carta: <https://kingpapacali.com/> y <https://kingpapacali.com/menu>.
+- La ficha usa `limitado`: dirige a un punto confirmado que sigue atendiendo, distingue las sedes afectadas y no presenta Marbella Plaza como abierto antes de la fecha anunciada.
+- Se incorporaron el reel oficial normalizado, una portada auténtica de producto y el avatar oficial. La ficha omite precios promocionales o no verificables.
 
 ### Fábrica Emilitas — verificada y carta incorporada
 
