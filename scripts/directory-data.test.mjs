@@ -185,6 +185,51 @@ test("Kurtos Kali publishes the verified Libertadores location and official medi
   ]);
 });
 
+test("Casa Bananá publishes its verified Pance operation and official recovery media", async () => {
+  const casaBanana = dataSource.match(/slug:\s*"casa-banana"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(casaBanana, "Casa Bananá listing must exist");
+  assert.match(casaBanana, /instagram:\s*"casabananaa"/);
+  assert.match(casaBanana, /instagramPost:\s*"Db_PXvahGFN"/);
+  assert.match(casaBanana, /video:\s*"\/videos\/casa-banana\.mp4"/);
+  assert.match(casaBanana, /videoPoster:\s*"\/places\/casa-banana\.jpg"/);
+  assert.match(casaBanana, /barrio:\s*"Pance"/);
+  assert.match(casaBanana, /address:\s*"Puerto 125, Cl\. 16A #124-285, local 2"/);
+  assert.match(casaBanana, /whatsapp:\s*"573186909991"/);
+  assert.match(casaBanana, /menuUrl:\s*"https:\/\/menupp\.co\/casabanana"/);
+  assert.match(casaBanana, /status:\s*"limitado"/);
+  assert.doesNotMatch(casaBanana, /price:\s*\d+/);
+  await Promise.all([
+    access(new URL("../public/videos/casa-banana.mp4", import.meta.url)),
+    access(new URL("../public/places/casa-banana.jpg", import.meta.url)),
+    access(new URL("../public/logos/casa-banana.jpg", import.meta.url)),
+  ]);
+});
+
+test("KingPapa publishes an operating support point and its verified reopening story", async () => {
+  const kingPapa = dataSource.match(/slug:\s*"kingpapa"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(kingPapa, "KingPapa listing must exist");
+  assert.match(kingPapa, /instagram:\s*"kingpapaco"/);
+  assert.match(kingPapa, /instagramPost:\s*"DccLjFFsVgy"/);
+  assert.match(kingPapa, /video:\s*"\/videos\/kingpapa\.mp4"/);
+  assert.match(kingPapa, /videoPoster:\s*"\/places\/kingpapa\.jpg"/);
+  assert.match(kingPapa, /barrio:\s*"La Flora"/);
+  assert.match(kingPapa, /address:\s*"Cl\. 44 Nte\. #3E-45"/);
+  assert.match(kingPapa, /whatsapp:\s*"573172455336"/);
+  assert.match(kingPapa, /website:\s*"https:\/\/kingpapacali\.com"/);
+  assert.match(kingPapa, /menuUrl:\s*"https:\/\/kingpapacali\.com\/menu"/);
+  assert.match(kingPapa, /status:\s*"limitado"/);
+  assert.match(kingPapa, /Marbella Plaza/);
+  assert.match(kingPapa, /4 de septiembre/);
+  assert.doesNotMatch(kingPapa, /price:\s*\d+/);
+  await Promise.all([
+    access(new URL("../public/videos/kingpapa.mp4", import.meta.url)),
+    access(new URL("../public/places/kingpapa.jpg", import.meta.url)),
+    access(new URL("../public/logos/kingpapa.jpg", import.meta.url)),
+  ]);
+});
+
 test("every local video card has an existing poster", async () => {
   const videoPosters = {
     "arepas-de-la-abuela": "/video-posters/reactivacion-cali.jpg",
