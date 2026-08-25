@@ -42,7 +42,8 @@ Esta revisión contrasta las 21 fichas recibidas originalmente y cuatro incorpor
 - La publicación oficial de recuperación confirma que la sede de Granada quedó sin operación tras el terremoto y dirige a clientes hacia la sede de Pance: <https://www.instagram.com/p/Db_PXvahGFN/>.
 - Una publicación oficial anterior ubica la sede operativa en Puerto 125, calle 16A #124-285, local 2, y publica el WhatsApp 318 690 9991: <https://www.instagram.com/p/DY22XDdxwGk/>.
 - La ficha conserva el estado `limitado` porque el negocio sigue atendiendo desde Pance, pero perdió la operación de Granada. No se afirma que Granada haya reabierto.
-- Se incorporaron el reel oficial normalizado, una portada auténtica de producto y el avatar oficial como identidad visual. La carta pública se enlaza en <https://menupp.co/casabanana> sin publicar precios no verificables.
+- Se incorporaron el reel oficial normalizado, una portada auténtica de producto y el avatar oficial como identidad visual.
+- El 25 de agosto de 2026 se verificó la carta oficial de la sede operativa de Pance en <https://menupp.co/casabanana/venue/mekiP3lb8Ou8ytqKgOq1/menu/aac0c5ed-d748-4191-b3be-fc0f76dc32b3>. Se publicaron 50 productos fotografiados como 59 tarjetas de variantes, con 50 imágenes oficiales locales y 58 precios inequívocos. El precio abreviado de Tuna Melt (`29,9`) no se convirtió por inferencia y queda para confirmar al pedir.
 
 ### KingPapa — incorporada y verificada
 
