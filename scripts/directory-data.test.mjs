@@ -7,6 +7,10 @@ const detailSource = await readFile(
   new URL("../src/pages/emprendimiento/[slug].astro", import.meta.url),
   "utf8",
 );
+const placeVideoSource = await readFile(
+  new URL("../src/components/PlaceVideo.astro", import.meta.url),
+  "utf8",
+);
 
 
 test("unverified businesses are not published as active listings", () => {
@@ -127,25 +131,46 @@ test("Kurtos Kali publishes the verified Libertadores location and official medi
   assert.ok(kurtos, "Kurtos Kali listing must exist");
   assert.match(kurtos, /instagram:\s*"kurtos_kali"/);
   assert.match(kurtos, /instagramPost:\s*"DccGtgFRIEb"/);
-  assert.match(kurtos, /instagramPostAuthor:\s*"takamarsushi"/);
+  assert.match(kurtos, /instagramPostPublisher:\s*"takamarsushi"/);
   assert.ok(
-    detailSource.includes("handle={place.instagramPostAuthor ?? place.instagram}"),
-    "collaboration reels must credit the publishing account",
+    detailSource.includes("handle={place.instagramPostPublisher ?? place.instagram}"),
+    "collaboration reels must identify the publishing account",
   );
+  assert.match(placeVideoSource, /Publicado por/);
+  assert.doesNotMatch(placeVideoSource, /Video original de/);
   assert.match(kurtos, /video:\s*"\/videos\/kurtos-kali\.mp4"/);
   assert.match(kurtos, /videoPoster:\s*"\/places\/kurtos-kali\.jpg"/);
-  assert.doesNotMatch(kurtos, /logo:\s*"\/logos\/kurtos-kali/);
+  assert.match(kurtos, /logo:\s*"\/logos\/kurtos-kali\.jpg"/);
   assert.match(kurtos, /barrio:\s*"Libertadores"/);
   assert.match(kurtos, /address:\s*"Cra\. 22 #1 Oeste-04"/);
   assert.match(kurtos, /lat:\s*3\.4421688/);
   assert.match(kurtos, /lng:\s*-76\.541648/);
   assert.match(kurtos, /whatsapp:\s*"573233706743"/);
+  assert.match(kurtos, /menuUrl:\s*"https:\/\/wa\.me\/c\/573233706743"/);
   assert.match(kurtos, /status:\s*"abierto"/);
-  assert.match(kurtos, /menu:\s*\[\s*\{\s*name:\s*"Kurto"/);
+  const products = [
+    "Kurto Lulada",
+    "Kurto Maracululo",
+    "Kurto Banano Nutella",
+    "Kurto Smash",
+    "Kurto Frutos Rojos",
+    "Kurto Fresas con Nutella",
+    "Kurto Chocolate Blanco",
+    "Kurto salado",
+  ];
+  for (const product of products) {
+    assert.match(kurtos, new RegExp(`name:\\s*"${product}"`), `${product} must be published`);
+  }
   assert.doesNotMatch(kurtos, /price:\s*\d+/);
+  const menuPhotos = [...kurtos.matchAll(/photo:\s*"(\/places\/kurtos-kali\/menu\/[^"]+\.webp)"/g)]
+    .map((match) => match[1]);
+  assert.equal(menuPhotos.length, products.length, "each verified product should have an official image");
+  assert.equal(new Set(menuPhotos).size, products.length, "product images should be distinct");
   await Promise.all([
     access(new URL("../public/videos/kurtos-kali.mp4", import.meta.url)),
     access(new URL("../public/places/kurtos-kali.jpg", import.meta.url)),
+    access(new URL("../public/logos/kurtos-kali.jpg", import.meta.url)),
+    ...menuPhotos.map((photo) => access(new URL(`../public${photo}`, import.meta.url))),
   ]);
 });
 

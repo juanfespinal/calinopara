@@ -29,7 +29,10 @@ Esta revisión contrasta las 21 fichas recibidas originalmente y dos incorporaci
 - La cuenta oficial confirma el nombre **Kurtos Kali**, la oferta de conos húngaros, la dirección `Cra. 22 #1 Oeste-04`, el WhatsApp 323 370 6743 y el punto de Libertadores: <https://www.instagram.com/kurtos_kali/>.
 - La misma cuenta reporta atención en Libertadores y Jardín Plaza, y comunica que Chipichape no está atendiendo después del terremoto.
 - Las coordenadas se tomaron del enlace de Google Maps publicado por la propia cuenta oficial, no de una aproximación histórica.
-- Se incorporaron el reel normalizado y un fotograma auténtico del producto. No se publicaron precios ni sabores específicos porque no aparecen en las fuentes consultadas.
+- Se incorporaron el reel normalizado y un fotograma auténtico del producto.
+- La cuenta oficial publica los productos Kurto Lulada, Maracululo, Banano Nutella, Smash, Frutos Rojos, Fresas con Nutella, Chocolate Blanco y Kurto salado. Se incorporaron ocho fotografías auténticas tomadas de esas publicaciones.
+- El catálogo oficial de WhatsApp existe en <https://wa.me/c/573233706743>, pero su página pública exige abrir la aplicación o iniciar WhatsApp Web y no expone precios verificables. Por eso la ficha enlaza el catálogo sin inventar precios y pide confirmarlos antes de ordenar.
+- No se encontró un archivo de logotipo independiente. Se incorporó como identidad visual el avatar oficial de la cuenta —una ilustración de marca— sin presentarlo como un wordmark independiente.
 
 ### Fábrica Emilitas — verificada y carta incorporada
 

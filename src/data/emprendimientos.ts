@@ -33,8 +33,8 @@ export interface Place {
   instagram?: string;
   /** Instagram post/reel shortcode. Used for credits and as embed fallback when `video` is missing. */
   instagramPost?: string;
-  /** Publishing account when a collaborator created the linked post. */
-  instagramPostAuthor?: string;
+  /** Publishing account when a collaborator published the linked post. */
+  instagramPostPublisher?: string;
   /** Local file under /videos, e.g. `/videos/nanitos-burger.mp4`. Preferred over the Instagram embed. */
   video?: string;
   /** Optional poster override when several businesses share a local video source. */
@@ -112,20 +112,57 @@ export const places: Place[] = [
     lng: -76.541648,
     instagram: "kurtos_kali",
     instagramPost: "DccGtgFRIEb",
-    instagramPostAuthor: "takamarsushi",
+    instagramPostPublisher: "takamarsushi",
     video: "/videos/kurtos-kali.mp4",
     videoPoster: "/places/kurtos-kali.jpg",
     whatsapp: "573233706743",
+    menuUrl: "https://wa.me/c/573233706743",
     status: "abierto",
     photo: "/places/kurtos-kali.jpg",
+    logo: "/logos/kurtos-kali.jpg",
     photoAlt: "Kurto cubierto con helado y salsa roja",
     menuNote:
-      "La sede de Libertadores está atendiendo y recibe al equipo trasladado desde las sedes afectadas. La cuenta oficial también reporta atención en Jardín Plaza; confirma horarios y domicilios por WhatsApp.",
+      "Libertadores está atendiendo y la cuenta oficial también reporta atención en Jardín Plaza. Productos publicados por la cuenta oficial y el catálogo de WhatsApp; confirma disponibilidad y precio vigente antes de pedir.",
     menu: [
       {
-        name: "Kurto",
-        desc: "Cono húngaro horneado servido con helado y toppings. Consulta sabores y adiciones disponibles.",
-        photo: "/places/kurtos-kali.jpg",
+        name: "Kurto Lulada",
+        desc: "Kurto recién horneado con arequipe, helado soft y lulo.",
+        photo: "/places/kurtos-kali/menu/kurto-lulada.webp",
+      },
+      {
+        name: "Kurto Maracululo",
+        desc: "Con arequipe, mango, lulo, lecherita, helado duro y un trozo de mango.",
+        photo: "/places/kurtos-kali/menu/kurto-maracululo.webp",
+      },
+      {
+        name: "Kurto Banano Nutella",
+        desc: "Combinación de banano y Nutella.",
+        photo: "/places/kurtos-kali/menu/kurto-banano-nutella.webp",
+      },
+      {
+        name: "Kurto Smash",
+        desc: "Masa de Kurto servida con chantilly, chocolate y fresas.",
+        photo: "/places/kurtos-kali/menu/kurto-smash.webp",
+      },
+      {
+        name: "Kurto Frutos Rojos",
+        desc: "Con helado duro de vainilla, crema chantilly y cereza.",
+        photo: "/places/kurtos-kali/menu/kurto-frutos-rojos.webp",
+      },
+      {
+        name: "Kurto Fresas con Nutella",
+        desc: "Con fresas y Nutella.",
+        photo: "/places/kurtos-kali/menu/kurto-fresas-nutella.webp",
+      },
+      {
+        name: "Kurto Chocolate Blanco",
+        desc: "Kurto de chocolate blanco; consulta helado y adiciones disponibles.",
+        photo: "/places/kurtos-kali/menu/kurto-chocolate-blanco.webp",
+      },
+      {
+        name: "Kurto salado",
+        desc: "Masa en espiral con queso mozzarella y especias; consulta sabores disponibles.",
+        photo: "/places/kurtos-kali/menu/kurto-salado.webp",
       },
     ],
   },
