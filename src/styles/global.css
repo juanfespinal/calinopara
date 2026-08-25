@@ -1225,6 +1225,12 @@ body.map-page .map-sheet {
   color: var(--on-dark);
 }
 
+.reel-tile[data-has-video="true"] .reel-tile-link::before {
+  content: "";
+  display: block;
+  aspect-ratio: 3 / 4;
+}
+
 .reel-tile-photo {
   width: 100%;
   aspect-ratio: 3 / 4;
@@ -1661,6 +1667,18 @@ body.map-page .map-sheet {
 .panel h2 {
   margin: 0 0 10px;
   font-size: 1.15rem;
+}
+
+.menu-group + .menu-group {
+  margin-top: 24px;
+}
+
+.menu-group h3 {
+  margin: 0 0 8px;
+  color: var(--accent-blue);
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .menu {

@@ -8,6 +8,10 @@ const detailSource = await readFile(
   "utf8",
 );
 const { categories, places } = await import("../src/data/emprendimientos.ts");
+const placeVideoSource = await readFile(
+  new URL("../src/components/PlaceVideo.astro", import.meta.url),
+  "utf8",
+);
 
 test("directory categories stay condensed and every filter has businesses", () => {
   assert.deepEqual(
@@ -111,6 +115,73 @@ test("Restaurant Montserrat publishes its Instagram story and local media", asyn
   await Promise.all([
     access(new URL("../public/videos/restaurantemontserrat.mp4", import.meta.url)),
     access(new URL("../public/places/restaurantemontserrat.jpg", import.meta.url)),
+  ]);
+});
+
+test("supplied logos and La Fugitiva menu source are published", async () => {
+  const montserrat = dataSource.match(/slug:\s*"restaurante-montserrat"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+  const fugitiva = dataSource.match(/slug:\s*"la-fugitiva-pizzeria-dapa"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(montserrat, "Restaurant Montserrat listing must exist");
+  assert.ok(fugitiva, "La Fugitiva listing must exist");
+  assert.match(montserrat, /logo:\s*"\/logos\/restaurantemontserrat\.png"/);
+  assert.match(fugitiva, /logo:\s*"\/logos\/la-fugitiva-pizzeria-dapa\.png"/);
+  assert.match(fugitiva, /menuUrl:\s*"https:\/\/menupp\.co\/lafugitiva\/venue\/jhfJgnsgRrj3ovActhCE\/menu\/a5204527-32eb-412d-b231-dd7bb5b0c987"/);
+  assert.match(fugitiva, /"?name"?:\s*"Pepperoni Chips/);
+  assert.match(fugitiva, /"?name"?:\s*"Pizza de Nutella/);
+  assert.match(fugitiva, /"?photo"?:\s*"\/places\/la-fugitiva-pizzeria-dapa\/menu\/001-pepperoni-chips\.webp"/);
+  await Promise.all([
+    access(new URL("../public/logos/restaurantemontserrat.png", import.meta.url)),
+    access(new URL("../public/logos/la-fugitiva-pizzeria-dapa.png", import.meta.url)),
+  ]);
+});
+
+test("Kurtos Kali publishes the verified Libertadores location and official media", async () => {
+  const kurtos = dataSource.match(/slug:\s*"kurtos-kali"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(kurtos, "Kurtos Kali listing must exist");
+  assert.match(kurtos, /instagram:\s*"kurtos_kali"/);
+  assert.match(kurtos, /instagramPost:\s*"DccGtgFRIEb"/);
+  assert.match(kurtos, /instagramPostPublisher:\s*"takamarsushi"/);
+  assert.ok(
+    detailSource.includes("handle={place.instagramPostPublisher ?? place.instagram}"),
+    "collaboration reels must identify the publishing account",
+  );
+  assert.match(placeVideoSource, /Publicado por/);
+  assert.doesNotMatch(placeVideoSource, /Video original de/);
+  assert.match(kurtos, /video:\s*"\/videos\/kurtos-kali\.mp4"/);
+  assert.match(kurtos, /videoPoster:\s*"\/places\/kurtos-kali\.jpg"/);
+  assert.match(kurtos, /logo:\s*"\/logos\/kurtos-kali\.jpg"/);
+  assert.match(kurtos, /barrio:\s*"Libertadores"/);
+  assert.match(kurtos, /address:\s*"Cra\. 22 #1 Oeste-04"/);
+  assert.match(kurtos, /lat:\s*3\.4421688/);
+  assert.match(kurtos, /lng:\s*-76\.541648/);
+  assert.match(kurtos, /whatsapp:\s*"573233706743"/);
+  assert.match(kurtos, /menuUrl:\s*"https:\/\/wa\.me\/c\/573233706743"/);
+  assert.match(kurtos, /status:\s*"abierto"/);
+  const products = [
+    "Kurto Lulada",
+    "Kurto Maracululo",
+    "Kurto Banano Nutella",
+    "Kurto Smash",
+    "Kurto Frutos Rojos",
+    "Kurto Fresas con Nutella",
+    "Kurto Chocolate Blanco",
+    "Kurto salado",
+  ];
+  for (const product of products) {
+    assert.match(kurtos, new RegExp(`name:\\s*"${product}"`), `${product} must be published`);
+  }
+  assert.doesNotMatch(kurtos, /price:\s*\d+/);
+  const menuPhotos = [...kurtos.matchAll(/photo:\s*"(\/places\/kurtos-kali\/menu\/[^"]+\.webp)"/g)]
+    .map((match) => match[1]);
+  assert.equal(menuPhotos.length, products.length, "each verified product should have an official image");
+  assert.equal(new Set(menuPhotos).size, products.length, "product images should be distinct");
+  await Promise.all([
+    access(new URL("../public/videos/kurtos-kali.mp4", import.meta.url)),
+    access(new URL("../public/places/kurtos-kali.jpg", import.meta.url)),
+    access(new URL("../public/logos/kurtos-kali.jpg", import.meta.url)),
+    ...menuPhotos.map((photo) => access(new URL(`../public${photo}`, import.meta.url))),
   ]);
 });
 
