@@ -1,13 +1,13 @@
 # Auditoría de datos — 24 de agosto de 2026
 
-Esta revisión contrasta las 21 fichas recibidas desde `origin/main` con fuentes públicas vigentes. Se priorizaron perfiles y publicaciones oficiales de cada negocio, publicaciones de reactivación enlazadas por el propio directorio y tiendas o menús oficiales. Después de la auditoría quedan 20 fichas publicables; El Porteño fue retirado hasta contar con una fuente primaria.
+Esta revisión contrasta las 21 fichas recibidas originalmente y dos incorporaciones posteriores con fuentes públicas vigentes. Se priorizaron perfiles y publicaciones oficiales de cada negocio, publicaciones de reactivación enlazadas por el propio directorio y tiendas o menús oficiales. Después de la auditoría quedan 22 fichas publicables; El Porteño fue retirado hasta contar con una fuente primaria y Kurtos Kali fue incorporado con datos de su cuenta oficial.
 
 ## Resultado ejecutivo
 
-- 21 fichas revisadas, incluidas Perreiranos y Fresh Wok, añadidas al remoto durante la auditoría.
-- 20 fichas conservadas en el directorio tras retirar una entrada no verificable.
-- 20 perfiles de Instagram comprobados como existentes y correspondientes al negocio.
-- 15 publicaciones únicas enlazadas por el directorio responden correctamente.
+- 23 fichas revisadas, incluidas las incorporaciones posteriores de Restaurante Montserrat y Kurtos Kali.
+- 22 fichas publicadas tras retirar una entrada no verificable e incorporar dos fichas nuevas verificadas.
+- 22 perfiles de Instagram comprobados como existentes y correspondientes al negocio.
+- 17 publicaciones únicas enlazadas por el directorio responden correctamente.
 - Los sitios de Café Obraje, Sobremesa y Yen responden correctamente.
 - Se corrigieron datos de contacto, operación y ubicación cuando hubo evidencia directa.
 - El Porteño queda pendiente de verificación y fue retirado temporalmente del directorio para no publicar como confirmados un estado, una dirección y un menú sustentados solo por agregadores.
@@ -22,6 +22,14 @@ Esta revisión contrasta las 21 fichas recibidas desde `origin/main` con fuentes
 - Sitio y tienda oficial activos: <https://www.cafeobrajecali.com/> y <https://cafeobrajecali.mitiendanube.com/>.
 - Se agregó la tienda como URL de pedidos.
 - Se retiraron las coordenadas porque [el punto guardado](https://www.openstreetmap.org/?mlat=3.3505&mlon=-76.5316#map=18/3.3505/-76.5316) no correspondía a la dirección textual de La Leyenda Mall. La dirección se conserva y Google Maps puede resolverla por texto.
+
+### Kurtos Kali — incorporada y verificada
+
+- La publicación colaborativa de apoyo, publicada por `@takamarsushi`, identifica a Olga, muestra los daños y confirma que el equipo continúa atendiendo desde Libertadores: <https://www.instagram.com/p/DccGtgFRIEb/>.
+- La cuenta oficial confirma el nombre **Kurtos Kali**, la oferta de conos húngaros, la dirección `Cra. 22 #1 Oeste-04`, el WhatsApp 323 370 6743 y el punto de Libertadores: <https://www.instagram.com/kurtos_kali/>.
+- La misma cuenta reporta atención en Libertadores y Jardín Plaza, y comunica que Chipichape no está atendiendo después del terremoto.
+- Las coordenadas se tomaron del enlace de Google Maps publicado por la propia cuenta oficial, no de una aproximación histórica.
+- Se incorporaron el reel normalizado y un fotograma auténtico del producto. No se publicaron precios ni sabores específicos porque no aparecen en las fuentes consultadas.
 
 ### Fábrica Emilitas — verificada y carta incorporada
 

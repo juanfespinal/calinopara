@@ -33,6 +33,8 @@ export interface Place {
   instagram?: string;
   /** Instagram post/reel shortcode. Used for credits and as embed fallback when `video` is missing. */
   instagramPost?: string;
+  /** Publishing account when a collaborator created the linked post. */
+  instagramPostAuthor?: string;
   /** Local file under /videos, e.g. `/videos/nanitos-burger.mp4`. Preferred over the Instagram embed. */
   video?: string;
   /** Optional poster override when several businesses share a local video source. */
@@ -97,6 +99,34 @@ export const places: Place[] = [
     menuNote: "Carta, disponibilidad y modalidad de atención por confirmar en Instagram.",
     menu: [
       { name: "Menú del día", desc: "Consulta disponibilidad y atención por Instagram." },
+    ],
+  },
+  {
+    slug: "kurtos-kali",
+    name: "Kurtos Kali",
+    tagline: "Conos húngaros y helado en Libertadores",
+    category: "postres",
+    barrio: "Libertadores",
+    address: "Cra. 22 #1 Oeste-04",
+    lat: 3.4421688,
+    lng: -76.541648,
+    instagram: "kurtos_kali",
+    instagramPost: "DccGtgFRIEb",
+    instagramPostAuthor: "takamarsushi",
+    video: "/videos/kurtos-kali.mp4",
+    videoPoster: "/places/kurtos-kali.jpg",
+    whatsapp: "573233706743",
+    status: "abierto",
+    photo: "/places/kurtos-kali.jpg",
+    photoAlt: "Kurto cubierto con helado y salsa roja",
+    menuNote:
+      "La sede de Libertadores está atendiendo y recibe al equipo trasladado desde las sedes afectadas. La cuenta oficial también reporta atención en Jardín Plaza; confirma horarios y domicilios por WhatsApp.",
+    menu: [
+      {
+        name: "Kurto",
+        desc: "Cono húngaro horneado servido con helado y toppings. Consulta sabores y adiciones disponibles.",
+        photo: "/places/kurtos-kali.jpg",
+      },
     ],
   },
   {

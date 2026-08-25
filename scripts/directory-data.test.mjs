@@ -121,6 +121,34 @@ test("supplied logos and La Fugitiva menu source are published", async () => {
   ]);
 });
 
+test("Kurtos Kali publishes the verified Libertadores location and official media", async () => {
+  const kurtos = dataSource.match(/slug:\s*"kurtos-kali"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(kurtos, "Kurtos Kali listing must exist");
+  assert.match(kurtos, /instagram:\s*"kurtos_kali"/);
+  assert.match(kurtos, /instagramPost:\s*"DccGtgFRIEb"/);
+  assert.match(kurtos, /instagramPostAuthor:\s*"takamarsushi"/);
+  assert.ok(
+    detailSource.includes("handle={place.instagramPostAuthor ?? place.instagram}"),
+    "collaboration reels must credit the publishing account",
+  );
+  assert.match(kurtos, /video:\s*"\/videos\/kurtos-kali\.mp4"/);
+  assert.match(kurtos, /videoPoster:\s*"\/places\/kurtos-kali\.jpg"/);
+  assert.doesNotMatch(kurtos, /logo:\s*"\/logos\/kurtos-kali/);
+  assert.match(kurtos, /barrio:\s*"Libertadores"/);
+  assert.match(kurtos, /address:\s*"Cra\. 22 #1 Oeste-04"/);
+  assert.match(kurtos, /lat:\s*3\.4421688/);
+  assert.match(kurtos, /lng:\s*-76\.541648/);
+  assert.match(kurtos, /whatsapp:\s*"573233706743"/);
+  assert.match(kurtos, /status:\s*"abierto"/);
+  assert.match(kurtos, /menu:\s*\[\s*\{\s*name:\s*"Kurto"/);
+  assert.doesNotMatch(kurtos, /price:\s*\d+/);
+  await Promise.all([
+    access(new URL("../public/videos/kurtos-kali.mp4", import.meta.url)),
+    access(new URL("../public/places/kurtos-kali.jpg", import.meta.url)),
+  ]);
+});
+
 test("every local video card has an existing poster", async () => {
   const videoPosters = {
     "arepas-de-la-abuela": "/video-posters/reactivacion-cali.jpg",

@@ -52,7 +52,7 @@ const menuItemIndexes = new Map(place.menu.map((item, index) => [item, index] as
           poster={place.photo}
           slug={place.slug}
           name={place.name}
-          handle={place.instagram}
+          handle={place.instagramPostAuthor ?? place.instagram}
           post={place.instagramPost}
         />
       ) : place.instagramPost ? (
