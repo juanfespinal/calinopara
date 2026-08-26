@@ -24,6 +24,8 @@ export interface Place {
   address: string;
   /** Set false when the business is operating only from a hidden kitchen or by delivery. */
   hasPhysicalLocation?: boolean;
+  /** Set false for multi-location listings without one precise route target. */
+  showDirections?: boolean;
   lat?: number;
   lng?: number;
   coordsApproximate?: boolean;
@@ -638,7 +640,8 @@ export const places: Place[] = [
     category: "comida",
     barrio: "Varias sedes",
     address: "Sedes activas en Pance, Unicentro y El Peñón",
-    hasPhysicalLocation: false,
+    hasPhysicalLocation: true,
+    showDirections: false,
     instagram: "elgringoamericankitchen",
     instagramPost: "Dce6oFKMX6V",
     video: "/videos/el-gringo-american-kitchen.mp4",
@@ -665,12 +668,15 @@ export const places: Place[] = [
     category: "postres",
     barrio: "Varias sedes",
     address: "Puntos en Granada, Chipichape, Ciudad Jardín y Jardín Plaza",
-    hasPhysicalLocation: false,
+    hasPhysicalLocation: true,
+    showDirections: false,
     instagram: "proteandco.froyo",
     instagramPost: "DcElnc-p-zU",
     video: "/videos/proteandco.mp4",
     videoPoster: "/places/proteandco.jpg",
     website: "https://linktr.ee/proteandco.froyo",
+    orderUrl: "https://linktr.ee/proteandco.froyo",
+    orderLabel: "Ver campaña",
     status: "limitado",
     photo: "/places/proteandco.jpg",
     photoAlt: "Representante de PROTE&CO en uno de sus puntos de frozen yogurt",
