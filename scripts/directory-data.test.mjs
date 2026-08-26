@@ -57,19 +57,27 @@ test("every Perreiranos menu item includes an existing product photo", async () 
   await Promise.all(photos.map((match) => access(new URL(`../public${match[1]}`, import.meta.url))));
 });
 
-test("Cocinamia publishes its complete priced menu and source", async () => {
+test("Cocinamia publishes the menu corrected directly by the business", async () => {
   const cocinamia = dataSource.match(
     /slug:\s*"cocina-mia"([\s\S]*?)slug:\s*"la-fonda-tradicional"/,
   )?.[1];
 
   assert.ok(cocinamia, "Cocinamia listing must exist");
-  assert.match(cocinamia, /menuUrl:\s*"https:\/\/drive\.google\.com\/file\/d\/1ISfH0kvE978ABk7gpTac9Zq9JkIICE6N\/view"/);
-  assert.equal((cocinamia.match(/\bprice:\s*\d+/g) ?? []).length, 46, "all published prices should be represented");
+  assert.doesNotMatch(cocinamia, /menuUrl:/, "the superseded March menu should not remain linked");
+  assert.match(cocinamia, /Selección actualizada directamente por Cocinamia el 25 de agosto de 2026/);
+  assert.equal((cocinamia.match(/\bprice:\s*\d+/g) ?? []).length, 26, "only the products retained by Cocinamia should remain priced");
+
+  for (const retained of ["Bistec a caballo", "Calentado de Frijoles", "Huevos al gusto", "Tinto de verano", "Tamarindo michelada"]) {
+    assert.match(cocinamia, new RegExp(`name:\\s*"${retained}"`), `${retained} should remain published`);
+  }
+  for (const removed of ["Omelette de jamón y queso", "Cubano de jamón y queso", "Brunch · pollo asado", "Jarra de refajo", "Canoa Parrillera", "Cubano de temporada"]) {
+    assert.doesNotMatch(cocinamia, new RegExp(`name:\\s*"${removed}"`), `${removed} was removed by Cocinamia`);
+  }
+
+  assert.match(cocinamia, /name:\s*"Sorpresa Mía"[\s\S]*?price:\s*50000[\s\S]*?photo:\s*"\/places\/cocina-mia\/menu\/sorpresa-mia-enviada\.webp"/);
+  assert.match(cocinamia, /name:\s*"Cazuela de Frijoles"[\s\S]*?price:\s*60000[\s\S]*?photo:\s*"\/places\/cocina-mia\/menu\/cazuela-de-frijoles-enviada\.webp"/);
   const photos = [...cocinamia.matchAll(/\bphoto:\s*"(\/places\/cocina-mia\/menu\/[^"]+)"/g)];
-  assert.equal(photos.length, 12, "key dishes should include the 12 real menu photographs");
   await Promise.all(photos.map((match) => access(new URL(`../public${match[1]}`, import.meta.url))));
-  assert.match(detailSource, /place\.menuUrl/);
-  assert.match(detailSource, />Ver carta completa</);
 });
 
 test("Fábrica Emilitas publishes the complete official Atom Bio menu", async () => {
