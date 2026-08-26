@@ -246,6 +246,72 @@ test("KingPapa publishes an operating support point and its verified reopening s
   ]);
 });
 
+test("El Gringo publishes the San Fernando closure and active alternative locations", async () => {
+  const elGringo = dataSource.match(/slug:\s*"el-gringo-american-kitchen"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(elGringo, "El Gringo listing must exist");
+  assert.match(elGringo, /instagram:\s*"elgringoamericankitchen"/);
+  assert.match(elGringo, /instagramPost:\s*"Dce6oFKMX6V"/);
+  assert.match(elGringo, /video:\s*"\/videos\/el-gringo-american-kitchen\.mp4"/);
+  assert.match(elGringo, /videoPoster:\s*"\/places\/el-gringo-american-kitchen\.jpg"/);
+  assert.match(elGringo, /menuUrl:\s*"https:\/\/menupp\.co\/elgringo\/venue\/CRANdwLVpuwbyG1KmvIk\/menu\/e98835b8-c62d-4f39-9a55-cab1da5fc45e"/);
+  assert.match(elGringo, /status:\s*"limitado"/);
+  assert.match(elGringo, /hasPhysicalLocation:\s*false/);
+  assert.match(elGringo, /orderUrl:\s*"https:\/\/app\.menupp\.co\/restaurant\/elgringo"/);
+  assert.match(elGringo, /San Fernando/);
+  assert.match(elGringo, /Pance, Unicentro y El Peñón/);
+  assert.doesNotMatch(elGringo, /price:\s*\d+/);
+  await Promise.all([
+    access(new URL("../public/videos/el-gringo-american-kitchen.mp4", import.meta.url)),
+    access(new URL("../public/places/el-gringo-american-kitchen.jpg", import.meta.url)),
+  ]);
+});
+
+test("PROTE&CO publishes its warehouse impact, active points, and recovery campaign", async () => {
+  const proteandco = dataSource.match(/slug:\s*"proteandco"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(proteandco, "PROTE&CO listing must exist");
+  assert.match(proteandco, /instagram:\s*"proteandco\.froyo"/);
+  assert.match(proteandco, /instagramPost:\s*"DcElnc-p-zU"/);
+  assert.match(proteandco, /video:\s*"\/videos\/proteandco\.mp4"/);
+  assert.match(proteandco, /videoPoster:\s*"\/places\/proteandco\.jpg"/);
+  assert.match(proteandco, /website:\s*"https:\/\/linktr\.ee\/proteandco\.froyo"/);
+  assert.match(proteandco, /status:\s*"limitado"/);
+  assert.match(proteandco, /hasPhysicalLocation:\s*false/);
+  assert.doesNotMatch(proteandco, /orderUrl:/);
+  assert.match(proteandco, /Granada, Chipichape, Ciudad Jardín y Jardín Plaza/);
+  assert.match(proteandco, /perdió su bodega y dos meses de suministro/);
+  assert.match(proteandco, /Ladrillo a Ladrillo/);
+  assert.match(proteandco, /TECHO/);
+  assert.doesNotMatch(proteandco, /price:\s*2000/);
+  await Promise.all([
+    access(new URL("../public/videos/proteandco.mp4", import.meta.url)),
+    access(new URL("../public/places/proteandco.jpg", import.meta.url)),
+  ]);
+});
+
+test("La Central publishes the temporary closure and the verified lechona support action", async () => {
+  const laCentral = dataSource.match(/slug:\s*"la-central-cafe-bar"([\s\S]*?)(?=\n  },\n  \{)/)?.[1];
+
+  assert.ok(laCentral, "La Central listing must exist");
+  assert.match(laCentral, /instagram:\s*"lacentralcafebar"/);
+  assert.match(laCentral, /instagramPost:\s*"DcfRVasNDQx"/);
+  assert.match(laCentral, /instagramPostPublisher:\s*"sobreexpuesta"/);
+  assert.match(laCentral, /video:\s*"\/videos\/la-central-cafe-bar\.mp4"/);
+  assert.match(laCentral, /videoPoster:\s*"\/places\/la-central-cafe-bar\.jpg"/);
+  assert.match(laCentral, /whatsapp:\s*"573160536396"/);
+  assert.match(laCentral, /status:\s*"limitado"/);
+  assert.match(laCentral, /hasPhysicalLocation:\s*false/);
+  assert.match(laCentral, /sábado 29 de agosto de 2026/);
+  assert.match(laCentral, /name:\s*"Lechona con arepita y cuero"/);
+  assert.match(laCentral, /price:\s*18000/);
+  assert.match(laCentral, /colapso parcial/);
+  await Promise.all([
+    access(new URL("../public/videos/la-central-cafe-bar.mp4", import.meta.url)),
+    access(new URL("../public/places/la-central-cafe-bar.jpg", import.meta.url)),
+  ]);
+});
+
 test("every local video card has an existing poster", async () => {
   const videoPosters = {
     "arepas-de-la-abuela": "/video-posters/reactivacion-cali.jpg",
