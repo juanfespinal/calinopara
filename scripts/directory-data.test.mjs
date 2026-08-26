@@ -33,7 +33,8 @@ test("reservation-only businesses can replace the generic order label", () => {
     dataSource,
     /slug:\s*"la-fugitiva-pizzeria-dapa"[\s\S]*?orderLabel:\s*"Reservar"/,
   );
-  assert.match(detailSource, /place\.orderLabel\s*\?\?\s*"Pedir ahora"/);
+  assert.match(detailSource, /derivePlaceActions\(place\)/);
+  assert.match(detailSource, /\{orderLabel\}/);
 });
 
 test("directory status labels avoid unsupported operational claims", () => {
@@ -256,7 +257,8 @@ test("El Gringo publishes the San Fernando closure and active alternative locati
   assert.match(elGringo, /videoPoster:\s*"\/places\/el-gringo-american-kitchen\.jpg"/);
   assert.match(elGringo, /menuUrl:\s*"https:\/\/menupp\.co\/elgringo\/venue\/CRANdwLVpuwbyG1KmvIk\/menu\/e98835b8-c62d-4f39-9a55-cab1da5fc45e"/);
   assert.match(elGringo, /status:\s*"limitado"/);
-  assert.match(elGringo, /hasPhysicalLocation:\s*false/);
+  assert.match(elGringo, /hasPhysicalLocation:\s*true/);
+  assert.match(elGringo, /showDirections:\s*false/);
   assert.match(elGringo, /orderUrl:\s*"https:\/\/app\.menupp\.co\/restaurant\/elgringo"/);
   assert.match(elGringo, /San Fernando/);
   assert.match(elGringo, /Pance, Unicentro y El Peñón/);
@@ -277,8 +279,10 @@ test("PROTE&CO publishes its warehouse impact, active points, and recovery campa
   assert.match(proteandco, /videoPoster:\s*"\/places\/proteandco\.jpg"/);
   assert.match(proteandco, /website:\s*"https:\/\/linktr\.ee\/proteandco\.froyo"/);
   assert.match(proteandco, /status:\s*"limitado"/);
-  assert.match(proteandco, /hasPhysicalLocation:\s*false/);
-  assert.doesNotMatch(proteandco, /orderUrl:/);
+  assert.match(proteandco, /hasPhysicalLocation:\s*true/);
+  assert.match(proteandco, /showDirections:\s*false/);
+  assert.match(proteandco, /orderUrl:\s*"https:\/\/linktr\.ee\/proteandco\.froyo"/);
+  assert.match(proteandco, /orderLabel:\s*"Ver campaña"/);
   assert.match(proteandco, /Granada, Chipichape, Ciudad Jardín y Jardín Plaza/);
   assert.match(proteandco, /perdió su bodega y dos meses de suministro/);
   assert.match(proteandco, /Ladrillo a Ladrillo/);
