@@ -69,6 +69,29 @@ export const aidOpportunities = [
     lastVerified: "2026-08-24",
   },
   {
+    id: "credito-emergencia-comfandi",
+    title: "Crédito de Emergencia Comfandi",
+    provider: "Comfandi",
+    status: "byProvider",
+    summary:
+      "Crédito de libre destinación para afiliados que necesiten atender una emergencia. Puede apoyar necesidades del negocio, pero no es un subsidio y debe pagarse con intereses.",
+    eligibility:
+      "Afiliados Comfandi de categorías A, B o C, con mínimo 3 meses de afiliación y 3 meses de antigüedad laboral, sujetos a evaluación y políticas de crédito.",
+    details: [
+      "Montos desde $1.000.000 hasta $20.000.000.",
+      "Plazo de hasta 60 meses y primera cuota hasta 60 días después del desembolso.",
+      "El dinero es de libre destinación y se desembolsa en una cuenta bancaria a nombre del solicitante.",
+      "Antes de aceptar, revisa la tasa, los seguros, el valor de la cuota y el costo total en la simulación.",
+    ],
+    guidance:
+      "Simula y solicita únicamente en la App Mi Comfandi o en la Sucursal Virtual Personas, desde los canales oficiales de Comfandi.",
+    actions: [],
+    sourceLabel: "Consultar condiciones en Comfandi",
+    sourceUrl:
+      "https://www.comfandi.com.co/personas/credito-y-seguros/credito-de-emergencia",
+    lastVerified: "2026-08-27",
+  },
+  {
     id: "fondo-recuperacion-productiva",
     title: "Fondo para reponer equipos e insumos",
     provider: "Alcaldía de Cali",
