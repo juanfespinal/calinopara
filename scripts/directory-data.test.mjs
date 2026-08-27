@@ -7,6 +7,7 @@ const detailSource = await readFile(
   new URL("../src/pages/emprendimiento/[slug].astro", import.meta.url),
   "utf8",
 );
+const globalStyles = await readFile(new URL("../src/styles/global.css", import.meta.url), "utf8");
 const { categories, places } = await import("../src/data/emprendimientos.ts");
 const placeVideoSource = await readFile(
   new URL("../src/components/PlaceVideo.astro", import.meta.url),
@@ -80,17 +81,17 @@ test("Cocinamia publishes the menu corrected directly by the business", async ()
   await Promise.all(photos.map((match) => access(new URL(`../public${match[1]}`, import.meta.url))));
 });
 
-test("Ñañitos Burger publishes the menu supplied directly by the business", () => {
+test("Ñañitos Burger publishes the menu and photos supplied directly by the business", async () => {
   const nanitos = dataSource.match(
     /slug:\s*"nanitos-burger"([\s\S]*?)slug:\s*"sobremesa-postres"/,
   )?.[1];
 
   assert.ok(nanitos, "Ñañitos Burger listing must exist");
-  assert.match(nanitos, /Carta enviada directamente por Ñañitos Burger el 27 de agosto de 2026/);
+  assert.match(nanitos, /Carta y fotos enviadas directamente por Ñañitos Burger el 27 de agosto de 2026/);
   assert.match(nanitos, /whatsapp:\s*"573103711047"/);
-  assert.equal((nanitos.match(/\bprice:\s*\d+/g) ?? []).length, 32, "the complete supplied menu should remain priced");
+  assert.equal((nanitos.match(/\bprice:\s*\d+/g) ?? []).length, 35, "the complete supplied menu and later additions should remain priced");
   const sections = [...nanitos.matchAll(/section:\s*"([^"]+)"/g)].map((match) => match[1]);
-  assert.equal(sections.length, 32, "every supplied item should belong to its PDF category");
+  assert.equal(sections.length, 36, "every supplied item should belong to a PDF category");
   assert.deepEqual([...new Set(sections)], [
     "Hamburguesas",
     "Picadas y salchipapas",
@@ -107,7 +108,11 @@ test("Ñañitos Burger publishes the menu supplied directly by the business", ()
   for (const item of [
     "Hamburguesa Clásica",
     "Hamburguesa Mixta",
+    "Hamburguesa de pollo",
+    "Hamburguesa promoción",
     "Hamburguesa La Tuca",
+    "Pincho ahumado al barril",
+    "Salchipapa Personal",
     "Picada Doble",
     "Combo Ñañitos (familiar)",
     "Jugo natural en leche",
@@ -116,6 +121,25 @@ test("Ñañitos Burger publishes the menu supplied directly by the business", ()
   ]) {
     assert.match(nanitos, new RegExp(`name:\\s*"${item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`), `${item} should be published`);
   }
+
+  const suppliedPhotos = [
+    "/places/nanitos-burger/menu/hamburguesa-mixta.webp",
+    "/places/nanitos-burger/menu/hamburguesa-de-pollo.webp",
+    "/places/nanitos-burger/menu/hamburguesa-promocion.webp",
+    "/places/nanitos-burger/menu/pincho-ahumado-al-barril.webp",
+    "/places/nanitos-burger/menu/papas-gratinadas.webp",
+    "/places/nanitos-burger/menu/salchipapa-personal.webp",
+    "/places/nanitos-burger/menu/salchipapa-para-dos.webp",
+    "/places/nanitos-burger/menu/limonada-cerezada.webp",
+    "/places/nanitos-burger/menu/limonada-de-coco.webp",
+  ];
+  for (const photo of suppliedPhotos) {
+    assert.match(nanitos, new RegExp(`photo:\\s*"${photo.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
+  }
+  const personalSalchipapa = nanitos.match(/\{ name:\s*"Salchipapa Personal"[^}]+\}/)?.[0];
+  assert.ok(personalSalchipapa, "the directly supplied personal salchipapa should be published");
+  assert.doesNotMatch(personalSalchipapa, /price:/, "no price was supplied for the personal salchipapa");
+  await Promise.all(suppliedPhotos.map((photo) => access(new URL(`../public${photo}`, import.meta.url))));
 });
 
 test("menu sections render accessible filters that control their groups", () => {
@@ -124,6 +148,13 @@ test("menu sections render accessible filters that control their groups", () => 
   assert.match(detailSource, /data-menu-filter=/);
   assert.match(detailSource, /data-menu-section=/);
   assert.match(detailSource, /initMenuFilter\(\)/);
+});
+
+test("restaurant menu mode hides the campaign story via a URL parameter", () => {
+  assert.match(detailSource, /searchParams\.get\("modo"\) === "menu"/);
+  assert.match(detailSource, /documentElement\.dataset\.menuMode = "true"/);
+  assert.match(globalStyles, /html\[data-menu-mode="true"\][\s\S]*?\.story-block/);
+  assert.match(globalStyles, /html\[data-menu-mode="true"\][\s\S]*?\.detail-page > \.back/);
 });
 
 test("Fábrica Emilitas publishes the complete official Atom Bio menu", async () => {

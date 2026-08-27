@@ -38,6 +38,12 @@ const menuItemIndexes = new Map(place.menu.map((item, index) => [item, index] as
 ---
 
 <Base title={`${place.name} · Cali No Para`} description={`${place.tagline} en ${place.barrio}.`}>
+  <script is:inline>
+    const { searchParams } = new URL(window.location.href);
+    if (searchParams.get("modo") === "menu") {
+      document.documentElement.dataset.menuMode = "true";
+    }
+  </script>
   <article class="wrap detail-page">
     <a class="back" href="/">← Todos los negocios</a>
 
