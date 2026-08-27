@@ -80,6 +80,52 @@ test("Cocinamia publishes the menu corrected directly by the business", async ()
   await Promise.all(photos.map((match) => access(new URL(`../public${match[1]}`, import.meta.url))));
 });
 
+test("Ñañitos Burger publishes the menu supplied directly by the business", () => {
+  const nanitos = dataSource.match(
+    /slug:\s*"nanitos-burger"([\s\S]*?)slug:\s*"sobremesa-postres"/,
+  )?.[1];
+
+  assert.ok(nanitos, "Ñañitos Burger listing must exist");
+  assert.match(nanitos, /Carta enviada directamente por Ñañitos Burger el 27 de agosto de 2026/);
+  assert.match(nanitos, /whatsapp:\s*"573103711047"/);
+  assert.equal((nanitos.match(/\bprice:\s*\d+/g) ?? []).length, 32, "the complete supplied menu should remain priced");
+  const sections = [...nanitos.matchAll(/section:\s*"([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(sections.length, 32, "every supplied item should belong to its PDF category");
+  assert.deepEqual([...new Set(sections)], [
+    "Hamburguesas",
+    "Picadas y salchipapas",
+    "Perros calientes",
+    "Combos",
+    "Entradas",
+    "Jugos naturales",
+    "Bebidas",
+    "Limonadas",
+    "Soda italiana",
+    "Adiciones",
+  ]);
+
+  for (const item of [
+    "Hamburguesa Clásica",
+    "Hamburguesa Mixta",
+    "Hamburguesa La Tuca",
+    "Picada Doble",
+    "Combo Ñañitos (familiar)",
+    "Jugo natural en leche",
+    "Limonada de Coco Jarra",
+    "Soda italiana",
+  ]) {
+    assert.match(nanitos, new RegExp(`name:\\s*"${item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`), `${item} should be published`);
+  }
+});
+
+test("menu sections render accessible filters that control their groups", () => {
+  assert.match(detailSource, /data-menu-filters/);
+  assert.match(detailSource, /aria-pressed=/);
+  assert.match(detailSource, /data-menu-filter=/);
+  assert.match(detailSource, /data-menu-section=/);
+  assert.match(detailSource, /initMenuFilter\(\)/);
+});
+
 test("Fábrica Emilitas publishes the complete official Atom Bio menu", async () => {
   const fabrica = dataSource.match(
     /slug:\s*"fabrica-emilitas"([\s\S]*?)slug:\s*"asados-al-carbon"/,
