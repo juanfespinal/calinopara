@@ -1663,6 +1663,15 @@ body.map-page .map-sheet {
   margin: 0 0 8px;
 }
 
+html[data-menu-mode="true"] .story-block,
+html[data-menu-mode="true"] .detail-page > .back {
+  display: none;
+}
+
+html[data-menu-mode="true"] .detail-page {
+  padding-top: 18px;
+}
+
 .menu-block h2,
 .panel h2 {
   margin: 0 0 10px;
