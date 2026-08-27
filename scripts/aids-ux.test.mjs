@@ -43,6 +43,24 @@ test("verified aid data distinguishes actionable and announced support", async (
   assert.match(aidsPageSource, /Papel de la Cámara/);
 
   assert.ok(aidOpportunities.some((aid) => aid.id === "alivios-bancarios" && aid.status === "byProvider"));
+
+  const comfandiCredit = aidOpportunities.find((aid) => aid.id === "credito-emergencia-comfandi");
+  assert.ok(comfandiCredit);
+  assert.equal(comfandiCredit.provider, "Comfandi");
+  assert.equal(comfandiCredit.status, "byProvider");
+  assert.match(comfandiCredit.summary, /crédito de libre destinación/i);
+  assert.match(comfandiCredit.summary, /no es un subsidio/i);
+  assert.match(comfandiCredit.eligibility, /categorías A, B o C/i);
+  assert.match(comfandiCredit.eligibility, /3 meses de afiliación/i);
+  assert.match(comfandiCredit.eligibility, /3 meses de antigüedad laboral/i);
+  assert.match(comfandiCredit.details.join(" "), /\$1\.000\.000.*\$20\.000\.000/i);
+  assert.match(comfandiCredit.details.join(" "), /60 meses/i);
+  assert.match(comfandiCredit.details.join(" "), /primera cuota.*60 días/i);
+  assert.match(comfandiCredit.guidance, /App Mi Comfandi.*Sucursal Virtual Personas/i);
+  assert.match(comfandiCredit.sourceUrl, /^https:\/\/www\.comfandi\.com\.co\//);
+  assert.equal(comfandiCredit.lastVerified, "2026-08-27");
+  assert.match(docsSource, /## Crédito de Emergencia Comfandi/);
+
   assert.ok(aidOpportunities.some((aid) => aid.id === "fondo-recuperacion-productiva" && aid.status === "announced"));
   assert.ok(aidOpportunities.some((aid) => aid.id === "microcreditos-especiales" && aid.status === "announced"));
   assert.ok(aidOpportunities.some((aid) => aid.id === "alivios-tributarios-servicios" && aid.status === "regulation"));

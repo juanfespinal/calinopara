@@ -1,6 +1,6 @@
 # Ayudas verificadas para negocios afectados
 
-Última revisión: 2026-08-24
+Última revisión: 2026-08-27
 
 Esta página documenta las fuentes y criterios usados en `/ayudas/`. La información cambia rápidamente después del terremoto del 10 de agosto de 2026; antes de modificar una tarjeta se debe volver a consultar la fuente responsable.
 
@@ -61,6 +61,19 @@ Fuente de contraste:
 - [Resumen publicado sobre alivios de entidades financieras](https://www.infobae.com/colombia/2026/08/22/terremoto-en-colombia-empresarios-suman-donaciones-y-alivios-financieros-para-la-reconstruccion/)
 
 No se identificó una solicitud centralizada. Cali No Para indica que el negocio debe consultar directamente a su entidad financiera y deja claro que condiciones y aprobación dependen de cada banco y crédito.
+
+## Crédito de Emergencia Comfandi
+
+Fuentes oficiales:
+
+- [Crédito de Emergencia de Comfandi](https://www.comfandi.com.co/personas/credito-y-seguros/credito-de-emergencia)
+- [Paquete de subsidios y alivios de emergencia de Comfandi](https://www.comfandi.com.co/personas/subsidios/subsidios-de-emergencia)
+
+Comfandi publica un crédito de libre destinación entre `$1.000.000` y `$20.000.000`, con plazo de hasta 60 meses y posibilidad de pagar la primera cuota hasta 60 días después del desembolso. La solicitud es digital mediante la App Mi Comfandi o la Sucursal Virtual Personas.
+
+La oferta está dirigida a afiliados de categorías A, B o C con mínimo tres meses de afiliación y tres meses de antigüedad laboral. La aprobación y los tiempos de respuesta están sujetos a evaluación y a las políticas de crédito de Comfandi.
+
+Cali No Para lo clasifica como `Disponible según entidad` porque existe un canal oficial activo, pero la aprobación es individual. La tarjeta aclara que se trata de deuda y no de un subsidio; tampoco publica una tasa concreta que no esté visible en la información oficial consultada.
 
 ## Checklist para actualizaciones
 
