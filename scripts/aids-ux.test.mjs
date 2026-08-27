@@ -50,6 +50,8 @@ test("verified aid data distinguishes actionable and announced support", async (
   assert.equal(comfandiCredit.status, "byProvider");
   assert.match(comfandiCredit.summary, /crédito de libre destinación/i);
   assert.match(comfandiCredit.summary, /no es un subsidio/i);
+  assert.match(comfandiCredit.eligibility, /trabajadores dependientes/i);
+  assert.match(comfandiCredit.eligibility, /no aplica para independientes ni pensionados/i);
   assert.match(comfandiCredit.eligibility, /categorías A, B o C/i);
   assert.match(comfandiCredit.eligibility, /3 meses de afiliación/i);
   assert.match(comfandiCredit.eligibility, /3 meses de antigüedad laboral/i);

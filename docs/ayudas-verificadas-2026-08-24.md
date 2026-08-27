@@ -68,10 +68,11 @@ Fuentes oficiales:
 
 - [Crédito de Emergencia de Comfandi](https://www.comfandi.com.co/personas/credito-y-seguros/credito-de-emergencia)
 - [Paquete de subsidios y alivios de emergencia de Comfandi](https://www.comfandi.com.co/personas/subsidios/subsidios-de-emergencia)
+- [Preguntas frecuentes del Crédito de Emergencia](https://back-api-prd.comfandi.com.co/sites/default/files/2026-08/Preguntas%20frecuentes%20cr%C3%A9dito%20de%20emergencia.pdf)
 
 Comfandi publica un crédito de libre destinación entre `$1.000.000` y `$20.000.000`, con plazo de hasta 60 meses y posibilidad de pagar la primera cuota hasta 60 días después del desembolso. La solicitud es digital mediante la App Mi Comfandi o la Sucursal Virtual Personas.
 
-La oferta está dirigida a afiliados de categorías A, B o C con mínimo tres meses de afiliación y tres meses de antigüedad laboral. La aprobación y los tiempos de respuesta están sujetos a evaluación y a las políticas de crédito de Comfandi.
+La oferta está dirigida exclusivamente a trabajadores dependientes afiliados en categorías A, B o C, con mínimo tres meses de afiliación y tres meses de antigüedad laboral. No aplica para trabajadores independientes ni pensionados. La aprobación y los tiempos de respuesta están sujetos a evaluación y a las políticas de crédito de Comfandi.
 
 Cali No Para lo clasifica como `Disponible según entidad` porque existe un canal oficial activo, pero la aprobación es individual. La tarjeta aclara que se trata de deuda y no de un subsidio; tampoco publica una tasa concreta que no esté visible en la información oficial consultada.
 
