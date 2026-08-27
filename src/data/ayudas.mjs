@@ -76,7 +76,7 @@ export const aidOpportunities = [
     summary:
       "Crédito de libre destinación para afiliados que necesiten atender una emergencia. Puede apoyar necesidades del negocio, pero no es un subsidio y debe pagarse con intereses.",
     eligibility:
-      "Afiliados Comfandi de categorías A, B o C, con mínimo 3 meses de afiliación y 3 meses de antigüedad laboral, sujetos a evaluación y políticas de crédito.",
+      "Trabajadores dependientes afiliados a Comfandi en categorías A, B o C, con mínimo 3 meses de afiliación y 3 meses de antigüedad laboral, sujetos a evaluación y políticas de crédito. No aplica para independientes ni pensionados.",
     details: [
       "Montos desde $1.000.000 hasta $20.000.000.",
       "Plazo de hasta 60 meses y primera cuota hasta 60 días después del desembolso.",
