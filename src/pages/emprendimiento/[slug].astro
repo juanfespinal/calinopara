@@ -33,6 +33,7 @@ const menuGroups = place.menu.reduce<Array<{ section?: string; items: typeof pla
   }
   return groups;
 }, []);
+const menuSections = [...new Set(place.menu.map((item) => item.section).filter((section): section is string => Boolean(section)))];
 const menuItemIndexes = new Map(place.menu.map((item, index) => [item, index] as const));
 ---
 
@@ -90,8 +91,16 @@ const menuItemIndexes = new Map(place.menu.map((item, index) => [item, index] as
 
     <section class="menu-block" aria-labelledby="carta">
       <h2 id="carta">La carta</h2>
+      {menuSections.length > 1 && (
+        <div class="menu-filters" data-menu-filters aria-label="Filtrar la carta por categoría">
+          <button type="button" class="menu-filter-button" data-menu-filter="all" aria-pressed="true">Todo</button>
+          {menuSections.map((section) => (
+            <button type="button" class="menu-filter-button" data-menu-filter={section} aria-pressed="false">{section}</button>
+          ))}
+        </div>
+      )}
       {menuGroups.map((group) => (
-        <div class="menu-group">
+        <div class="menu-group" data-menu-section={group.section}>
           {group.section && <h3>{group.section}</h3>}
           <ul class:list={["menu", menuHasPhotos && "menu-grid"]}>
             {group.items.map((item) => (
@@ -182,5 +191,7 @@ const menuItemIndexes = new Map(place.menu.map((item, index) => [item, index] as
 
 <script>
   import { initDishModal } from "../../scripts/dish-modal";
+  import { initMenuFilter } from "../../scripts/menu-filter";
   initDishModal();
+  initMenuFilter();
 </script>
